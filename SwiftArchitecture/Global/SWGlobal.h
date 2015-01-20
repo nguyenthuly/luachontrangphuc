@@ -13,4 +13,16 @@
 #define dataHasChanged @"dataHasChanged"
 #define CacheFoder @"CacheFoder"
 
+/*TITLE*/
+#define Register_Title @"Đăng ký"
+#define Login_Title @"Đăng nhập"
+#define DressTime_Title @"Lựa chọn"
+#define Wardrobe_Title @"Bộ sưu tập"
+#define AddClothe_Title @"Thêm mới"
+#define Log_Title @"Lịch sử"
+#define Feel_Title @"Cảm nhận"
+#define Settting_Title @"Cài đặt"
+
+/*IMAGE*/
+
 #endif

@@ -2,8 +2,8 @@
 //  APIClient.m
 //  NewWindBase
 //
-//  Created by newwindsoft  on 8/6/13.
-//  Copyright (c) 2013 newwindsoft . All rights reserved.
+//  Created by Mac on 1/20/15.
+//  Copyright (c) 2015 luan pham. All rights reserved.
 //
 
 #import "APIClient.h"

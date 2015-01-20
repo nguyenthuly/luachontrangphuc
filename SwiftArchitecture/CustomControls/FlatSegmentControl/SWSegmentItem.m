@@ -2,8 +2,8 @@
 //  SWSegmentItem.m
 //  SwiftArchitecture
 //
-//  Created by luan pham on 7/11/14.
-//  Copyright (c) 2014 luan pham. All rights reserved.
+//  Created by Mac on 1/20/15.
+//  Copyright (c) 2015 luan pham. All rights reserved.
 //
 
 #import "SWSegmentItem.h"

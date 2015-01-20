@@ -21,6 +21,7 @@
 #import "SWGlobal.h"
 #import "SWMacro.h"
 #import "SWUtil.h"
+#import "QuartzCore/QuartzCore.h"
 
 /*
 *   Import Categories

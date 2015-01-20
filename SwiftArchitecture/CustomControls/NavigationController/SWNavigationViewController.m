@@ -2,8 +2,8 @@
 //  SWNavigationViewController.m
 //  SwiftArchitecture
 //
-//  Created by luan pham on 6/19/14.
-//  Copyright (c) 2014 luan pham. All rights reserved.
+//  Created by Mac on 1/20/15.
+//  Copyright (c) 2015 luan pham. All rights reserved.
 //
 
 #import "SWNavigationViewController.h"
@@ -34,17 +34,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController
                       background:(UIImage *)background
