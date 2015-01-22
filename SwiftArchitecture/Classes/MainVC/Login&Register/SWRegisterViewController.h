@@ -8,6 +8,6 @@
 
 #import "SWBaseViewController.h"
 
-@interface SWRegisterViewController : SWBaseViewController
+@interface SWRegisterViewController : SWBaseViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @end

@@ -49,7 +49,17 @@
     
     [tmpButton setShowsTouchWhenHighlighted:YES];
     
-    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:tmpButton]];
+    if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7) {
+        UIBarButtonItem *spacingAdjust = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        [spacingAdjust setWidth:-10];
+        
+        [self.navigationItem setLeftBarButtonItems:@[spacingAdjust,[[UIBarButtonItem alloc] initWithCustomView:tmpButton]]];
+    }
+    else {
+        
+        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:tmpButton]];
+    }
+    
 }
 
 - (void)setRightButtonWithImage:(NSString*)imageButtonName
@@ -64,7 +74,15 @@
     tmpButton.frame = CGRectMake(0, 0, temEdit.size.width, temEdit.size.height);
     [tmpButton setShowsTouchWhenHighlighted:YES];
     
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:tmpButton]];
-}
+    if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7) {
+        UIBarButtonItem *spacingAdjust = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        [spacingAdjust setWidth:-10];
+        
+        [self.navigationItem setRightBarButtonItems:@[spacingAdjust,[[UIBarButtonItem alloc] initWithCustomView:tmpButton]]];
+    }
+    else {
+        
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:tmpButton]];
+    }}
 
 @end

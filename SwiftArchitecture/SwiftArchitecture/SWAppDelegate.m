@@ -2,11 +2,12 @@
 //  SWAppDelegate.m
 //  SwiftArchitecture
 //
-//  Created by luan pham on 6/19/14.
-//  Copyright (c) 2014 luan pham. All rights reserved.
+//  Created by Mac on 1/20/15.
+//  Copyright (c) 2015 luan pham. All rights reserved.
 //
 
 #import "SWAppDelegate.h"
+#import "SWLoginViewController.h"
 
 @implementation SWAppDelegate
 
@@ -31,11 +32,9 @@
     UIImage *iosBg = [UIImage resizableImage:[UIImage imageNamed:@"navbar_bg"]];
     UIImage *navBg = (SYSTEM_VERSION >= 7)?ios7Bg:iosBg;
     UIFont *font = [UIFont fontHelveticaNeue_Medium:18];
-    /*
-    SWMultiSelectContactViewController *multilVC = (SWMultiSelectContactViewController *)[SWUtil newUniversalViewControllerWithClassName:@"SWMultiSelectContactViewController"];
-     */
-    SWAwesomeTableViewController *controller = [[SWAwesomeTableViewController alloc]init];
-    SWNavigationViewController *rootNavigation = [[SWNavigationViewController alloc]initWithRootViewController:controller background:navBg font:font textColor:[UIColor whiteColor] shadowColor:[UIColor blackColor]];
+  
+    SWLoginViewController *controller = [[SWLoginViewController alloc] init];
+    SWNavigationViewController *rootNavigation = [[SWNavigationViewController alloc]initWithRootViewController:controller background:navBg font:font textColor:[UIColor colorWithHex:@"40CCBB" alpha:1.0] shadowColor:[UIColor colorWithHex:@"40CCBB" alpha:1.0]];
     
     self.window.rootViewController = rootNavigation;
     [self.window makeKeyAndVisible];

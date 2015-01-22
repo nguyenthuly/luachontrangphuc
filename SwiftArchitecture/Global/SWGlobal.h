@@ -24,5 +24,8 @@
 #define Settting_Title @"Cài đặt"
 
 /*IMAGE*/
+#define Back_Button @"back_green.png"
 
+/*COLOR*/
+#define Gray_Color @"939393"
 #endif

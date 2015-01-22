@@ -8,6 +8,6 @@
 
 #import "SWBaseViewController.h"
 
-@interface SWLoginViewController : SWBaseViewController
+@interface SWLoginViewController : SWBaseViewController <UITextFieldDelegate>
 
 @end
