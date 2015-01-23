@@ -1741,7 +1741,7 @@
 			attributes = {
 				CLASSPREFIX = SW;
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "luan pham";
+				ORGANIZATIONNAME = "Nguyen Thu Ly";
 				TargetAttributes = {
 					915C4B501952A58200A592AD = {
 						TestTargetID = 915C4B351952A58200A592AD;

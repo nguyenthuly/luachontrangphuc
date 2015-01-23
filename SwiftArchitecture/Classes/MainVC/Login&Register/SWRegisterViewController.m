@@ -3,7 +3,7 @@
 //  SwiftArchitecture
 //
 //  Created by Mac on 1/20/15.
-//  Copyright (c) 2015 luan pham. All rights reserved.
+//  Copyright (c) 2015 Nguyen Thu Ly. All rights reserved.
 //
 
 #import "SWRegisterViewController.h"
@@ -12,6 +12,10 @@
 #define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Ngày sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại mật khẩu"]
 
 @interface SWRegisterViewController ()
+{
+    UIButton *maleButton;
+    UIButton *femaleButton;
+}
 @property (weak, nonatomic) IBOutlet UITableView *registerTableView;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (strong, nonatomic) NSArray *registerArray;
@@ -44,6 +48,21 @@
 - (IBAction)registerButtonTapped:(id)sender {
 }
 
+- (void)maleButtonTapped:(id)sender{
+    [self setButton:femaleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
+    [self setButton:maleButton andBackground:@"40CCBB" andTitleColor:@"FFFFFF"];
+}
+
+- (void)femaleButtonTapped:(id)sender{
+    [self setButton:maleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
+    [self setButton:femaleButton andBackground:@"40CCBB" andTitleColor:@"FFFFFF"];
+}
+
+- (void)setButton:(UIButton *)button andBackground:(NSString *)bg andTitleColor:(NSString *)title{
+    [button setTitleColor:[UIColor colorWithHex:title alpha:1.0] forState:UIControlStateNormal];
+    [button setBackgroundColor:[UIColor colorWithHex:bg alpha:1.0]];
+}
+
 #pragma mark - TableView
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;
@@ -64,24 +83,52 @@
         case 6:
         case 7:
         {
-            UITextField *registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(90 , 6, 209, 30)];
+            UITextField *registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 220, 30)];
             registerTextField.tag = indexPath.row;
             [cell addSubview:registerTextField];
             registerTextField.borderStyle = UITextBorderStyleNone;
+            registerTextField.textAlignment = NSTextAlignmentRight;
+            registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
             registerTextField.delegate = self;
         }
             break;
         case 2:
+        {
+            maleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            [maleButton addTarget:self
+                           action:@selector(maleButtonTapped:)
+             forControlEvents:UIControlEventTouchUpInside];
+            [maleButton setTitle:@"Nam" forState:UIControlStateNormal];
+            maleButton.layer.masksToBounds = YES;
+            maleButton.layer.cornerRadius = 5.0;
+            [self setButton:maleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
+            maleButton.frame = CGRectMake(120.0, 6, 80, 30.0);
+            [cell addSubview:maleButton];
+            
+            femaleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            [femaleButton addTarget:self
+                           action:@selector(femaleButtonTapped:)
+                 forControlEvents:UIControlEventTouchUpInside];
+            [femaleButton setTitle:@"Nữ" forState:UIControlStateNormal];
+            femaleButton.layer.masksToBounds = YES;
+            femaleButton.layer.cornerRadius = 5.0;
+            [self setButton:femaleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
+            femaleButton.frame = CGRectMake(210.0, 6, 80, 30.0);
+            [cell addSubview:femaleButton];
+        }
             break;
         case 3:
             break;
         case 8:
         case 9:
         {
-            UITextField *passWordTextField = [[UITextField alloc] initWithFrame:CGRectMake(90 , 6, 209, 30)];
+            UITextField *passWordTextField = [[UITextField alloc] initWithFrame:CGRectMake(160 , 3, 130, 30)];
             passWordTextField.tag = indexPath.row;
             [cell addSubview:passWordTextField];
             passWordTextField.borderStyle = UITextBorderStyleNone;
+            passWordTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
+            passWordTextField.textAlignment = NSTextAlignmentRight;
+            passWordTextField.secureTextEntry = YES;
             passWordTextField.delegate = self;
 
         }
