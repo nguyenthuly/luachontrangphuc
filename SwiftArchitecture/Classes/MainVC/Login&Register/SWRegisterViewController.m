@@ -10,11 +10,22 @@
 
 #define CONTENT_VIEW_Y 20
 #define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Ngày sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại mật khẩu"]
+#define First_Name 0
+#define Last_Name 1
+#define Gender 2
+#define Birthday 3
+#define Height 4
+#define Weight 5
+#define Telephone 6
+#define Email 7
+#define Password 8
+#define Re_Password 9
 
 @interface SWRegisterViewController ()
 {
     UIButton *maleButton;
     UIButton *femaleButton;
+    UITextField *registerTextField;
 }
 @property (weak, nonatomic) IBOutlet UITableView *registerTableView;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
@@ -46,6 +57,11 @@
 }
 
 - (IBAction)registerButtonTapped:(id)sender {
+    NSString *errorMessage = [self validateForm];
+    if (errorMessage) {
+        [[[UIAlertView alloc] initWithTitle:nil message:errorMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        return;
+    }
 }
 
 - (void)maleButtonTapped:(id)sender{
@@ -63,6 +79,122 @@
     [button setBackgroundColor:[UIColor colorWithHex:bg alpha:1.0]];
 }
 
+- (BOOL)isValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO;
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+- (BOOL)isValidTelephoneNumber:(NSString *)phoneNumber{
+    NSString *phoneRegex = @"^((\\+)|(00))[0-9]{6,14}$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    return [phoneTest evaluateWithObject:phoneNumber];
+}
+
+- (BOOL)isValidPassword:(NSString *)passWord {
+    return (passWord.length >= 5);
+}
+
+- (BOOL)isValidName:(NSString *)name {
+    
+    if (name.length == 0) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (NSString *)validateForm {
+    NSString *errorMessage;
+    NSString *passWord;
+    
+    for (int i = 0; i < 10; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        UITableViewCell *cell = (UITableViewCell*)[self.registerTableView cellForRowAtIndexPath:indexPath];
+        
+        for (UIView *subview in cell.subviews) {
+            if ([subview isKindOfClass:[UITextField class]]) {
+                UITextField *tf = (UITextField*)subview;
+                NSString *text = tf.text;
+                switch (tf.tag) {
+                    case First_Name:
+                    {
+                        if (![self isValidName:text]) {
+                            NSLog(@"%d",[self isValidName:registerTextField.text]);
+                            errorMessage = @"Mời bạn nhập họ!";
+                        }
+                    }
+                        break;
+                    case Last_Name:
+                    {
+                        if (![self isValidName:text]) {
+                            errorMessage = @"Mời bạn nhập tên!";
+                        }
+                    }
+                        break;
+                    case Height:
+                    {
+                        if (![self isValidName:text]) {
+                            errorMessage = @"Mời bạn nhập chiều cao!";
+                        }
+                    }
+                        break;
+                    case Weight:
+                    {
+                        if (![self isValidName:text]) {
+                            errorMessage = @"Mời bạn nhập cân nặng!";
+                        }
+                    }
+                        break;
+                    case Telephone:
+                    {
+                        if (![self isValidTelephoneNumber:text]) {
+                            errorMessage = @"Số điện thoại không đúng!";
+                        }
+                    }
+                        break;
+                    case Email:
+                    {
+                        if (![self isValidEmail:text ]) {
+                            errorMessage = @"Email không tồn tại!";
+                        }
+                    }
+                        break;
+                    case Password:
+                    {
+                        passWord = registerTextField.text;
+                        if (![self isValidPassword:text]) {
+                            errorMessage = @"Mật khẩu của bạn chưa đủ kí tự";
+                        }
+                    }
+                        break;
+                    case Re_Password:
+                    {
+                        if (![registerTextField.text isEqualToString:passWord]) {
+                            errorMessage = @"Mật khẩu chưa đúng";
+                        }
+                    }
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            }
+            
+            if (errorMessage.length) {
+                return errorMessage;
+            }
+        }
+    }
+    
+    
+    return errorMessage;
+}
+
 #pragma mark - TableView
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;
@@ -76,14 +208,12 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     switch (indexPath.row) {
-        case 0:
-        case 1:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
+        case First_Name:
+        case Last_Name:
+        case Telephone:
+        case Email:
         {
-            UITextField *registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 220, 30)];
+            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 220, 30)];
             registerTextField.tag = indexPath.row;
             [cell addSubview:registerTextField];
             registerTextField.borderStyle = UITextBorderStyleNone;
@@ -92,7 +222,20 @@
             registerTextField.delegate = self;
         }
             break;
-        case 2:
+            
+        case Height:
+        case Weight:
+        {
+            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 220, 30)];
+            registerTextField.tag = indexPath.row;
+            [cell addSubview:registerTextField];
+            registerTextField.borderStyle = UITextBorderStyleNone;
+            registerTextField.textAlignment = NSTextAlignmentRight;
+            registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
+            registerTextField.delegate = self;
+        }
+            break;
+        case Gender:
         {
             maleButton = [UIButton buttonWithType:UIButtonTypeSystem];
             [maleButton addTarget:self
@@ -117,19 +260,19 @@
             [cell addSubview:femaleButton];
         }
             break;
-        case 3:
+        case Birthday:
             break;
-        case 8:
-        case 9:
+        case Password:
+        case Re_Password:
         {
-            UITextField *passWordTextField = [[UITextField alloc] initWithFrame:CGRectMake(160 , 3, 130, 30)];
-            passWordTextField.tag = indexPath.row;
-            [cell addSubview:passWordTextField];
-            passWordTextField.borderStyle = UITextBorderStyleNone;
-            passWordTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
-            passWordTextField.textAlignment = NSTextAlignmentRight;
-            passWordTextField.secureTextEntry = YES;
-            passWordTextField.delegate = self;
+            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(160 , 3, 130, 30)];
+            registerTextField.tag = indexPath.row;
+            [cell addSubview:registerTextField];
+            registerTextField.borderStyle = UITextBorderStyleNone;
+            registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
+            registerTextField.textAlignment = NSTextAlignmentRight;
+            registerTextField.secureTextEntry = YES;
+            registerTextField.delegate = self;
 
         }
             break;
