@@ -90,7 +90,7 @@
 }
 
 - (BOOL)isValidTelephoneNumber:(NSString *)phoneNumber{
-    NSString *phoneRegex = @"^((\\+)|(00))[0-9]{6,14}$";
+    NSString *phoneRegex = @"^((\\+)|(0))[0-9]{6,14}$";
     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
     return [phoneTest evaluateWithObject:phoneNumber];
 }
@@ -185,7 +185,7 @@
                 break;
             }
             
-            if (errorMessage.length) {
+            if (errorMessage.length > 0) {
                 return errorMessage;
             }
         }
