@@ -8,6 +8,10 @@
 
 #import "SWAppDelegate.h"
 #import "SWLoginViewController.h"
+#import "SWDressTimeViewController.h"
+#import "SWWardrobeViewController.h"
+#import "SWLogViewController.h"
+#import "SWSettingViewController.h"
 
 @implementation SWAppDelegate
 
@@ -39,6 +43,37 @@
     self.window.rootViewController = rootNavigation;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)initTabbar {
+    
+    NSString *navBgName = (SYSTEM_VERSION >= 7) ? @"nav_ios7" : @"navbar_bg";
+    UIImage *navbgImage = [UIImage resizableImage:[UIImage imageNamed:navBgName]];
+    
+    //Init Classes
+    SWDressTimeViewController *dressTimeVC = [[SWDressTimeViewController alloc] init];
+    SWWardrobeViewController *wardrobeVC = [[SWWardrobeViewController alloc] init];
+    SWLogViewController *logVC = [[SWLogViewController alloc] init];
+    SWSettingViewController *settingVC = [[SWSettingViewController alloc] init];
+    
+    //Init Navigations
+    
+    SWNavigationViewController *dressTimeNavi = [[SWNavigationViewController alloc] initWithRootViewController:dressTimeVC background:navbgImage font:[UIFont fontHelveticaNeue_Medium:18] textColor:[UIColor colorWithHex:Green_Color alpha:1.0] shadowColor:[UIColor clearColor]];
+    SWNavigationViewController *wardrobeNavi = [[SWNavigationViewController alloc] initWithRootViewController:wardrobeVC background:navbgImage font:[UIFont fontHelveticaNeue_Medium:18] textColor:[UIColor colorWithHex:Green_Color alpha:1.0] shadowColor:[UIColor clearColor]];
+    SWNavigationViewController *logNavi = [[SWNavigationViewController alloc] initWithRootViewController:logVC background:navbgImage font:[UIFont fontHelveticaNeue_Medium:18] textColor:[UIColor colorWithHex:Green_Color alpha:1.0] shadowColor:[UIColor clearColor]];
+    SWNavigationViewController *settingNavi = [[SWNavigationViewController alloc] initWithRootViewController:settingVC background:navbgImage font:[UIFont fontHelveticaNeue_Medium:18] textColor:[UIColor colorWithHex:Green_Color alpha:1.0] shadowColor:[UIColor clearColor]];
+    
+    //Init tabbar
+    NSArray *imagesNormal = @[Dress_Time_Off,Wardrobe_Off,Log_Off, Setting_Off];
+    NSArray *imagesSelected = @[Dress_Time_On,Wardrobe_On,Log_On, Setting_On];
+    NSArray *title = @[Dress_Time_Title, Wardrobe_Title, Log_Title, Setting_Title];
+    UIColor *backgroundColor = [UIColor colorWithHex:White_Color alpha:1];
+    
+    self.tabbarController = [[SWTabbarController alloc] initWithNomarlImages:imagesNormal selectImages:imagesSelected backGround:backgroundColor title:title];
+    self.tabbarController.viewControllers = @[dressTimeNavi,wardrobeNavi,logNavi,settingNavi];
+    [self.tabbarController hoverAtIndex:0];    
+    self.window.rootViewController = nil;
+    self.window.rootViewController = self.tabbarController;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -16,16 +16,51 @@
 /*TITLE*/
 #define Register_Title @"Đăng ký"
 #define Login_Title @"Đăng nhập"
-#define DressTime_Title @"Lựa chọn"
+#define DressTime_Title @"Lựa chọn quần áo"
 #define Wardrobe_Title @"Bộ sưu tập"
 #define AddClothe_Title @"Thêm mới"
 #define Log_Title @"Lịch sử"
 #define Feel_Title @"Cảm nhận"
 #define Settting_Title @"Cài đặt"
 
+/*TEXT*/
+#define First_Name_Message @"Mời bạn nhập họ!"
+#define Last_Name_Message @"Mời bạn nhập tên!"
+#define Height_Message @"Mời bạn nhập chiều cao!"
+#define Weight_Message @"Mời bạn nhập cân nặng!"
+#define Telephone_Message @"Số điện thoại không đúng!"
+#define Email_Message @"Email không tồn tại!"
+#define Password_Message @"Mật khẩu của bạn chưa đủ kí tự"
+#define Re_Password_Message @"Mật khẩu chưa đúng"
+
+#define Dress_Time_Title @"Lựa chọn"
+#define Wardrobe_Title @"Bộ sưu tập"
+#define Log_Title @"Lịch sử"
+#define Setting_Title @"Cài đặt"
+#define Skirt @"ÁO"
+#define Jeans @"QUẦN/VÁY"
+#define Shoe @"GIÀY/DÉP"
+
 /*IMAGE*/
 #define Back_Button @"back_green.png"
+#define Dress_Time_On @"t_shirt_on.png"
+#define Dress_Time_Off @"t_shirt_off.png"
+#define Wardrobe_On @"wardrobe_on.png"
+#define Wardrobe_Off @"wardrobe_off.png"
+#define Log_On @"bookmark_on.png"
+#define Log_Off @"bookmark_off.png"
+#define Setting_On @"settings_on"
+#define Setting_Off @"settings_off"
+#define Search @"search.png"
+#define Add @"plus.png"
+
 
 /*COLOR*/
 #define Gray_Color @"939393"
+#define Button_bg @"EAEAEA"
+#define Button_bg_Selected @"40CCBB"
+#define White_Color @"FFFFFF"
+#define Black_Color @"000000"
+#define Green_Color @"40CCBB"
+
 #endif

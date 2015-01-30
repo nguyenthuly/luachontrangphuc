@@ -14,13 +14,16 @@
     /*Hold icon images and colors for text - only using for Part type*/
     UIImageView  *tabNomarl;
     UIImageView *tabSelected;
+    UILabel *titleLabel;
 }
 
 @property (nonatomic,assign) NSInteger tabIndex;
 
 /*Using image contain icon,text for tabbar item*/
 - (id)initWithFrame:(CGRect)frame
-        nomarlImage:(UIImage *)nomarl
-      selectedImage:(UIImage *)hover;
+        nomarlImage:(UIImage *)nomarlImage
+      selectedImage:(UIImage *)hoverImage
+              title:(NSString*)title
+             offset:(float)offset ;
 
 @end

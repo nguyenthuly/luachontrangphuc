@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040894B21A7B7D8C0033B215 /* SWWeatherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040894B11A7B7D8C0033B215 /* SWWeatherView.m */; };
+		040894B41A7B7DA90033B215 /* SWWeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040894B31A7B7DA90033B215 /* SWWeatherView.xib */; };
+		040894C41A7B835E0033B215 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894B61A7B835E0033B215 /* 1.jpg */; };
+		040894C51A7B835E0033B215 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894B71A7B835E0033B215 /* 10.jpg */; };
+		040894C61A7B835E0033B215 /* 11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894B81A7B835E0033B215 /* 11.jpg */; };
+		040894C71A7B835E0033B215 /* 12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894B91A7B835E0033B215 /* 12.jpg */; };
+		040894C81A7B835E0033B215 /* 13.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894BA1A7B835E0033B215 /* 13.jpg */; };
+		040894C91A7B835E0033B215 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894BB1A7B835E0033B215 /* 2.jpg */; };
+		040894CA1A7B835E0033B215 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894BC1A7B835E0033B215 /* 3.jpg */; };
+		040894CB1A7B835E0033B215 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894BD1A7B835E0033B215 /* 4.jpg */; };
+		040894CC1A7B835E0033B215 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894BE1A7B835E0033B215 /* 5.jpg */; };
+		040894CD1A7B835E0033B215 /* 6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894BF1A7B835E0033B215 /* 6.jpg */; };
+		040894CE1A7B835E0033B215 /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894C01A7B835E0033B215 /* 7.jpg */; };
+		040894CF1A7B835E0033B215 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894C11A7B835E0033B215 /* 8.jpg */; };
+		040894D01A7B835E0033B215 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 040894C21A7B835E0033B215 /* 9.jpg */; };
+		040894D11A7B835E0033B215 /* icons.pagecontrol.png in Resources */ = {isa = PBXBuildFile; fileRef = 040894C31A7B835E0033B215 /* icons.pagecontrol.png */; };
 		040C2B481A7104B90087E336 /* coat.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AEE1A7104B90087E336 /* coat.png */; };
 		040C2B491A7104B90087E336 /* coat_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AEF1A7104B90087E336 /* coat_red.png */; };
 		040C2B4A1A7104B90087E336 /* flip_flops.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AF01A7104B90087E336 /* flip_flops.png */; };
@@ -21,7 +37,6 @@
 		040C2B531A7104B90087E336 /* mittens_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AF91A7104B90087E336 /* mittens_red.png */; };
 		040C2B541A7104B90087E336 /* scarf.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AFA1A7104B90087E336 /* scarf.png */; };
 		040C2B551A7104B90087E336 /* scarf_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AFB1A7104B90087E336 /* scarf_red.png */; };
-		040C2B561A7104B90087E336 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AFC1A7104B90087E336 /* search.png */; };
 		040C2B571A7104B90087E336 /* shirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AFD1A7104B90087E336 /* shirt.png */; };
 		040C2B581A7104B90087E336 /* shirt_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AFE1A7104B90087E336 /* shirt_red.png */; };
 		040C2B591A7104B90087E336 /* shoe_man.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2AFF1A7104B90087E336 /* shoe_man.png */; };
@@ -51,8 +66,6 @@
 		040C2B711A7104B90087E336 /* wardrobe_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2B171A7104B90087E336 /* wardrobe_on.png */; };
 		040C2B721A7104B90087E336 /* winter_boots.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2B181A7104B90087E336 /* winter_boots.png */; };
 		040C2B731A7104B90087E336 /* winter_boots_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2B191A7104B90087E336 /* winter_boots_red.png */; };
-		040C2B741A7104B90087E336 /* bookmark_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2B1B1A7104B90087E336 /* bookmark_off@2x.png */; };
-		040C2B751A7104B90087E336 /* bookmark_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2B1C1A7104B90087E336 /* bookmark_on@2x.png */; };
 		040C2B761A7104B90087E336 /* coat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2B1D1A7104B90087E336 /* coat@2x.png */; };
 		040C2B771A7104B90087E336 /* coat_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2B1E1A7104B90087E336 /* coat_red@2x.png */; };
 		040C2B781A7104B90087E336 /* flip_flops@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C2B1F1A7104B90087E336 /* flip_flops@2x.png */; };
@@ -365,6 +378,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040894B01A7B7D8C0033B215 /* SWWeatherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWeatherView.h; sourceTree = "<group>"; };
+		040894B11A7B7D8C0033B215 /* SWWeatherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWeatherView.m; sourceTree = "<group>"; };
+		040894B31A7B7DA90033B215 /* SWWeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWWeatherView.xib; sourceTree = "<group>"; };
+		040894B61A7B835E0033B215 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		040894B71A7B835E0033B215 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
+		040894B81A7B835E0033B215 /* 11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 11.jpg; sourceTree = "<group>"; };
+		040894B91A7B835E0033B215 /* 12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.jpg; sourceTree = "<group>"; };
+		040894BA1A7B835E0033B215 /* 13.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 13.jpg; sourceTree = "<group>"; };
+		040894BB1A7B835E0033B215 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		040894BC1A7B835E0033B215 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		040894BD1A7B835E0033B215 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		040894BE1A7B835E0033B215 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5.jpg; sourceTree = "<group>"; };
+		040894BF1A7B835E0033B215 /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 6.jpg; sourceTree = "<group>"; };
+		040894C01A7B835E0033B215 /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
+		040894C11A7B835E0033B215 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
+		040894C21A7B835E0033B215 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
+		040894C31A7B835E0033B215 /* icons.pagecontrol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icons.pagecontrol.png; sourceTree = "<group>"; };
 		040C2AEE1A7104B90087E336 /* coat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coat.png; sourceTree = "<group>"; };
 		040C2AEF1A7104B90087E336 /* coat_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coat_red.png; sourceTree = "<group>"; };
 		040C2AF01A7104B90087E336 /* flip_flops.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flip_flops.png; sourceTree = "<group>"; };
@@ -379,7 +409,6 @@
 		040C2AF91A7104B90087E336 /* mittens_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mittens_red.png; sourceTree = "<group>"; };
 		040C2AFA1A7104B90087E336 /* scarf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scarf.png; sourceTree = "<group>"; };
 		040C2AFB1A7104B90087E336 /* scarf_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scarf_red.png; sourceTree = "<group>"; };
-		040C2AFC1A7104B90087E336 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		040C2AFD1A7104B90087E336 /* shirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shirt.png; sourceTree = "<group>"; };
 		040C2AFE1A7104B90087E336 /* shirt_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shirt_red.png; sourceTree = "<group>"; };
 		040C2AFF1A7104B90087E336 /* shoe_man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoe_man.png; sourceTree = "<group>"; };
@@ -409,8 +438,6 @@
 		040C2B171A7104B90087E336 /* wardrobe_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wardrobe_on.png; sourceTree = "<group>"; };
 		040C2B181A7104B90087E336 /* winter_boots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winter_boots.png; sourceTree = "<group>"; };
 		040C2B191A7104B90087E336 /* winter_boots_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winter_boots_red.png; sourceTree = "<group>"; };
-		040C2B1B1A7104B90087E336 /* bookmark_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bookmark_off@2x.png"; sourceTree = "<group>"; };
-		040C2B1C1A7104B90087E336 /* bookmark_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bookmark_on@2x.png"; sourceTree = "<group>"; };
 		040C2B1D1A7104B90087E336 /* coat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coat@2x.png"; sourceTree = "<group>"; };
 		040C2B1E1A7104B90087E336 /* coat_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coat_red@2x.png"; sourceTree = "<group>"; };
 		040C2B1F1A7104B90087E336 /* flip_flops@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flip_flops@2x.png"; sourceTree = "<group>"; };
@@ -837,6 +864,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040894AF1A7B7D0A0033B215 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				040894B01A7B7D8C0033B215 /* SWWeatherView.h */,
+				040894B11A7B7D8C0033B215 /* SWWeatherView.m */,
+				040894B31A7B7DA90033B215 /* SWWeatherView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		040894B51A7B835E0033B215 /* AO */ = {
+			isa = PBXGroup;
+			children = (
+				040894B61A7B835E0033B215 /* 1.jpg */,
+				040894B71A7B835E0033B215 /* 10.jpg */,
+				040894B81A7B835E0033B215 /* 11.jpg */,
+				040894B91A7B835E0033B215 /* 12.jpg */,
+				040894BA1A7B835E0033B215 /* 13.jpg */,
+				040894BB1A7B835E0033B215 /* 2.jpg */,
+				040894BC1A7B835E0033B215 /* 3.jpg */,
+				040894BD1A7B835E0033B215 /* 4.jpg */,
+				040894BE1A7B835E0033B215 /* 5.jpg */,
+				040894BF1A7B835E0033B215 /* 6.jpg */,
+				040894C01A7B835E0033B215 /* 7.jpg */,
+				040894C11A7B835E0033B215 /* 8.jpg */,
+				040894C21A7B835E0033B215 /* 9.jpg */,
+				040894C31A7B835E0033B215 /* icons.pagecontrol.png */,
+			);
+			path = AO;
+			sourceTree = "<group>";
+		};
 		040C2AED1A7104B90087E336 /* 1x */ = {
 			isa = PBXGroup;
 			children = (
@@ -854,7 +912,6 @@
 				040C2AF91A7104B90087E336 /* mittens_red.png */,
 				040C2AFA1A7104B90087E336 /* scarf.png */,
 				040C2AFB1A7104B90087E336 /* scarf_red.png */,
-				040C2AFC1A7104B90087E336 /* search.png */,
 				040C2AFD1A7104B90087E336 /* shirt.png */,
 				040C2AFE1A7104B90087E336 /* shirt_red.png */,
 				040C2AFF1A7104B90087E336 /* shoe_man.png */,
@@ -891,8 +948,6 @@
 		040C2B1A1A7104B90087E336 /* 2x */ = {
 			isa = PBXGroup;
 			children = (
-				040C2B1B1A7104B90087E336 /* bookmark_off@2x.png */,
-				040C2B1C1A7104B90087E336 /* bookmark_on@2x.png */,
 				040C2B1D1A7104B90087E336 /* coat@2x.png */,
 				040C2B1E1A7104B90087E336 /* coat_red@2x.png */,
 				040C2B1F1A7104B90087E336 /* flip_flops@2x.png */,
@@ -1132,6 +1187,7 @@
 		04300D631A6E569D0086F1E9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				040894B51A7B835E0033B215 /* AO */,
 				04300D6E1A6E577E0086F1E9 /* 1x */,
 				04300D8A1A6E577E0086F1E9 /* 2x */,
 				04300DA41A6E577E0086F1E9 /* Clothes */,
@@ -1235,6 +1291,7 @@
 				91B4C5AC1955249C008F0686 /* Categories */,
 				915C4B7F1952B18F00A592AD /* CustomControls */,
 				917AB630197068100012002A /* Utilities Classes */,
+				040894AF1A7B7D0A0033B215 /* Views */,
 				915C4B6B1952AF6400A592AD /* Model */,
 				915C4B691952AF4700A592AD /* Classes */,
 				915C4B6A1952AF4700A592AD /* Resource */,
@@ -1776,6 +1833,7 @@
 				040C2B971A7104B90087E336 /* trousers@2x.png in Resources */,
 				040C2C211A7104BF0087E336 /* little_snow_gray@2x.png in Resources */,
 				040C2B571A7104B90087E336 /* shirt.png in Resources */,
+				040894CA1A7B835E0033B215 /* 3.jpg in Resources */,
 				040C2B7E1A7104B90087E336 /* jumper@2x.png in Resources */,
 				040C2B6E1A7104B90087E336 /* vegan_shoes.png in Resources */,
 				04300E801A6E577E0086F1E9 /* search@2x.png in Resources */,
@@ -1786,6 +1844,7 @@
 				9186AD5E1956992900F0AF40 /* icon_search.png in Resources */,
 				915C4B441952A58200A592AD /* InfoPlist.strings in Resources */,
 				04300E671A6E577E0086F1E9 /* search.png in Resources */,
+				040894C51A7B835E0033B215 /* 10.jpg in Resources */,
 				040C2C011A7104BF0087E336 /* sleet_gray.png in Resources */,
 				040C2B941A7104B90087E336 /* tie_red@2x.png in Resources */,
 				040C2B651A7104B90087E336 /* t_shirt_red.png in Resources */,
@@ -1814,6 +1873,7 @@
 				04300B9D1A6E41700086F1E9 /* SWWardrobeDetailViewController.xib in Resources */,
 				9163986119572296004A5B5A /* navbar_bg@2x.png in Resources */,
 				04300B8E1A6E41090086F1E9 /* SWRegisterViewController.xib in Resources */,
+				040894CF1A7B835E0033B215 /* 8.jpg in Resources */,
 				04300E581A6E577E0086F1E9 /* checkmark.png in Resources */,
 				040C2BFD1A7104BF0087E336 /* partly_cloudy_day_gray.png in Resources */,
 				040C2C1D1A7104BF0087E336 /* fog_night_gray@2x.png in Resources */,
@@ -1822,6 +1882,7 @@
 				040C2C1C1A7104BF0087E336 /* fog_day_gray@2x.png in Resources */,
 				040C2B6C1A7104B90087E336 /* vegan_clothing.png in Resources */,
 				04300E631A6E577E0086F1E9 /* left_green.png in Resources */,
+				040894C71A7B835E0033B215 /* 12.jpg in Resources */,
 				04300E571A6E577E0086F1E9 /* bookmark_on.png in Resources */,
 				040C2B681A7104B90087E336 /* trainers.png in Resources */,
 				04300E531A6E577E0086F1E9 /* add_image.png in Resources */,
@@ -1844,6 +1905,7 @@
 				040C2BF71A7104BF0087E336 /* fog_night_gray.png in Resources */,
 				040C2C111A7104BF0087E336 /* partly_cloudy_night_red.png in Resources */,
 				040C2B7D1A7104B90087E336 /* jacket_red@2x.png in Resources */,
+				040894D01A7B835E0033B215 /* 9.jpg in Resources */,
 				040C2C3A1A7104BF0087E336 /* rain_red@2x.png in Resources */,
 				040C2B4B1A7104B90087E336 /* hanger.png in Resources */,
 				040C2BA01A7104B90087E336 /* winter_boots_red@2x.png in Resources */,
@@ -1875,6 +1937,7 @@
 				040C2C221A7104BF0087E336 /* moon_gray@2x.png in Resources */,
 				040C2C081A7104BF0087E336 /* clouds_red.png in Resources */,
 				040C2B591A7104B90087E336 /* shoe_man.png in Resources */,
+				040894C61A7B835E0033B215 /* 11.jpg in Resources */,
 				040C2B641A7104B90087E336 /* t_shirt_on.png in Resources */,
 				040C2C291A7104BF0087E336 /* snow_storm_gray@2x.png in Resources */,
 				040C2B7F1A7104B90087E336 /* jumper_red@2x.png in Resources */,
@@ -1884,6 +1947,7 @@
 				040C2B721A7104B90087E336 /* winter_boots.png in Resources */,
 				04300E861A6E577E0086F1E9 /* up_green@2x.png in Resources */,
 				04300E6A1A6E577E0086F1E9 /* settings_on.png in Resources */,
+				040894C41A7B835E0033B215 /* 1.jpg in Resources */,
 				04300E601A6E577E0086F1E9 /* forward.png in Resources */,
 				040C2B521A7104B90087E336 /* mittens.png in Resources */,
 				04300B891A6E40F50086F1E9 /* SWLoginViewController.xib in Resources */,
@@ -1902,8 +1966,10 @@
 				040C2C181A7104BF0087E336 /* sunrise_red.png in Resources */,
 				04300E811A6E577E0086F1E9 /* settings_filled@2x.png in Resources */,
 				04300BA21A6E41950086F1E9 /* SWAddClotheViewController.xib in Resources */,
+				040894C91A7B835E0033B215 /* 2.jpg in Resources */,
 				040C2B861A7104B90087E336 /* shoe_man@2x.png in Resources */,
 				040C2B7A1A7104B90087E336 /* hanger_red@2x.png in Resources */,
+				040894C81A7B835E0033B215 /* 13.jpg in Resources */,
 				04300E7F1A6E577E0086F1E9 /* right_green@2x.png in Resources */,
 				040C2B991A7104B90087E336 /* vegan_clothing@2x.png in Resources */,
 				040C2B9E1A7104B90087E336 /* wardrobe_on@2x.png in Resources */,
@@ -1917,12 +1983,10 @@
 				040C2B921A7104B90087E336 /* t_shirt_red@2x.png in Resources */,
 				040C2B851A7104B90087E336 /* shirt_red@2x.png in Resources */,
 				040C2B8B1A7104B90087E336 /* shorts_red@2x.png in Resources */,
-				040C2B751A7104B90087E336 /* bookmark_on@2x.png in Resources */,
 				040C2C371A7104BF0087E336 /* partly_cloudy_day_red@2x.png in Resources */,
 				040C2B841A7104B90087E336 /* shirt@2x.png in Resources */,
 				040C2B901A7104B90087E336 /* t_shirt_off@2x.png in Resources */,
 				9163985E19572296004A5B5A /* nav_ios7.png in Resources */,
-				040C2B741A7104B90087E336 /* bookmark_off@2x.png in Resources */,
 				915C4B4C1952A58200A592AD /* Images.xcassets in Resources */,
 				04300E7A1A6E577E0086F1E9 /* forward_green@2x.png in Resources */,
 				040C2BF81A7104BF0087E336 /* hail_gray.png in Resources */,
@@ -1931,6 +1995,7 @@
 				040C2B5C1A7104B90087E336 /* shoe_woman_red.png in Resources */,
 				04300E851A6E577E0086F1E9 /* up@2x.png in Resources */,
 				040C2C2B1A7104BF0087E336 /* sun_gray@2x.png in Resources */,
+				040894CC1A7B835E0033B215 /* 5.jpg in Resources */,
 				04300E731A6E577E0086F1E9 /* down@2x.png in Resources */,
 				9186AD681956A3C100F0AF40 /* ContactSample.plist in Resources */,
 				040C2B951A7104B90087E336 /* trainers@2x.png in Resources */,
@@ -1952,8 +2017,10 @@
 				040C2C1F1A7104BF0087E336 /* lightning_bolt_gray@2x.png in Resources */,
 				040C2C131A7104BF0087E336 /* rain_red.png in Resources */,
 				040C2B541A7104B90087E336 /* scarf.png in Resources */,
+				040894CD1A7B835E0033B215 /* 6.jpg in Resources */,
 				040C2B821A7104B90087E336 /* scarf@2x.png in Resources */,
 				040C2C3B1A7104BF0087E336 /* sleet_red@2x.png in Resources */,
+				040894D11A7B835E0033B215 /* icons.pagecontrol.png in Resources */,
 				040C2C3F1A7104BF0087E336 /* sunrise_red@2x.png in Resources */,
 				9186AD631956992900F0AF40 /* icon_unselect@2x.png in Resources */,
 				040C2C0D1A7104BF0087E336 /* little_rain_red.png in Resources */,
@@ -1967,10 +2034,11 @@
 				040C2C0C1A7104BF0087E336 /* hail_red.png in Resources */,
 				040C2B5D1A7104B90087E336 /* shorts.png in Resources */,
 				040C2B4C1A7104B90087E336 /* hanger_red.png in Resources */,
+				040894CB1A7B835E0033B215 /* 4.jpg in Resources */,
 				040C2BF51A7104BF0087E336 /* dry_gray.png in Resources */,
-				040C2B561A7104B90087E336 /* search.png in Resources */,
 				040C2C331A7104BF0087E336 /* lightning_bolt_red@2x.png in Resources */,
 				9186AD611956992900F0AF40 /* icon_selected@2x.png in Resources */,
+				040894CE1A7B835E0033B215 /* 7.jpg in Resources */,
 				04300E691A6E577E0086F1E9 /* settings_off.png in Resources */,
 				040C2C251A7104BF0087E336 /* partly_cloudy_rain_gray@2x.png in Resources */,
 				040C2B8E1A7104B90087E336 /* socks@2x.png in Resources */,
@@ -2011,6 +2079,7 @@
 				04300E791A6E577E0086F1E9 /* forward@2x.png in Resources */,
 				040C2C381A7104BF0087E336 /* partly_cloudy_night_red@2x.png in Resources */,
 				04300B7A1A6E409E0086F1E9 /* SWDressTimeViewController.xib in Resources */,
+				040894B41A7B7DA90033B215 /* SWWeatherView.xib in Resources */,
 				040C2B4F1A7104B90087E336 /* jacket_red.png in Resources */,
 				040C2C2A1A7104BF0087E336 /* storm_gray@2x.png in Resources */,
 				040C2BF61A7104BF0087E336 /* fog_day_gray.png in Resources */,
@@ -2080,6 +2149,7 @@
 				04300B7E1A6E40C40086F1E9 /* SWLogViewController.m in Sources */,
 				91B4C5E01955249C008F0686 /* NSManagedObject+Ext.m in Sources */,
 				91B4C5E61955249C008F0686 /* NSString+TKUtilities.m in Sources */,
+				040894B21A7B7D8C0033B215 /* SWWeatherView.m in Sources */,
 				9193C36619617E4B00ADD198 /* MagicalImportFunctions.m in Sources */,
 				916E709019722592007DC301 /* SWAwesomeTableViewController.m in Sources */,
 				91646C8A196F9ADB00C3BBBE /* SWSegmentControl.m in Sources */,

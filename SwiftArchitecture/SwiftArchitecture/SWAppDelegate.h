@@ -10,9 +10,15 @@
 #import "SWUtil.h"
 #import "SWMultiSelectContactViewController.h"
 #import "SWAwesomeTableViewController.h"
+#import "SWTabbarController.h"
+#import "SWLogViewController.h"
 
 @interface SWAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) SWTabbarController *tabbarController;
+@property (nonatomic, strong) SWLogViewController *loginViewController;
+
+- (void)initTabbar;
 
 @end

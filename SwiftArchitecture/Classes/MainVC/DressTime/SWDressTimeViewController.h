@@ -8,6 +8,6 @@
 
 #import "SWBaseViewController.h"
 
-@interface SWDressTimeViewController : SWBaseViewController
+@interface SWDressTimeViewController : SWBaseViewController<UIScrollViewDelegate>
 
 @end

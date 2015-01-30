@@ -7,6 +7,7 @@
 //
 
 #import "SWTabbarController.h"
+#import "SWTabbarItem.h"
 
 #define SW_HEIGHT_TABBAR 49
 
@@ -33,7 +34,8 @@
 
 - (id)initWithNomarlImages:(NSArray *)normalImages
              selectImages:(NSArray *)selectImages
-               backGround:(UIColor *)ground {
+               backGround:(UIColor *)ground
+                     title:(NSArray *)titleArray{
     if (self = [super init]) {
         
         [self hidenOldTabbar];
@@ -47,11 +49,14 @@
         int x = 0;
         for (int i = 0; i < [normalImages count]; i++) {
 			
-            UIImage *nomarlImg = [UIImage imageNamed:[normalImages objectAtIndex:i]];
-            UIImage *hoverImg = [UIImage imageNamed:[selectImages objectAtIndex:i]];
+            UIImage *normalImage = [UIImage imageNamed:[normalImages objectAtIndex:i]];
+            UIImage *hoverImage = [UIImage imageNamed:[selectImages objectAtIndex:i]];
             
-            CGRect tabRect = CGRectMake(x, [UIScreen mainScreen].bounds.size.height - SW_HEIGHT_TABBAR, [UIScreen mainScreen].bounds.size.width / [normalImages count], SW_HEIGHT_TABBAR);
-			SWTabbarItem *cellTab = [[SWTabbarItem alloc]initWithFrame:tabRect nomarlImage:nomarlImg selectedImage:hoverImg];
+            CGRect tabRect = CGRectMake(x, [UIScreen mainScreen].bounds.size.height - SW_HEIGHT_TABBAR, normalImage.size.width, normalImage.size.height);
+            
+            SWTabbarItem *cellTab;
+
+            cellTab = [[SWTabbarItem alloc] initWithFrame:tabRect nomarlImage:normalImage selectedImage:hoverImage title:[titleArray objectAtIndex:i] offset:0];
             
             cellTab.tabIndex = i;
             [self.view addSubview:cellTab];
@@ -110,6 +115,22 @@
             else {
                 
                 [item setSelected:NO];
+            }
+        }
+    }
+}
+
+- (void)hideTabbar:(BOOL)hiden {
+    
+    if (hiden) {
+        _backGround.frame = CGRectMake(0,
+                                       [UIScreen mainScreen].bounds.size.height,
+                                       [UIScreen mainScreen].bounds.size.width,
+                                       SW_HEIGHT_TABBAR);
+        for (UIView *subview in [self.view subviews]) {
+            
+            if ([subview  isKindOfClass:[SWTabbarItem class]] || [subview isKindOfClass:[UITabBar class]]) {
+                [subview setHidden:YES];
             }
         }
     }

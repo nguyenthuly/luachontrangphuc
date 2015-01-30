@@ -22,7 +22,7 @@
 #import "SWMacro.h"
 #import "SWUtil.h"
 #import "QuartzCore/QuartzCore.h"
-
+#import "SWAppDelegate.h"
 /*
 *   Import Categories
 */

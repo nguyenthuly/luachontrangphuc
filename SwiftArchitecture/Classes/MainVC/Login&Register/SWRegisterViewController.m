@@ -65,13 +65,13 @@
 }
 
 - (void)maleButtonTapped:(id)sender{
-    [self setButton:femaleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
-    [self setButton:maleButton andBackground:@"40CCBB" andTitleColor:@"FFFFFF"];
+    [self setButton:femaleButton andBackground:Button_bg andTitleColor:Black_Color];
+    [self setButton:maleButton andBackground:Button_bg_Selected andTitleColor:White_Color];
 }
 
 - (void)femaleButtonTapped:(id)sender{
-    [self setButton:maleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
-    [self setButton:femaleButton andBackground:@"40CCBB" andTitleColor:@"FFFFFF"];
+    [self setButton:maleButton andBackground:Button_bg andTitleColor:Black_Color];
+    [self setButton:femaleButton andBackground:Button_bg_Selected andTitleColor:White_Color];
 }
 
 - (void)setButton:(UIButton *)button andBackground:(NSString *)bg andTitleColor:(NSString *)title{
@@ -125,42 +125,42 @@
                     {
                         if (![self isValidName:text]) {
                             NSLog(@"%d",[self isValidName:registerTextField.text]);
-                            errorMessage = @"Mời bạn nhập họ!";
+                            errorMessage = First_Name_Message;
                         }
                     }
                         break;
                     case Last_Name:
                     {
                         if (![self isValidName:text]) {
-                            errorMessage = @"Mời bạn nhập tên!";
+                            errorMessage = Last_Name_Message;
                         }
                     }
                         break;
                     case Height:
                     {
                         if (![self isValidName:text]) {
-                            errorMessage = @"Mời bạn nhập chiều cao!";
+                            errorMessage = Height_Message;
                         }
                     }
                         break;
                     case Weight:
                     {
                         if (![self isValidName:text]) {
-                            errorMessage = @"Mời bạn nhập cân nặng!";
+                            errorMessage = Weight_Message;
                         }
                     }
                         break;
                     case Telephone:
                     {
                         if (![self isValidTelephoneNumber:text]) {
-                            errorMessage = @"Số điện thoại không đúng!";
+                            errorMessage = Telephone_Message;
                         }
                     }
                         break;
                     case Email:
                     {
                         if (![self isValidEmail:text ]) {
-                            errorMessage = @"Email không tồn tại!";
+                            errorMessage = Email_Message;
                         }
                     }
                         break;
@@ -168,14 +168,14 @@
                     {
                         passWord = registerTextField.text;
                         if (![self isValidPassword:text]) {
-                            errorMessage = @"Mật khẩu của bạn chưa đủ kí tự";
+                            errorMessage = Password_Message;
                         }
                     }
                         break;
                     case Re_Password:
                     {
                         if (![registerTextField.text isEqualToString:passWord]) {
-                            errorMessage = @"Mật khẩu chưa đúng";
+                            errorMessage = Re_Password_Message;
                         }
                     }
                         break;

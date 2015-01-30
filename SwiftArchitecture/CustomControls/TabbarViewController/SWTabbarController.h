@@ -21,5 +21,9 @@
 
 - (id)initWithNomarlImages:(NSArray *)normalImages
               selectImages:(NSArray *)selectImages
-                backGround:(UIColor *)ground;
+                backGround:(UIColor *)ground
+                     title:(NSArray *)titleArray;
+
+- (void)hideTabbar:(BOOL)hiden;
+
 @end

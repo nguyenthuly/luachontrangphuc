@@ -51,8 +51,7 @@
 }
 
 - (IBAction)loginButtonTapped:(id)sender {
-    SWDressTimeViewController *dressTimeVC = [[SWDressTimeViewController alloc] initWithNibName:@"SWDressTimeViewController" bundle:nil];
-    [self.navigationController pushViewController:dressTimeVC animated:YES];
+    [[SWUtil appDelegate] initTabbar];
 }
 
 - (IBAction)registerButtonTapped:(id)sender {
