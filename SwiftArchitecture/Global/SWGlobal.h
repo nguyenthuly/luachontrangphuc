@@ -41,6 +41,7 @@
 #define Jeans @"QUẦN/VÁY"
 #define Shoe @"GIÀY/DÉP"
 
+
 /*IMAGE*/
 #define Back_Button @"back_green.png"
 #define Dress_Time_On @"t_shirt_on.png"
@@ -62,5 +63,9 @@
 #define White_Color @"FFFFFF"
 #define Black_Color @"000000"
 #define Green_Color @"40CCBB"
+
+/*ARRAY*/
+#define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần jeans",@"Váy",@"Giày thể thao",@"Giày hài",@"Bốt"]
+#define Clothes_IconArr @[@"shirt_red.png",@"t_shirt_red.png",@"coat_red.png",@"jacket_red.png",@"trousers_red.png",@"skirt_red.png",@"trainers_red.png",@"shoe_woman_red.png",@"winter_boots_red.png"]
 
 #endif
