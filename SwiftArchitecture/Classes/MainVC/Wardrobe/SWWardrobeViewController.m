@@ -7,8 +7,13 @@
 //
 
 #import "SWWardrobeViewController.h"
+#import "SWWardrobeDetailViewController.h"
+#import "SWAddClotheViewController.h"
 
-@interface SWWardrobeViewController ()
+@interface SWWardrobeViewController (){
+    NSArray *clothesArr;
+    NSArray *clothesIconArr;
+}
 @property (weak, nonatomic) IBOutlet UITableView *wardrobeTableView;
 
 @end
@@ -29,7 +34,8 @@
 }
 
 - (void)initData{
-    
+    clothesArr = Clothes_Arr;
+    clothesIconArr = Clothes_IconArr;
 }
 
 - (void)searchButtonTapped:(id)sender{
@@ -37,7 +43,8 @@
 }
 
 - (void)addButtonTapped:(id)sender{
-    
+    SWAddClotheViewController *addClothesVC = [[SWAddClotheViewController alloc] initWithNibName:@"SWAddClotheViewController" bundle:nil];
+    [self.navigationController pushViewController:addClothesVC animated:YES];
 }
 
 #pragma mark - TableView
@@ -72,12 +79,32 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    [cell.textLabel setTextColor:[UIColor colorWithHex: Gray_Color alpha:1.0]];
+    switch (indexPath.section) {
+        case 0:
+            cell.textLabel.text = [clothesArr objectAtIndex:indexPath.row];
+            cell.imageView.image = [UIImage imageNamed:[clothesIconArr objectAtIndex:indexPath.row]];
+            break;
+        case 1:
+            cell.textLabel.text = [clothesArr objectAtIndex:indexPath.row + 3];
+            cell.imageView.image = [UIImage imageNamed:[clothesIconArr objectAtIndex:indexPath.row + 3]];
+            break;
+        case 2:
+            cell.textLabel.text = [clothesArr objectAtIndex:indexPath.row + 6];
+            cell.imageView.image = [UIImage imageNamed:[clothesIconArr objectAtIndex:indexPath.row + 6]];
+
+            break;
+        default:
+            break;
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    SWWardrobeDetailViewController *wardrobeDetailVC = [[SWWardrobeDetailViewController alloc] init];
+    [self.navigationController pushViewController:wardrobeDetailVC animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,7 +114,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, 40)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, 39)];
     [view setBackgroundColor:[UIColor colorWithHex:Green_Color alpha:1.0]];
     UILabel *sectionTitle  = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, 25)];
     [view addSubview:sectionTitle];

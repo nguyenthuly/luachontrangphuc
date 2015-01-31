@@ -124,7 +124,6 @@
                     case First_Name:
                     {
                         if (![self isValidName:text]) {
-                            NSLog(@"%d",[self isValidName:registerTextField.text]);
                             errorMessage = First_Name_Message;
                         }
                     }
