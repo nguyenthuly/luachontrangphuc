@@ -22,13 +22,13 @@
     /*
      * Please don't remove backet {} setup Magical record DB
      */
-    
+    /*
     //Start setup Magical record Model
     NSString *modelName = @"SwiftModel.sqlite";//Replace this name with your model name.
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:modelName];
     [MagicalRecord setupAutoMigratingCoreDataStack];
     //End setup Magical record Model
-    
+    */
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
