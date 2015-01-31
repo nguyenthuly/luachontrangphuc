@@ -133,6 +133,17 @@
                 [subview setHidden:YES];
             }
         }
+    }else{
+        _backGround.frame = CGRectMake(0,
+                                       [UIScreen mainScreen].bounds.size.height,
+                                       [UIScreen mainScreen].bounds.size.width,
+                                       SW_HEIGHT_TABBAR);
+        for (UIView *subview in [self.view subviews]) {
+            
+            if ([subview  isKindOfClass:[SWTabbarItem class]] || [subview isKindOfClass:[UITabBar class]]) {
+                [subview setHidden:NO];
+            }
+        }
     }
 }
 

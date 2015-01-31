@@ -40,6 +40,7 @@
 #define Skirt @"ÁO"
 #define Jeans @"QUẦN/VÁY"
 #define Shoe @"GIÀY/DÉP"
+#define Cell @"Cell"
 
 
 /*IMAGE*/
@@ -54,6 +55,7 @@
 #define Setting_Off @"settings_off"
 #define Search @"search.png"
 #define Add @"plus.png"
+#define Check_Mark @"checkmark.png"
 
 
 /*COLOR*/
@@ -63,6 +65,7 @@
 #define White_Color @"FFFFFF"
 #define Black_Color @"000000"
 #define Green_Color @"40CCBB"
+#define Red_Color @"F65D63"
 
 /*ARRAY*/
 #define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần jeans",@"Váy",@"Giày thể thao",@"Giày hài",@"Bốt"]

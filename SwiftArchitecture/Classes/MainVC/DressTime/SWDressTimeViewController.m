@@ -9,7 +9,9 @@
 #import "SWDressTimeViewController.h"
 #import "SWWeatherView.h"
 
-@interface SWDressTimeViewController () <UIScrollViewDelegate>
+@interface SWDressTimeViewController () <UIScrollViewDelegate>{
+    SWWeatherView *weatherGrid;
+}
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLabel;
@@ -33,6 +35,7 @@
 
 @implementation SWDressTimeViewController {
     NSMutableArray *weatherArr;
+    NSMutableArray *timeArr;
 }
 
 - (void)viewDidLoad {
@@ -45,12 +48,6 @@
 
 - (void)initUI{
     self.title = DressTime_Title;
-//    self.weatherScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 231, 400,128)];
-//    SWWeatherView *weatherView = [[SWWeatherView alloc] init];
-//    [self.weatherScrollView addSubview:weatherView];
-//    [weatherView setBackgroundColor:[UIColor greenColor]];
-//    [self.weatherScrollView setBackgroundColor:[UIColor redColor]];
-    //[self.view addSubview:self.weatherScrollView];
     self.weatherScrollView.delegate = self;
     self.weatherScrollView.hidden = NO;
     
@@ -60,33 +57,49 @@
 
 - (void)initData{
     weatherArr = [[NSMutableArray alloc] initWithArray:@[@22,@23,@32,@21,@12,@13,@15,@16,@17]];
+    timeArr = [[NSMutableArray alloc] initWithArray:@[@5,@6,@7,@8,@9,@10,@11,@12,@13]];
+    
 }
 
 - (void)initScroll {
-    int xPos = 0;
     
+    int xPos = 0;
     for (int i=0; i < [weatherArr count]; i++) {
         SWWeatherView *weatherView = [[SWWeatherView alloc] initWithFrame:CGRectZero];
-        weatherView.backgroundColor = [UIColor blueColor];
+        weatherView.delegate = self;
         NSString *temperature = [NSString stringWithFormat:@"%@ ºC", [weatherArr objectAtIndex:i]];
+        NSString *time = [NSString stringWithFormat:@"%@ PM",[timeArr objectAtIndex:i]];
         weatherView.temperatureLabel.text = temperature;
+        weatherView.timeLabel.text = time;
         CGRect frame = [weatherView frame];
         frame.origin.x = xPos;
         xPos += frame.size.width;
         [weatherView setFrame:frame];
         [self.weatherScrollView addSubview:weatherView];
-        
-        NSLog(@"F:%@ - %d", NSStringFromCGRect(weatherView.frame), xPos);
     }
     
     CGSize contentSize = [self.weatherScrollView contentSize];
     contentSize.width = xPos;
     [self.weatherScrollView setContentSize:contentSize];
-    NSLog(@"F:%@", NSStringFromCGRect(self.weatherScrollView.frame));
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     
+}
+
+#pragma mark - WeatherViewDelegate
+
+- (void)didSelect:(id)grid{
+    for (UIView *view in [self.weatherScrollView subviews]) {
+        if ([view isKindOfClass:[SWWeatherView class]]) {
+            SWWeatherView *optionGrid = (SWWeatherView *)view;
+            if ([grid isEqual:optionGrid]) {
+                [optionGrid setGridSelected:YES];
+            } else {
+                [optionGrid setGridSelected:NO];
+            }
+        }
+    }
 }
 
 #pragma mark - Action

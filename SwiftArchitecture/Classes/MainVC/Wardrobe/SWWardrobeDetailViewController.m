@@ -7,31 +7,93 @@
 //
 
 #import "SWWardrobeDetailViewController.h"
+#import "SWAddClotheViewController.h"
+#import "LXReorderableCollectionViewFlowLayout.h"
+#import "SWWardrobeCollectionViewCell.h"
 
 @interface SWWardrobeDetailViewController ()
+@property(nonatomic, strong) IBOutlet UICollectionView *wardrobeCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *contentWardrobeView;
 
 @end
 
 @implementation SWWardrobeDetailViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [[SWUtil appDelegate] hideTabbar:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self initUI];
+    [self initData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)initUI{
+    [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
+    [self setRightButtonWithImage:Add highlightedImage:nil target:self action:@selector(addButtonTapped:)];
+    
+    //Make machine collection
+    LXReorderableCollectionViewFlowLayout *layout = [[LXReorderableCollectionViewFlowLayout alloc] init];
+    [layout setMinimumLineSpacing:0];
+    [layout setMinimumInteritemSpacing:0];
+    layout.itemSize = CGSizeMake(70,90);//SCREEN_WIDTH_LANDSCAPE/2, self.contentWardrobeView.bounds.size.height/5);
+    [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    
+    self.wardrobeCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH_PORTRAIT,self.contentWardrobeView.bounds.size.height ) collectionViewLayout:layout];
+    self.wardrobeCollectionView.delegate = self;
+    self.wardrobeCollectionView.dataSource = self;
+    [self.wardrobeCollectionView setBackgroundColor:[UIColor colorWithHex:@"D3F2ED" alpha:1.0]];
+    
+    [self.wardrobeCollectionView registerClass:[SWWardrobeCollectionViewCell class] forCellWithReuseIdentifier:Cell];
+    [self.wardrobeCollectionView registerNib:[UINib nibWithNibName:@"SWWardrobeCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:Cell];
+    
+    [self.contentWardrobeView addSubview:self.wardrobeCollectionView];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)initData{
+    
 }
-*/
+
+- (void)backButtonTapped:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)addButtonTapped:(id)sender{
+    SWAddClotheViewController *addClothesVC = [[SWAddClotheViewController alloc] initWithNibName:@"SWAddClotheViewController" bundle:nil];
+    [self.navigationController pushViewController:addClothesVC animated:YES];
+}
+
+#pragma mark - CollectionView
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 90;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *reuseIdentifier = Cell;
+    SWWardrobeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGSize size = CGSizeMake(70,90);//SCREEN_WIDTH_LANDSCAPE/4, self.contentWardrobeView.bounds.size.height/5);
+    
+    return size;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "SWBaseViewController.h"
+#import "SWWeatherView.h"
 
-@interface SWDressTimeViewController : SWBaseViewController<UIScrollViewDelegate>
+@interface SWDressTimeViewController : SWBaseViewController<UIScrollViewDelegate, SWWeatherViewDelegate>
 
 @end

@@ -30,6 +30,21 @@
 
 - (void)didTapOptionGrid
 {
+    if (self.delegate) {
+        [self.delegate didSelect:self];
+    }
+}
 
+- (void)setGridSelected:(BOOL)selected{
+    if (selected) {
+        self.timeLabel.textColor = [UIColor colorWithHex:Red_Color alpha:1.0];
+        self.temperatureLabel.textColor = [UIColor colorWithHex:Red_Color alpha:1.0];
+        self.weatherImageView.image = [UIImage imageNamed:@"clouds_red.png"];
+    }
+    else{
+        self.timeLabel.textColor = [UIColor colorWithHex:Gray_Color alpha:1.0];
+        self.temperatureLabel.textColor = [UIColor colorWithHex:Gray_Color alpha:1.0];
+        self.weatherImageView.image = [UIImage imageNamed:@"clouds_gray.png"];
+    }
 }
 @end

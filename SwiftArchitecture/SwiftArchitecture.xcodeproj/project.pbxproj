@@ -259,6 +259,9 @@
 		04300E841A6E577E0086F1E9 /* up4_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04300DA11A6E577E0086F1E9 /* up4_green@2x.png */; };
 		04300E851A6E577E0086F1E9 /* up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04300DA21A6E577E0086F1E9 /* up@2x.png */; };
 		04300E861A6E577E0086F1E9 /* up_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04300DA31A6E577E0086F1E9 /* up_green@2x.png */; };
+		04D318FF1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D318FE1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m */; };
+		04D319031A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D319011A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m */; };
+		04D319041A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D319021A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib */; };
 		915C4B3A1952A58200A592AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915C4B391952A58200A592AD /* Foundation.framework */; };
 		915C4B3C1952A58200A592AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915C4B3B1952A58200A592AD /* CoreGraphics.framework */; };
 		915C4B3E1952A58200A592AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915C4B3D1952A58200A592AD /* UIKit.framework */; };
@@ -641,6 +644,11 @@
 		04300DA11A6E577E0086F1E9 /* up4_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up4_green@2x.png"; sourceTree = "<group>"; };
 		04300DA21A6E577E0086F1E9 /* up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up@2x.png"; sourceTree = "<group>"; };
 		04300DA31A6E577E0086F1E9 /* up_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up_green@2x.png"; sourceTree = "<group>"; };
+		04D318FD1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		04D318FE1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		04D319001A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWardrobeCollectionViewCell.h; sourceTree = "<group>"; };
+		04D319011A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWardrobeCollectionViewCell.m; sourceTree = "<group>"; };
+		04D319021A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWWardrobeCollectionViewCell.xib; sourceTree = "<group>"; };
 		915C4B361952A58200A592AD /* SwiftArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		915C4B391952A58200A592AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		915C4B3B1952A58200A592AD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -870,6 +878,9 @@
 				040894B01A7B7D8C0033B215 /* SWWeatherView.h */,
 				040894B11A7B7D8C0033B215 /* SWWeatherView.m */,
 				040894B31A7B7DA90033B215 /* SWWeatherView.xib */,
+				04D319001A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.h */,
+				04D319011A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m */,
+				04D319021A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1282,6 +1293,15 @@
 			path = Weather;
 			sourceTree = "<group>";
 		};
+		04D318FC1A7CABFA001E3ED8 /* CollectionViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				04D318FD1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.h */,
+				04D318FE1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m */,
+			);
+			path = CollectionViewLayout;
+			sourceTree = "<group>";
+		};
 		915C4B2D1952A58200A592AD = {
 			isa = PBXGroup;
 			children = (
@@ -1400,6 +1420,7 @@
 		915C4B7F1952B18F00A592AD /* CustomControls */ = {
 			isa = PBXGroup;
 			children = (
+				04D318FC1A7CABFA001E3ED8 /* CollectionViewLayout */,
 				9186F51819712C6600E910E0 /* AwesomeButton */,
 				9186AD471956913F00F0AF40 /* MultiSelectContactController */,
 				915C4B8B1952B22800A592AD /* TabbarViewController */,
@@ -1969,6 +1990,7 @@
 				040C2C181A7104BF0087E336 /* sunrise_red.png in Resources */,
 				04300E811A6E577E0086F1E9 /* settings_filled@2x.png in Resources */,
 				04300BA21A6E41950086F1E9 /* SWAddClotheViewController.xib in Resources */,
+				04D319041A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib in Resources */,
 				040894C91A7B835E0033B215 /* 2.jpg in Resources */,
 				040C2B861A7104B90087E336 /* shoe_man@2x.png in Resources */,
 				040C2B7A1A7104B90087E336 /* hanger_red@2x.png in Resources */,
@@ -2116,6 +2138,7 @@
 				9193C37319617E4B00ADD198 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				91B4C5E51955249C008F0686 /* NSString+HTML.m in Sources */,
 				9193C37219617E4B00ADD198 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
+				04D318FF1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				9193C36B19617E4B00ADD198 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				9193C37D19617E4B00ADD198 /* MagicalRecord+Setup.m in Sources */,
 				9193C37419617E4B00ADD198 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
@@ -2178,6 +2201,7 @@
 				91B4C5A91955222F008F0686 /* ResponseObject.m in Sources */,
 				9193C38019617E4B00ADD198 /* NSArray+Accessors.m in Sources */,
 				91646C8D196F9CC300C3BBBE /* UIFont+Ext.m in Sources */,
+				04D319031A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m in Sources */,
 				9193C36019617E4B00ADD198 /* AFURLConnectionOperation.m in Sources */,
 				9193C37819617E4B00ADD198 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				04300BA11A6E41950086F1E9 /* SWAddClotheViewController.m in Sources */,

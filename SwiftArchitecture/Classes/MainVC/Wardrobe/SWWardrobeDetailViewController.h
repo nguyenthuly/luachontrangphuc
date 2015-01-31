@@ -8,6 +8,6 @@
 
 #import "SWBaseViewController.h"
 
-@interface SWWardrobeDetailViewController : SWBaseViewController
+@interface SWWardrobeDetailViewController : SWBaseViewController<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end

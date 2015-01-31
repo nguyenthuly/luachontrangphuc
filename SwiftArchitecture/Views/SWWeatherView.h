@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol SWWeatherViewDelegate<NSObject>
+- (void)didSelect:(id)grid;
+@end
 
 @interface SWWeatherView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherImageView;
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
+@property (weak, nonatomic) id <SWWeatherViewDelegate> delegate;
 
+- (void)setGridSelected:(BOOL)selected;
 @end

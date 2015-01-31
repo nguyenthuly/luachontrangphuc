@@ -20,5 +20,5 @@
 @property (nonatomic, strong) SWLogViewController *loginViewController;
 
 - (void)initTabbar;
-
+- (void)hideTabbar:(BOOL)hide;
 @end

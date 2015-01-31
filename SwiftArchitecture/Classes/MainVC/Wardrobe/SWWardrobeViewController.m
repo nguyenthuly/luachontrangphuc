@@ -20,6 +20,11 @@
 
 @implementation SWWardrobeViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [[SWUtil appDelegate] hideTabbar:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -102,7 +107,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     SWWardrobeDetailViewController *wardrobeDetailVC = [[SWWardrobeDetailViewController alloc] init];
+    wardrobeDetailVC.title = cell.textLabel.text;
     [self.navigationController pushViewController:wardrobeDetailVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
