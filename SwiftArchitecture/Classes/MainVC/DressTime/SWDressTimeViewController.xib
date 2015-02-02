@@ -85,7 +85,7 @@
                         <action selector="suggestButton:" destination="-1" eventType="touchUpInside" id="kZr-F4-dXO"/>
                     </connections>
                 </button>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="w1o-ZE-J8l">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="w1o-ZE-J8l">
                     <rect key="frame" x="0.0" y="231" width="320" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

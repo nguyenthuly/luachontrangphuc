@@ -123,7 +123,7 @@
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, 39)];
     [view setBackgroundColor:[UIColor colorWithHex:Green_Color alpha:1.0]];
-    UILabel *sectionTitle  = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, 25)];
+    UILabel *sectionTitle  = [[UILabel alloc] initWithFrame:CGRectMake(0, -2, SCREEN_WIDTH_PORTRAIT, 25)];
     [view addSubview:sectionTitle];
     sectionTitle.textAlignment = NSTextAlignmentCenter;
     sectionTitle.textColor = [UIColor whiteColor];

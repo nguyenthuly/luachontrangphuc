@@ -8,6 +8,7 @@
 
 #import "SWDressTimeViewController.h"
 #import "SWWeatherView.h"
+#import "SWWardrobeDetailViewController.h"
 
 @interface SWDressTimeViewController () <UIScrollViewDelegate>{
     SWWeatherView *weatherGrid;
@@ -105,12 +106,19 @@
 #pragma mark - Action
 
 - (IBAction)skirtButton:(id)sender {
+    SWWardrobeDetailViewController *wardrobeVC = [[SWWardrobeDetailViewController alloc] initWithNibName:@"SWWardrobeDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:wardrobeVC animated:YES];
+    
 }
 
 - (IBAction)jeanButton:(id)sender {
+    SWWardrobeDetailViewController *wardrobeVC = [[SWWardrobeDetailViewController alloc] initWithNibName:@"SWWardrobeDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:wardrobeVC animated:YES];
 }
 
 - (IBAction)shoeButton:(id)sender {
+    SWWardrobeDetailViewController *wardrobeVC = [[SWWardrobeDetailViewController alloc] initWithNibName:@"SWWardrobeDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:wardrobeVC animated:YES];
 }
 
 - (IBAction)suggestButton:(id)sender {
