@@ -262,6 +262,8 @@
 		04D318FF1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D318FE1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m */; };
 		04D319031A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D319011A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m */; };
 		04D319041A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D319021A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib */; };
+		04FAF07B1A7F6B4900533A80 /* bg_popup.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FAF07A1A7F6B4900533A80 /* bg_popup.png */; };
+		04FAF07D1A7F6B5700533A80 /* bg_popup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FAF07C1A7F6B5700533A80 /* bg_popup@2x.png */; };
 		915C4B3A1952A58200A592AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915C4B391952A58200A592AD /* Foundation.framework */; };
 		915C4B3C1952A58200A592AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915C4B3B1952A58200A592AD /* CoreGraphics.framework */; };
 		915C4B3E1952A58200A592AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915C4B3D1952A58200A592AD /* UIKit.framework */; };
@@ -649,6 +651,8 @@
 		04D319001A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWardrobeCollectionViewCell.h; sourceTree = "<group>"; };
 		04D319011A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWardrobeCollectionViewCell.m; sourceTree = "<group>"; };
 		04D319021A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWWardrobeCollectionViewCell.xib; sourceTree = "<group>"; };
+		04FAF07A1A7F6B4900533A80 /* bg_popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_popup.png; sourceTree = "<group>"; };
+		04FAF07C1A7F6B5700533A80 /* bg_popup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_popup@2x.png"; sourceTree = "<group>"; };
 		915C4B361952A58200A592AD /* SwiftArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		915C4B391952A58200A592AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		915C4B3B1952A58200A592AD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1210,6 +1214,7 @@
 		04300D6E1A6E577E0086F1E9 /* 1x */ = {
 			isa = PBXGroup;
 			children = (
+				04FAF07A1A7F6B4900533A80 /* bg_popup.png */,
 				04300D6F1A6E577E0086F1E9 /* add_image.png */,
 				04300D701A6E577E0086F1E9 /* back.png */,
 				04300D711A6E577E0086F1E9 /* back_green.png */,
@@ -1244,6 +1249,7 @@
 		04300D8A1A6E577E0086F1E9 /* 2x */ = {
 			isa = PBXGroup;
 			children = (
+				04FAF07C1A7F6B5700533A80 /* bg_popup@2x.png */,
 				04300D8B1A6E577E0086F1E9 /* add_image@2x.png */,
 				04300D8C1A6E577E0086F1E9 /* back2x.png */,
 				04300D8D1A6E577E0086F1E9 /* back_green@2x.png */,
@@ -1878,6 +1884,7 @@
 				040C2C1A1A7104BF0087E336 /* clouds_gray@2x.png in Resources */,
 				040C2C3C1A7104BF0087E336 /* snow_red@2x.png in Resources */,
 				04300E761A6E577E0086F1E9 /* edit_green@2x.png in Resources */,
+				04FAF07B1A7F6B4900533A80 /* bg_popup.png in Resources */,
 				040C2B581A7104B90087E336 /* shirt_red.png in Resources */,
 				04300E6F1A6E577E0086F1E9 /* back2x.png in Resources */,
 				040C2B4A1A7104B90087E336 /* flip_flops.png in Resources */,
@@ -1927,6 +1934,7 @@
 				040C2BFC1A7104BF0087E336 /* moon_gray.png in Resources */,
 				04300E771A6E577E0086F1E9 /* edit_user_gray@2x.png in Resources */,
 				040C2BF71A7104BF0087E336 /* fog_night_gray.png in Resources */,
+				04FAF07D1A7F6B5700533A80 /* bg_popup@2x.png in Resources */,
 				040C2C111A7104BF0087E336 /* partly_cloudy_night_red.png in Resources */,
 				040C2B7D1A7104B90087E336 /* jacket_red@2x.png in Resources */,
 				040894D01A7B835E0033B215 /* 9.jpg in Resources */,

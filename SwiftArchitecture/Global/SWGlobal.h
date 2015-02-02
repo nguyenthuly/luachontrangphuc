@@ -13,6 +13,14 @@
 #define dataHasChanged @"dataHasChanged"
 #define CacheFoder @"CacheFoder"
 
+/*TYPE ENUM*/
+typedef enum {
+    color = 0,
+    category,
+    size
+}TableViewType;
+
+
 /*TITLE*/
 #define Register_Title @"Đăng ký"
 #define Login_Title @"Đăng nhập"
@@ -56,6 +64,8 @@
 #define Search @"search.png"
 #define Add @"plus.png"
 #define Check_Mark @"checkmark.png"
+#define Up @"up4.png"
+#define Down @"down.png"
 
 
 /*COLOR*/
@@ -70,5 +80,8 @@
 /*ARRAY*/
 #define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần jeans",@"Váy",@"Giày thể thao",@"Giày hài",@"Bốt"]
 #define Clothes_IconArr @[@"shirt_red.png",@"t_shirt_red.png",@"coat_red.png",@"jacket_red.png",@"trousers_red.png",@"skirt_red.png",@"trainers_red.png",@"shoe_woman_red.png",@"winter_boots_red.png"]
+#define Color_Arr @[@"Đỏ",@"Xanh da trời",@"Tím",@"Vàng",@"Hồng",@"Đen",@"Cam",@"Nâu",@"Xanh lá cây",@"Xanh nõn chuối",@"Hồng đỏ"]
+#define Size_Clothes_Arr @[@"S",@"M",@"L",@"XL",@"XXL"]
+#define Size_Shoes_Arr @[@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44"]
 
 #endif

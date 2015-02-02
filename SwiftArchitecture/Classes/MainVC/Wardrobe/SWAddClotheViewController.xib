@@ -7,6 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SWAddClotheViewController">
             <connections>
+                <outlet property="addClotheTableView" destination="dHo-Er-RLk" id="V9i-xz-JEf"/>
+                <outlet property="categoryImageView" destination="85Q-S4-5Rr" id="rYi-0V-pna"/>
+                <outlet property="categoryLabel" destination="jXC-47-5Fe" id="qaN-EN-3Nw"/>
+                <outlet property="colorImageView" destination="nDc-2R-k9X" id="fRh-HU-428"/>
+                <outlet property="colorLabel" destination="AMQ-At-QA7" id="6ai-a5-mOd"/>
+                <outlet property="sizeImageView" destination="mQI-W4-hjA" id="4ij-iK-2Yt"/>
+                <outlet property="sizeLabel" destination="Fim-nY-MyK" id="3Wm-ge-ARP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -56,6 +63,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="YHu-j9-RE9"/>
+                    </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AMQ-At-QA7">
                     <rect key="frame" x="150" y="61" width="162" height="30"/>
@@ -94,6 +104,9 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="addButton:" destination="-1" eventType="touchUpInside" id="RgM-gd-K6c"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down.png" id="nDc-2R-k9X">
                     <rect key="frame" x="293" y="68" width="15" height="15"/>
@@ -107,6 +120,45 @@
                     <rect key="frame" x="293" y="138" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K5A-S0-RS4">
+                    <rect key="frame" x="150" y="61" width="162" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="colorButton:" destination="-1" eventType="touchUpInside" id="5H1-mj-t3q"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="etD-3b-FkM">
+                    <rect key="frame" x="150" y="96" width="162" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="categoryButton:" destination="-1" eventType="touchUpInside" id="qAd-8j-U6f"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qyq-us-HcY">
+                    <rect key="frame" x="150" y="132" width="162" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="sizeButton:" destination="-1" eventType="touchUpInside" id="A0o-Ax-Wz1"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dHo-Er-RLk">
+                    <rect key="frame" x="150" y="91" width="162" height="220"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="6KV-oj-fff"/>
+                        <outlet property="delegate" destination="-1" id="9Ux-HM-WvT"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="0.8901960784313725" green="0.95294117647058818" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
