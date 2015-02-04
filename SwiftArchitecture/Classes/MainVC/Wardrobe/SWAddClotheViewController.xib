@@ -12,6 +12,8 @@
                 <outlet property="categoryLabel" destination="jXC-47-5Fe" id="qaN-EN-3Nw"/>
                 <outlet property="colorImageView" destination="nDc-2R-k9X" id="fRh-HU-428"/>
                 <outlet property="colorLabel" destination="AMQ-At-QA7" id="6ai-a5-mOd"/>
+                <outlet property="nameTextField" destination="aPM-2s-fI8" id="bSv-9N-bbY"/>
+                <outlet property="photoImageView" destination="K8R-RS-Ptx" id="7rf-B2-NeU"/>
                 <outlet property="sizeImageView" destination="mQI-W4-hjA" id="4ij-iK-2Yt"/>
                 <outlet property="sizeLabel" destination="Fim-nY-MyK" id="3Wm-ge-ARP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -91,16 +93,17 @@
                     <color key="textColor" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.jpg" id="K8R-RS-Ptx">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="K8R-RS-Ptx">
                     <rect key="frame" x="25" y="203" width="90" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vm9-KW-T6h">
                     <rect key="frame" x="10" y="351" width="300" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.96470588239999999" green="0.36470588240000001" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="Thêm mới">
+                    <state key="normal" title="Tải ảnh">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -166,7 +169,6 @@
         </view>
     </objects>
     <resources>
-        <image name="1.jpg" width="183" height="276"/>
         <image name="down.png" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

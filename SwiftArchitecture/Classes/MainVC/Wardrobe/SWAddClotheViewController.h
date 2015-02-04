@@ -8,6 +8,6 @@
 
 #import "SWBaseViewController.h"
 
-@interface SWAddClotheViewController : SWBaseViewController<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface SWAddClotheViewController : SWBaseViewController<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, assign) TableViewType typeTableView;
 @end

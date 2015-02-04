@@ -19,5 +19,5 @@
  * Making univesal Viewcontroller with two .xib UI
  */
 + (UIViewController*)newUniversalViewControllerWithClassName:(NSString*)className;
-
++ (void)showConfirmAlert:(NSString *)title message:(NSString *)message cancelButton:(NSString*)cancel otherButton:(NSString *)other tag: (NSInteger )tag delegate:(id)delegate;
 @end

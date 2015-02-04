@@ -7,31 +7,41 @@
 //
 
 #import "SWLogViewController.h"
+#import "SWFeelViewController.h"
 
 @interface SWLogViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *dateTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *weatherImageView;
+@property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+- (IBAction)feelButtonTapped:(id)sender;
 
 @end
 
 @implementation SWLogViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [[SWUtil appDelegate] hideTabbar:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self initUI];
+    [self initData];
+}
+- (void)initUI{
+    self.title = Log_Title;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)initData{
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)feelButtonTapped:(id)sender {
+    SWFeelViewController *feelVC = [[SWFeelViewController alloc] initWithNibName:@"SWFeelViewController" bundle:nil];
+    [self.navigationController pushViewController:feelVC animated:YES];
 }
-*/
-
 @end

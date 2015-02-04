@@ -7,6 +7,20 @@
 //
 
 #import "SWAddClotheViewController.h"
+#import "SWUtil.h"
+#define Title_Alert @"Xác nhận"
+#define Title_Alert_Validate @"Thông báo"
+#define Message_Alert @"Bạn có chắc chắn thêm mới không?"
+#define Message_Alert_Validate @"Bạn chưa nhập tên trang phục!"
+#define Message_Alert_Camera @"Bạn chưa có ảnh trang phục"
+#define Cancel @"Không"
+#define Yes @"Có"
+#define OK @"OK"
+#define Title_ActionSheet @"Chọn ảnh"
+#define Cancel_ActionSheet @"Thoát"
+#define TakePhoto_ActionSheet @"Chụp ảnh"
+#define PhotoLibrary_ActionSheet @"Chọn từ thư viện"
+#define Message_Camera @"Thiết bị không có camera"
 
 @interface SWAddClotheViewController (){
     NSMutableArray *tableViewArr;
@@ -18,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *colorImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *sizeImageView;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 
 - (IBAction)addButton:(id)sender;
 - (IBAction)colorButton:(id)sender;
@@ -39,8 +55,11 @@
     self.title = AddClothe_Title;
     [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
     [self setRightButtonWithImage:Check_Mark highlightedImage:nil target:self action:@selector(checkButtonTapped:)];
+    
     self.addClotheTableView.hidden = YES;
     self.addClotheTableView.alpha = 0;
+    self.nameTextField.textColor = [UIColor colorWithHex:Gray_Color alpha:1.0];
+    [self checkCamera];
 }
 
 - (void)initData{
@@ -63,26 +82,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - Action
-
-- (void)checkButtonTapped:(id)sender{
-}
-- (IBAction)addButton:(id)sender {
-}
-
-- (IBAction)colorButton:(id)sender {
-    UIButton *button = (UIButton*)sender;
-    CGRect frame = self.addClotheTableView.frame;
-    frame.origin.y = button.frame.origin.y + button.frame.size.height;
-    self.addClotheTableView.frame = frame;
-    
-    self.typeTableView = color;
-    [self initData];
-    [self.addClotheTableView reloadData];
+- (void)showPopupWithImageView:(UIImageView *)imageView{
     if (self.addClotheTableView.hidden) {
         
         self.addClotheTableView.hidden = NO;
-        self.colorImageView.image = [UIImage imageNamed:Up];
+        imageView.image = [UIImage imageNamed:Up];
         [UIView animateWithDuration:.3 animations:^{
             
             self.addClotheTableView.alpha = 1;
@@ -95,10 +99,79 @@
             
             self.addClotheTableView.alpha = 0;
         } completion:^(BOOL finished) {
-            self.colorImageView.image = [UIImage imageNamed:Down];
+            imageView.image = [UIImage imageNamed:Down];
             self.addClotheTableView.hidden = YES;
         }];
     }
+}
+
+- (void)checkCamera{
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Camera cancelButton:OK otherButton:nil tag:3 delegate:self];
+    }
+}
+
+- (void)takePhoto{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+//    CGAffineTransform translate = CGAffineTransformMakeTranslation(0.0, 71.0);
+//    picker.cameraViewTransform = translate;
+//    CGAffineTransform scale = CGAffineTransformScale(translate, 1.333333, 1.333333);
+//    picker.cameraViewTransform = scale;
+//    
+//    UIView * overlayView = [[UIView alloc]init];
+//    overlayView.frame = CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, SCREEN_HEIGHT_PORTRAIT);
+//    picker.cameraOverlayView = overlayView;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+- (void)chooseFromLibrary{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+#pragma mark - Action
+
+- (void)checkButtonTapped:(id)sender{
+    if (self.nameTextField.text.length == 0) {
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Alert_Validate cancelButton:OK otherButton:nil tag:1 delegate:self];
+        return;
+    }
+    if (self.photoImageView.image == nil) {
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Alert_Camera cancelButton:OK otherButton:nil tag:2 delegate:self];
+
+    }else{
+        [SWUtil showConfirmAlert:Title_Alert message:Message_Alert cancelButton:Cancel otherButton:Yes tag:0 delegate:self];
+
+    }
+    
+}
+- (IBAction)addButton:(id)sender {
+    UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
+                                                                     delegate:self
+                                                            cancelButtonTitle:Cancel_ActionSheet
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles:TakePhoto_ActionSheet,PhotoLibrary_ActionSheet,nil];
+    [addPhotoActionSheet showInView:self.view];
+}
+
+- (IBAction)colorButton:(id)sender {
+    UIButton *button = (UIButton*)sender;
+    CGRect frame = self.addClotheTableView.frame;
+    frame.origin.y = button.frame.origin.y + button.frame.size.height;
+    self.addClotheTableView.frame = frame;
+    
+    self.typeTableView = color;
+    [self initData];
+    [self.addClotheTableView reloadData];
+    [self showPopupWithImageView:self.colorImageView];
 }
 
 - (IBAction)categoryButton:(id)sender {
@@ -111,24 +184,7 @@
     self.typeTableView = category;
     [self initData];
     [self.addClotheTableView reloadData];
-    if (self.addClotheTableView.hidden) {
-        
-        self.addClotheTableView.hidden = NO;
-        [UIView animateWithDuration:.3 animations:^{
-            
-            self.addClotheTableView.alpha = 1;
-        } completion:^(BOOL finished) {}];
-    }
-    else {
-        
-        [UIView animateWithDuration:.3 animations:^{
-            
-            self.addClotheTableView.alpha = 0;
-        } completion:^(BOOL finished) {
-            
-            self.addClotheTableView.hidden = YES;
-        }];
-    }
+    [self showPopupWithImageView:self.categoryImageView];
 }
 
 - (IBAction)sizeButton:(id)sender {
@@ -141,25 +197,7 @@
     self.typeTableView = size;
     [self initData];
     [self.addClotheTableView reloadData];
-
-    if (self.addClotheTableView.hidden) {
-        
-        self.addClotheTableView.hidden = NO;
-        [UIView animateWithDuration:.3 animations:^{
-            
-            self.addClotheTableView.alpha = 1;
-        } completion:^(BOOL finished) {}];
-    }
-    else {
-        
-        [UIView animateWithDuration:.3 animations:^{
-            
-            self.addClotheTableView.alpha = 0;
-        } completion:^(BOOL finished) {
-            
-            self.addClotheTableView.hidden = YES;
-        }];
-    }
+    [self showPopupWithImageView:self.sizeImageView];
 }
 
 #pragma mark - TableView
@@ -180,12 +218,31 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    switch (self.typeTableView) {
+        case color:
+            self.colorLabel.text = cell.textLabel.text;
+            break;
+        case category:
+            self.categoryLabel.text = cell.textLabel.text;
+            break;
+        case size:
+            self.sizeLabel.text = cell.textLabel.text;
+            break;
+        default:
+            break;
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma mark - TextField
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+    [self.addClotheTableView setHidden:YES];
+    self.colorImageView.image = [UIImage imageNamed:Down];
+    self.categoryImageView.image = [UIImage imageNamed:Down];
+    self.sizeImageView.image = [UIImage imageNamed:Down];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField{
@@ -199,4 +256,49 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
 }
+
+#pragma mark - ActionSheet
+
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self takePhoto];
+            break;
+        case 1:
+            [self chooseFromLibrary];
+            break;
+        case 2:
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - UIImagePickerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.photoImageView.image = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+#pragma mark - UIAlertView
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+
+
 @end
