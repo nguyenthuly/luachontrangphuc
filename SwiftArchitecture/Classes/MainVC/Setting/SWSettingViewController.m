@@ -7,8 +7,20 @@
 //
 
 #import "SWSettingViewController.h"
+#import "SWRegisterViewController.h"
 
 @interface SWSettingViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageUserImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *locationSwitch;
+
+
+- (IBAction)inforButton:(id)sender;
+- (IBAction)userButton:(id)sender;
+- (IBAction)inforAppButton:(id)sender;
+- (IBAction)activityAppButton:(id)sender;
+- (IBAction)logoutButton:(id)sender;
 
 @end
 
@@ -17,21 +29,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self initUI];
+    [self initData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)initUI{
+    self.title = Setting_Title;
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Action
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)inforButton:(id)sender {
+    SWRegisterViewController *inforVC = [[SWRegisterViewController alloc] initWithNibName:@"SWRegisterViewController" bundle:nil];
+    inforVC.title = InforUser_Title;
+    inforVC.registerTableView.scrollEnabled = NO;
+    inforVC.registerTableView.userInteractionEnabled = NO;
+    [self.navigationController pushViewController:inforVC animated:YES];
 }
-*/
 
+- (IBAction)userButton:(id)sender {
+}
+
+- (IBAction)inforAppButton:(id)sender {
+}
+
+- (IBAction)activityAppButton:(id)sender {
+}
+
+- (IBAction)logoutButton:(id)sender {
+}
 @end

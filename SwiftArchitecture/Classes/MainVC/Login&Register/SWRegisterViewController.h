@@ -9,5 +9,6 @@
 #import "SWBaseViewController.h"
 
 @interface SWRegisterViewController : SWBaseViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *registerTableView;
 
 @end

@@ -27,7 +27,6 @@
     UIButton *femaleButton;
     UITextField *registerTextField;
 }
-@property (weak, nonatomic) IBOutlet UITableView *registerTableView;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (strong, nonatomic) NSArray *registerArray;
 - (IBAction)registerButtonTapped:(id)sender;
@@ -44,7 +43,6 @@
 }
 
 - (void)initUI{
-    self.title = Register_Title;
     [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
 }
 

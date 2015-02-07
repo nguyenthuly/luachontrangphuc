@@ -10,8 +10,6 @@
 #import "SWRegisterViewController.h"
 #import "SWDressTimeViewController.h"
 
-#define CONTENT_VIEW_Y 130
-
 @interface SWLoginViewController ()
 - (IBAction)loginButtonTapped:(id)sender;
 
@@ -56,6 +54,7 @@
 
 - (IBAction)registerButtonTapped:(id)sender {
     SWRegisterViewController *registerVC = [[SWRegisterViewController alloc] initWithNibName:@"SWRegisterViewController" bundle:nil];
+    registerVC.title = Register_Title;
     [self.navigationController pushViewController:registerVC animated:YES];
 }
 

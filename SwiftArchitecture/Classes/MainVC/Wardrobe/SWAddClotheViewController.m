@@ -44,6 +44,11 @@
 
 @implementation SWAddClotheViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [[SWUtil appDelegate] hideTabbar:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

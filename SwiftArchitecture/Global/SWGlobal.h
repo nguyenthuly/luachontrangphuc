@@ -29,7 +29,8 @@ typedef enum {
 #define AddClothe_Title @"Thêm mới"
 #define Log_Title @"Lịch sử"
 #define Feel_Title @"Cảm nhận"
-#define Settting_Title @"Cài đặt"
+#define Setting_Title @"Cài đặt"
+#define InforUser_Title @"Thông tin của bạn"
 
 /*TEXT*/
 #define First_Name_Message @"Mời bạn nhập họ!"
@@ -49,7 +50,6 @@ typedef enum {
 #define Jeans @"QUẦN/VÁY"
 #define Shoe @"GIÀY/DÉP"
 #define Cell @"Cell"
-
 
 /*IMAGE*/
 #define Back_Button @"back_green.png"
@@ -83,5 +83,8 @@ typedef enum {
 #define Color_Arr @[@"Đỏ",@"Xanh da trời",@"Tím",@"Vàng",@"Hồng",@"Đen",@"Cam",@"Nâu",@"Xanh lá cây",@"Xanh nõn chuối",@"Hồng đỏ"]
 #define Size_Clothes_Arr @[@"S",@"M",@"L",@"XL",@"XXL"]
 #define Size_Shoes_Arr @[@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44"]
+
+/*SIZE*/
+#define CONTENT_VIEW_Y 130
 
 #endif
