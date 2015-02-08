@@ -8,6 +8,6 @@
 
 #import "SWBaseViewController.h"
 
-@interface SWSettingViewController : SWBaseViewController
+@interface SWSettingViewController : SWBaseViewController< UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end

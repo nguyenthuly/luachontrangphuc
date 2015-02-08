@@ -27,13 +27,20 @@
     UIButton *femaleButton;
     UITextField *registerTextField;
 }
-@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (strong, nonatomic) NSArray *registerArray;
+@property (weak, nonatomic) IBOutlet UITableView *registerTableView;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+
 - (IBAction)registerButtonTapped:(id)sender;
 
 @end
 
 @implementation SWRegisterViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [[SWUtil appDelegate] hideTabbar:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,6 +51,24 @@
 
 - (void)initUI{
     [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
+    switch (self.typeUser) {
+        case register_new:
+        {
+            self.title = Register_Title;
+            [self.registerButton setTitle:Register_Button forState:UIControlStateNormal];
+        }
+            break;
+        case edit_infor:
+        {
+            self.title = InforUser_Title;
+            [self setRightButtonWithImage:Edit highlightedImage:nil target:self action:@selector(editButtonTapped:)];
+            self.registerTableView.userInteractionEnabled = NO;
+            [self.registerButton setTitle:Complete_Button forState:UIControlStateNormal];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)initData{
@@ -54,10 +79,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)editButtonTapped:(id)sender{
+    self.registerTableView.userInteractionEnabled = YES;
+}
+
 - (IBAction)registerButtonTapped:(id)sender {
     NSString *errorMessage = [self validateForm];
     if (errorMessage) {
-        [[[UIAlertView alloc] initWithTitle:nil message:errorMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        [[[UIAlertView alloc] initWithTitle:nil message:errorMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
         return;
     }
 }

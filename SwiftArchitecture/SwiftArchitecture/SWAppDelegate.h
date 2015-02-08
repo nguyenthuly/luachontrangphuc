@@ -21,4 +21,6 @@
 
 - (void)initTabbar;
 - (void)hideTabbar:(BOOL)hide;
+- (void)logoutFunction;
+
 @end

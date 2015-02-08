@@ -8,19 +8,7 @@
 
 #import "SWAddClotheViewController.h"
 #import "SWUtil.h"
-#define Title_Alert @"Xác nhận"
-#define Title_Alert_Validate @"Thông báo"
-#define Message_Alert @"Bạn có chắc chắn thêm mới không?"
-#define Message_Alert_Validate @"Bạn chưa nhập tên trang phục!"
-#define Message_Alert_Camera @"Bạn chưa có ảnh trang phục"
-#define Cancel @"Không"
-#define Yes @"Có"
-#define OK @"OK"
-#define Title_ActionSheet @"Chọn ảnh"
-#define Cancel_ActionSheet @"Thoát"
-#define TakePhoto_ActionSheet @"Chụp ảnh"
-#define PhotoLibrary_ActionSheet @"Chọn từ thư viện"
-#define Message_Camera @"Thiết bị không có camera"
+
 
 @interface SWAddClotheViewController (){
     NSMutableArray *tableViewArr;
@@ -64,7 +52,6 @@
     self.addClotheTableView.hidden = YES;
     self.addClotheTableView.alpha = 0;
     self.nameTextField.textColor = [UIColor colorWithHex:Gray_Color alpha:1.0];
-    [self checkCamera];
 }
 
 - (void)initData{
@@ -110,12 +97,6 @@
     }
 }
 
-- (void)checkCamera{
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Camera cancelButton:OK otherButton:nil tag:3 delegate:self];
-    }
-}
-
 - (void)takePhoto{
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
@@ -146,11 +127,11 @@
 
 - (void)checkButtonTapped:(id)sender{
     if (self.nameTextField.text.length == 0) {
-        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Alert_Validate cancelButton:OK otherButton:nil tag:1 delegate:self];
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Alert_Validate cancelButton:OK_Button otherButton:nil tag:1 delegate:self];
         return;
     }
     if (self.photoImageView.image == nil) {
-        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Alert_Camera cancelButton:OK otherButton:nil tag:2 delegate:self];
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Alert_Camera cancelButton:OK_Button otherButton:nil tag:2 delegate:self];
 
     }else{
         [SWUtil showConfirmAlert:Title_Alert message:Message_Alert cancelButton:Cancel otherButton:Yes tag:0 delegate:self];
@@ -159,12 +140,16 @@
     
 }
 - (IBAction)addButton:(id)sender {
-    UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Camera cancelButton:OK_Button otherButton:nil tag:3 delegate:self];
+    }else {
+        UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
                                                                      delegate:self
                                                             cancelButtonTitle:Cancel_ActionSheet
                                                        destructiveButtonTitle:nil
                                                             otherButtonTitles:TakePhoto_ActionSheet,PhotoLibrary_ActionSheet,nil];
-    [addPhotoActionSheet showInView:self.view];
+        [addPhotoActionSheet showInView:self.view];
+    }
 }
 
 - (IBAction)colorButton:(id)sender {

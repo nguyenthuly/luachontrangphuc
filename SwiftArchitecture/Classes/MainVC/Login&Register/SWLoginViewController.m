@@ -54,7 +54,7 @@
 
 - (IBAction)registerButtonTapped:(id)sender {
     SWRegisterViewController *registerVC = [[SWRegisterViewController alloc] initWithNibName:@"SWRegisterViewController" bundle:nil];
-    registerVC.title = Register_Title;
+    registerVC.typeUser = register_new;
     [self.navigationController pushViewController:registerVC animated:YES];
 }
 

@@ -20,6 +20,11 @@ typedef enum {
     size
 }TableViewType;
 
+typedef enum{
+    register_new = 0,
+    edit_infor
+}UserType;
+
 
 /*TITLE*/
 #define Register_Title @"Đăng ký"
@@ -31,6 +36,7 @@ typedef enum {
 #define Feel_Title @"Cảm nhận"
 #define Setting_Title @"Cài đặt"
 #define InforUser_Title @"Thông tin của bạn"
+#define About_Title @"Thông tin ứng dụng"
 
 /*TEXT*/
 #define First_Name_Message @"Mời bạn nhập họ!"
@@ -41,6 +47,8 @@ typedef enum {
 #define Email_Message @"Email không tồn tại!"
 #define Password_Message @"Mật khẩu của bạn chưa đủ kí tự"
 #define Re_Password_Message @"Mật khẩu chưa đúng"
+#define Complete_Button @"Hoàn thành"
+#define Register_Button @"Đăng ký"
 
 #define Dress_Time_Title @"Lựa chọn"
 #define Wardrobe_Title @"Bộ sưu tập"
@@ -50,6 +58,20 @@ typedef enum {
 #define Jeans @"QUẦN/VÁY"
 #define Shoe @"GIÀY/DÉP"
 #define Cell @"Cell"
+
+#define Title_ActionSheet @"Chọn ảnh"
+#define Cancel_ActionSheet @"Thoát"
+#define TakePhoto_ActionSheet @"Chụp ảnh"
+#define PhotoLibrary_ActionSheet @"Chọn từ thư viện"
+#define Message_Camera @"Thiết bị không có camera"
+#define Title_Alert @"Xác nhận"
+#define Title_Alert_Validate @"Thông báo"
+#define Message_Alert @"Bạn có chắc chắn thêm mới không?"
+#define Message_Alert_Validate @"Bạn chưa nhập tên trang phục!"
+#define Message_Alert_Camera @"Bạn chưa có ảnh trang phục"
+#define Cancel @"Không"
+#define Yes @"Có"
+#define OK_Button @"OK"
 
 /*IMAGE*/
 #define Back_Button @"back_green.png"
@@ -66,7 +88,7 @@ typedef enum {
 #define Check_Mark @"checkmark.png"
 #define Up @"up4.png"
 #define Down @"down.png"
-
+#define Edit @"edit_green.png"
 
 /*COLOR*/
 #define Gray_Color @"939393"
@@ -85,6 +107,5 @@ typedef enum {
 #define Size_Shoes_Arr @[@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44"]
 
 /*SIZE*/
-#define CONTENT_VIEW_Y 130
 
 #endif
