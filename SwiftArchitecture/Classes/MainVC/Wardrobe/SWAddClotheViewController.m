@@ -14,7 +14,6 @@
     NSMutableArray *tableViewArr;
 }
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (weak, nonatomic) IBOutlet UITableView *addClotheTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *colorImageView;
@@ -45,6 +44,7 @@
 }
 
 - (void)initUI{
+    
     self.title = AddClothe_Title;
     [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
     [self setRightButtonWithImage:Check_Mark highlightedImage:nil target:self action:@selector(checkButtonTapped:)];
@@ -52,9 +52,16 @@
     self.addClotheTableView.hidden = YES;
     self.addClotheTableView.alpha = 0;
     self.nameTextField.textColor = [UIColor colorWithHex:Gray_Color alpha:1.0];
+    
+    if (self.typeCategory == addClotherDetail) {
+        self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+        self.categoryImageView.hidden = YES;
+    }
+    [self checkSizeLabel];
 }
 
 - (void)initData{
+    
     switch (self.typeTableView) {
         case color:
             tableViewArr = [[NSMutableArray alloc] initWithArray:Color_Arr];
@@ -63,10 +70,23 @@
             tableViewArr = [[NSMutableArray alloc] initWithArray:Clothes_Arr];
             break;
         case size:
-            tableViewArr = [[NSMutableArray alloc] initWithArray:Size_Clothes_Arr];
+        {
+            if ([self.categoryLabel.text containsString:@"Giày"]) {
+                tableViewArr = [[NSMutableArray alloc] initWithArray:Size_Shoes_Arr];
+
+            } else {
+                tableViewArr = [[NSMutableArray alloc] initWithArray:Size_Clothes_Arr];
+            }
+        }
             break;
         default:
             break;
+    }
+}
+
+- (void)checkSizeLabel{
+    if ([self.categoryLabel.text containsString:@"Giày"]) {
+        self.sizeLabel.text = @"36";
     }
 }
 
@@ -153,6 +173,7 @@
 }
 
 - (IBAction)colorButton:(id)sender {
+    
     UIButton *button = (UIButton*)sender;
     CGRect frame = self.addClotheTableView.frame;
     frame.origin.y = button.frame.origin.y + button.frame.size.height;
@@ -166,15 +187,17 @@
 
 - (IBAction)categoryButton:(id)sender {
     
-    UIButton *button = (UIButton*)sender;
-    CGRect frame = self.addClotheTableView.frame;
-    frame.origin.y = button.frame.origin.y + button.frame.size.height;
-    self.addClotheTableView.frame = frame;
-    
-    self.typeTableView = category;
-    [self initData];
-    [self.addClotheTableView reloadData];
-    [self showPopupWithImageView:self.categoryImageView];
+    if (self.typeCategory == addClother) {
+        UIButton *button = (UIButton*)sender;
+        CGRect frame = self.addClotheTableView.frame;
+        frame.origin.y = button.frame.origin.y + button.frame.size.height;
+        self.addClotheTableView.frame = frame;
+        
+        self.typeTableView = category;
+        [self initData];
+        [self.addClotheTableView reloadData];
+        [self showPopupWithImageView:self.categoryImageView];
+    }
 }
 
 - (IBAction)sizeButton:(id)sender {

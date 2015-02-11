@@ -9,8 +9,9 @@
 #import "SWFeelViewController.h"
 #import "SWUtil.h"
 #import "StarRatingControl.h"
+#import "SWListLogViewController.h"
 
-#define Message_Alert @"Cảm ơn đánh giá của bạn!"
+#define Message_Alert_Feel @"Cảm ơn đánh giá của bạn!"
 #define OK_Button @"OK"
 
 @interface SWFeelViewController (){
@@ -74,7 +75,7 @@
 }
 
 - (IBAction)sendButtonTapped:(id)sender {
-    [SWUtil showConfirmAlert:nil message:Message_Alert cancelButton:OK_Button otherButton:nil tag:0 delegate:self];
+    [SWUtil showConfirmAlert:nil message:Message_Alert_Feel cancelButton:OK_Button otherButton:nil tag:0 delegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -136,8 +137,15 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 0) {
+        
         if (buttonIndex == 0) {
-            [self.navigationController popViewControllerAnimated:YES];
+            NSArray *viewControllers = [self.navigationController viewControllers];
+            for (UIViewController *controller in viewControllers) {
+                if ([controller isKindOfClass:[SWListLogViewController class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                    break;
+                }
+            }
         }
     }
 }

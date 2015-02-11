@@ -25,6 +25,10 @@ typedef enum{
     edit_infor
 }UserType;
 
+typedef enum {
+    addClother = 0,
+    addClotherDetail
+}TypeCategory;
 
 /*TITLE*/
 #define Register_Title @"Đăng ký"
@@ -100,7 +104,7 @@ typedef enum{
 #define Red_Color @"F65D63"
 
 /*ARRAY*/
-#define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần jeans",@"Váy",@"Giày thể thao",@"Giày hài",@"Bốt"]
+#define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần jeans",@"Váy",@"Giày thể thao",@"Giày hài",@"Giày bốt"]
 #define Clothes_IconArr @[@"shirt_red.png",@"t_shirt_red.png",@"coat_red.png",@"jacket_red.png",@"trousers_red.png",@"skirt_red.png",@"trainers_red.png",@"shoe_woman_red.png",@"winter_boots_red.png"]
 #define Color_Arr @[@"Đỏ",@"Xanh da trời",@"Tím",@"Vàng",@"Hồng",@"Đen",@"Cam",@"Nâu",@"Xanh lá cây",@"Xanh nõn chuối",@"Hồng đỏ"]
 #define Size_Clothes_Arr @[@"S",@"M",@"L",@"XL",@"XXL"]

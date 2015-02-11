@@ -274,6 +274,8 @@
 		047412331A867F2100F2F00E /* user_female.png in Resources */ = {isa = PBXBuildFile; fileRef = 047412311A867F2100F2F00E /* user_female.png */; };
 		047412361A867F2D00F2F00E /* user_male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047412341A867F2D00F2F00E /* user_male@2x.png */; };
 		047412371A867F2D00F2F00E /* user_female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047412351A867F2D00F2F00E /* user_female@2x.png */; };
+		04B40E051A8B3EDA005D6938 /* SWListLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B40E031A8B3EDA005D6938 /* SWListLogViewController.m */; };
+		04B40E061A8B3EDA005D6938 /* SWListLogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B40E041A8B3EDA005D6938 /* SWListLogViewController.xib */; };
 		04D318FF1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D318FE1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m */; };
 		04D319031A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D319011A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.m */; };
 		04D319041A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D319021A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.xib */; };
@@ -676,6 +678,9 @@
 		047412311A867F2100F2F00E /* user_female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_female.png; sourceTree = "<group>"; };
 		047412341A867F2D00F2F00E /* user_male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_male@2x.png"; sourceTree = "<group>"; };
 		047412351A867F2D00F2F00E /* user_female@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_female@2x.png"; sourceTree = "<group>"; };
+		04B40E021A8B3EDA005D6938 /* SWListLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWListLogViewController.h; sourceTree = "<group>"; };
+		04B40E031A8B3EDA005D6938 /* SWListLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWListLogViewController.m; sourceTree = "<group>"; };
+		04B40E041A8B3EDA005D6938 /* SWListLogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWListLogViewController.xib; sourceTree = "<group>"; };
 		04D318FD1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		04D318FE1A7CABFA001E3ED8 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		04D319001A7CB00C001E3ED8 /* SWWardrobeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWWardrobeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1184,6 +1189,9 @@
 				04300B801A6E40DB0086F1E9 /* SWFeelViewController.h */,
 				04300B811A6E40DB0086F1E9 /* SWFeelViewController.m */,
 				04300B821A6E40DB0086F1E9 /* SWFeelViewController.xib */,
+				04B40E021A8B3EDA005D6938 /* SWListLogViewController.h */,
+				04B40E031A8B3EDA005D6938 /* SWListLogViewController.m */,
+				04B40E041A8B3EDA005D6938 /* SWListLogViewController.xib */,
 			);
 			path = "Log&Feel";
 			sourceTree = "<group>";
@@ -2040,6 +2048,7 @@
 				04300E601A6E577E0086F1E9 /* forward.png in Resources */,
 				040C2B521A7104B90087E336 /* mittens.png in Resources */,
 				04300B891A6E40F50086F1E9 /* SWLoginViewController.xib in Resources */,
+				04B40E061A8B3EDA005D6938 /* SWListLogViewController.xib in Resources */,
 				04300B931A6E411C0086F1E9 /* SWSettingViewController.xib in Resources */,
 				040C2B6D1A7104B90087E336 /* vegan_clothing_red.png in Resources */,
 				040C2B501A7104B90087E336 /* jumper.png in Resources */,
@@ -2225,6 +2234,7 @@
 				9193C37019617E4B00ADD198 /* NSManagedObject+MagicalRecord.m in Sources */,
 				9193C36919617E4B00ADD198 /* NSNumber+MagicalDataImport.m in Sources */,
 				9193C35D19617E4B00ADD198 /* AFJSONRequestOperation.m in Sources */,
+				04B40E051A8B3EDA005D6938 /* SWListLogViewController.m in Sources */,
 				915C4B4A1952A58200A592AD /* SWAppDelegate.m in Sources */,
 				9186AD4A1956916100F0AF40 /* SWMultiSelectContactViewController.m in Sources */,
 				915C4B971952B4FD00A592AD /* SWTabbarItem.m in Sources */,

@@ -10,4 +10,8 @@
 
 @interface SWAddClotheViewController : SWBaseViewController<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, assign) TableViewType typeTableView;
+@property (nonatomic, assign) TypeCategory typeCategory;
+
+@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
+
 @end

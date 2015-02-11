@@ -49,7 +49,7 @@
                     <color key="textColor" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Cảm nhận của bạn" textAlignment="center" minimumFontSize="17" id="I2X-UF-iNr">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Cảm nhận của bạn" minimumFontSize="17" id="I2X-UF-iNr">
                     <rect key="frame" x="8" y="380" width="304" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

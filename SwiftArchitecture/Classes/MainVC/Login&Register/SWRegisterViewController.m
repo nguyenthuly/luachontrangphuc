@@ -9,7 +9,7 @@
 #import "SWRegisterViewController.h"
 
 #define CONTENT_VIEW_Y 20
-#define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Ngày sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại mật khẩu"]
+#define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Năm sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại mật khẩu"]
 #define First_Name 0
 #define Last_Name 1
 #define Gender 2
@@ -287,6 +287,7 @@
         }
             break;
         case Birthday:
+            
             break;
         case Password:
         case Re_Password:

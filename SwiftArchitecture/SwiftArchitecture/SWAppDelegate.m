@@ -10,7 +10,7 @@
 #import "SWLoginViewController.h"
 #import "SWDressTimeViewController.h"
 #import "SWWardrobeViewController.h"
-#import "SWLogViewController.h"
+#import "SWListLogViewController.h"
 #import "SWSettingViewController.h"
 
 @implementation SWAppDelegate
@@ -18,18 +18,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    /*
-     * Please don't remove backet {} setup Magical record DB
-     */
-    /*
-    //Start setup Magical record Model
-    NSString *modelName = @"SwiftModel.sqlite";//Replace this name with your model name.
-    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:modelName];
-    [MagicalRecord setupAutoMigratingCoreDataStack];
-    //End setup Magical record Model
-    */
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
     UIImage *ios7Bg = [UIImage resizableImage:[UIImage imageNamed:@"nav_ios7"]];
@@ -57,7 +45,7 @@
     //Init Classes
     SWDressTimeViewController *dressTimeVC = [[SWDressTimeViewController alloc] init];
     SWWardrobeViewController *wardrobeVC = [[SWWardrobeViewController alloc] init];
-    SWLogViewController *logVC = [[SWLogViewController alloc] init];
+    SWListLogViewController *logVC = [[SWListLogViewController alloc] init];
     SWSettingViewController *settingVC = [[SWSettingViewController alloc] init];
     
     //Init Navigations

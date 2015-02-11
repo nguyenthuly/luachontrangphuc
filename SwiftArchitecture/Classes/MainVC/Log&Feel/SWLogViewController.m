@@ -23,7 +23,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [[SWUtil appDelegate] hideTabbar:NO];
+    [[SWUtil appDelegate] hideTabbar:YES];
 }
 
 - (void)viewDidLoad {
@@ -34,10 +34,15 @@
 }
 - (void)initUI{
     self.title = Log_Title;
+    [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
 }
 
 - (void)initData{
     
+}
+
+- (void)backButtonTapped:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)feelButtonTapped:(id)sender {

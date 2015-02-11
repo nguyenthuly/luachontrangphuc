@@ -49,6 +49,7 @@
 
 - (void)addButtonTapped:(id)sender{
     SWAddClotheViewController *addClothesVC = [[SWAddClotheViewController alloc] initWithNibName:@"SWAddClotheViewController" bundle:nil];
+    addClothesVC.typeCategory = addClother;
     [self.navigationController pushViewController:addClothesVC animated:YES];
 }
 
@@ -110,6 +111,8 @@
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     SWWardrobeDetailViewController *wardrobeDetailVC = [[SWWardrobeDetailViewController alloc] init];
     wardrobeDetailVC.title = cell.textLabel.text;
+    [[NSUserDefaults standardUserDefaults] setObject:cell.textLabel.text forKey:@"category"];
+    
     [self.navigationController pushViewController:wardrobeDetailVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
