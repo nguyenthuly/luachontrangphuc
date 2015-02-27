@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *weatherImageView;
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
 @property (weak, nonatomic) id <SWWeatherViewDelegate> delegate;
+@property (nonatomic, strong) NSString *imageString;
 
 - (void)setGridSelected:(BOOL)selected;
 @end

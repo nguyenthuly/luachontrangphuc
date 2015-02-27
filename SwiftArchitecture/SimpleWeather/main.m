@@ -2,8 +2,8 @@
 //  main.m
 //  SimpleWeather
 //
-//  Created by Ryan Nystrom on 11/11/13.
-//  Copyright (c) 2013 Ryan Nystrom. All rights reserved.
+//  Created by Nguyen Thu Ly on 11/11/13.
+//  Copyright (c) 2013 Nguyen Thu Ly. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

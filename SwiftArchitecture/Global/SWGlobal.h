@@ -77,6 +77,9 @@ typedef enum {
 #define Yes @"Có"
 #define OK_Button @"OK"
 
+#define Date_Format @"dd/MM/yyyy"
+#define Time_Format @"HH:mm"
+
 /*IMAGE*/
 #define Back_Button @"back_green.png"
 #define Dress_Time_On @"t_shirt_on.png"
@@ -93,6 +96,9 @@ typedef enum {
 #define Up @"up4.png"
 #define Down @"down.png"
 #define Edit @"edit_green.png"
+
+#define Gray_Weather @"_gray.png"
+#define Red_Weather @"_red.png"
 
 /*COLOR*/
 #define Gray_Color @"939393"
@@ -111,5 +117,6 @@ typedef enum {
 #define Size_Shoes_Arr @[@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44"]
 
 /*SIZE*/
+
 
 #endif

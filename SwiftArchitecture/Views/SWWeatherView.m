@@ -39,12 +39,14 @@
     if (selected) {
         self.timeLabel.textColor = [UIColor colorWithHex:Red_Color alpha:1.0];
         self.temperatureLabel.textColor = [UIColor colorWithHex:Red_Color alpha:1.0];
-        self.weatherImageView.image = [UIImage imageNamed:@"clouds_red.png"];
+        self.weatherImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",self.imageString,Red_Weather]];
+
     }
     else{
         self.timeLabel.textColor = [UIColor colorWithHex:Gray_Color alpha:1.0];
         self.temperatureLabel.textColor = [UIColor colorWithHex:Gray_Color alpha:1.0];
-        self.weatherImageView.image = [UIImage imageNamed:@"clouds_gray.png"];
+        self.weatherImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",self.imageString,Gray_Weather]];
+
     }
 }
 @end

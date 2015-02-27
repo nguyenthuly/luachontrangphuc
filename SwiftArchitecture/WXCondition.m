@@ -2,8 +2,8 @@
 //  WXCondition.m
 //  SimpleWeather
 //
-//  Created by Ryan Nystrom on 11/11/13.
-//  Copyright (c) 2013 Ryan Nystrom. All rights reserved.
+//  Created by Nguyen Thu Ly on 11/11/13.
+//  Copyright (c) 2013 Nguyen Thu Ly. All rights reserved.
 //
 
 #import "WXCondition.h"
@@ -14,24 +14,24 @@
     static NSDictionary *_imageMap = nil;
     if (! _imageMap) {
         _imageMap = @{
-                      @"01d" : @"weather-clear",
-                      @"02d" : @"weather-few",
-                      @"03d" : @"weather-few",
-                      @"04d" : @"weather-broken",
-                      @"09d" : @"weather-shower",
-                      @"10d" : @"weather-rain",
-                      @"11d" : @"weather-tstorm",
-                      @"13d" : @"weather-snow",
-                      @"50d" : @"weather-mist",
-                      @"01n" : @"weather-moon",
-                      @"02n" : @"weather-few-night",
-                      @"03n" : @"weather-few-night",
-                      @"04n" : @"weather-broken",
-                      @"09n" : @"weather-shower",
-                      @"10n" : @"weather-rain-night",
-                      @"11n" : @"weather-tstorm",
-                      @"13n" : @"weather-snow",
-                      @"50n" : @"weather-mist",
+                      @"01d" : @"sun",
+                      @"02d" : @"partly_cloudy_day",
+                      @"03d" : @"partly_cloudy_day",
+                      @"04d" : @"clouds",
+                      @"09d" : @"rain",
+                      @"10d" : @"partly_cloudy_rain",
+                      @"11d" : @"storm",
+                      @"13d" : @"snow",
+                      @"50d" : @"fog_day",
+                      @"01n" : @"moon",
+                      @"02n" : @"partly_cloudy_night",
+                      @"03n" : @"partly_cloudy_night",
+                      @"04n" : @"clouds",
+                      @"09n" : @"rain",
+                      @"10n" : @"rain",
+                      @"11n" : @"storm",
+                      @"13n" : @"snow",
+                      @"50n" : @"fog_day",
                       };
     }
     return _imageMap;
