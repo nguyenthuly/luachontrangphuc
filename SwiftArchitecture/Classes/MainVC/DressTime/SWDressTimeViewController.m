@@ -56,13 +56,6 @@
     _hourlyFormatter = [[NSDateFormatter alloc] init];
     _hourlyFormatter.dateFormat = @"h a";
     
-    UILabel *hiloLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    hiloLabel.backgroundColor = [UIColor clearColor];
-    hiloLabel.textColor = [UIColor whiteColor];
-    hiloLabel.text = @"0° / 0°";
-    hiloLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:28];
-    hiloLabel.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:hiloLabel];
     
     [[RACObserve([WXManager sharedManager], currentCondition)
       deliverOn:RACScheduler.mainThreadScheduler]
@@ -79,26 +72,11 @@
          self.weatherLabel.image = [UIImage imageNamed:[newCondition imageName]];
      }];
     
-    
-    RAC(hiloLabel, text) = [[RACSignal combineLatest:@[
-                                                       RACObserve([WXManager sharedManager], currentCondition.tempHigh),
-                                                       RACObserve([WXManager sharedManager], currentCondition.tempLow)]
-                                              reduce:^(NSNumber *hi, NSNumber *low) {
-                                                  return [NSString  stringWithFormat:@"%.0f° / %.0f°",hi.floatValue,low.floatValue];
-                                              }]
-                            deliverOn:RACScheduler.mainThreadScheduler];
-    
     [[RACObserve([WXManager sharedManager], hourlyForecast)
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(NSArray *newForecast) {
          [self initScroll];
      }];
-    
-//    [[RACObserve([WXManager sharedManager], dailyForecast)
-//      deliverOn:RACScheduler.mainThreadScheduler]
-//     subscribeNext:^(NSArray *newForecast) {
-//         [self initScroll];
-//     }];
     
     [[WXManager sharedManager] findCurrentLocation];
 
