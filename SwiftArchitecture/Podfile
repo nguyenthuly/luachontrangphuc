@@ -1,10 +1,6 @@
 platform :ios, '7.0'
 
-source 'https://github.com/CocoaPods/Specs.git'
-
-target 'SwiftArchitecture' do
-pod 'Mantle', '1.3.1'
-pod 'ReactiveCocoa', '2.1.7'
-end
-
-
+pod 'Mantle'
+pod 'LBBlurredImage'
+pod 'TSMessages'
+pod 'ReactiveCocoa'

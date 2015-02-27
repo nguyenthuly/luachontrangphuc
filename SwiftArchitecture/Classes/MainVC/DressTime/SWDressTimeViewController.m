@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *skirtButton;
 @property (weak, nonatomic) IBOutlet UIButton *shoeButton;
 @property (strong, nonatomic) IBOutlet UIScrollView *weatherScrollView;
+@property (nonatomic, strong) NSDateFormatter *hourlyFormatter;
 
 - (IBAction)skirtButton:(id)sender;
 - (IBAction)jeanButton:(id)sender;
@@ -49,24 +50,33 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initUI];
-    [self initData];
-    [self initScroll];
+//    [self initData];
+//    [self initScroll];
+    
+    _hourlyFormatter = [[NSDateFormatter alloc] init];
+    _hourlyFormatter.dateFormat = @"h a";
     
     UILabel *hiloLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     hiloLabel.backgroundColor = [UIColor clearColor];
     hiloLabel.textColor = [UIColor whiteColor];
     hiloLabel.text = @"0° / 0°";
     hiloLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:28];
-    
+    hiloLabel.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:hiloLabel];
     
     [[RACObserve([WXManager sharedManager], currentCondition)
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(WXCondition *newCondition) {
-//         temperatureLabel.text = [NSString stringWithFormat:@"%.0f°",newCondition.temperature.floatValue];
-//         conditionsLabel.text = [newCondition.condition capitalizedString];
-//         cityLabel.text = [newCondition.locationName capitalizedString];
-//         
-//         iconView.image = [UIImage imageNamed:[newCondition imageName]];
+         float temp = newCondition.temperature.floatValue-272.15;
+         if (temp >= 0) {
+             self.temperatureLabel.text = [NSString stringWithFormat:@"%.0f°",newCondition.temperature.floatValue-272.15];
+         } else {
+             self.temperatureLabel.text = @"";
+         }
+         
+         self.descriptionLabel.text = [newCondition.condition capitalizedString];
+         self.cityLabel.text = [newCondition.locationName capitalizedString];
+         self.weatherLabel.image = [UIImage imageNamed:[newCondition imageName]];
      }];
     
     
@@ -81,14 +91,14 @@
     [[RACObserve([WXManager sharedManager], hourlyForecast)
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(NSArray *newForecast) {
-         //[self.tableView reloadData];
+         [self initScroll];
      }];
     
-    [[RACObserve([WXManager sharedManager], dailyForecast)
-      deliverOn:RACScheduler.mainThreadScheduler]
-     subscribeNext:^(NSArray *newForecast) {
-         //[self.tableView reloadData];
-     }];
+//    [[RACObserve([WXManager sharedManager], dailyForecast)
+//      deliverOn:RACScheduler.mainThreadScheduler]
+//     subscribeNext:^(NSArray *newForecast) {
+//         [self initScroll];
+//     }];
     
     [[WXManager sharedManager] findCurrentLocation];
 
@@ -103,22 +113,27 @@
     self.chooseView.alpha = 0;
 }
 
-- (void)initData{
-    weatherArr = [[NSMutableArray alloc] initWithArray:@[@22,@23,@32,@21,@12,@13,@15,@16,@17]];
-    timeArr = [[NSMutableArray alloc] initWithArray:@[@5,@6,@7,@8,@9,@10,@11,@12,@13]];
-    
-}
-
 - (void)initScroll {
     
     int xPos = 0;
-    for (int i=0; i < [weatherArr count]; i++) {
+    
+    for (int i=0; i < [[WXManager sharedManager].hourlyForecast count]; i++) {
+        WXCondition *weather = [WXManager sharedManager].hourlyForecast[i];
+        
         SWWeatherView *weatherView = [[SWWeatherView alloc] initWithFrame:CGRectZero];
         weatherView.delegate = self;
-        NSString *temperature = [NSString stringWithFormat:@"%@ ºC", [weatherArr objectAtIndex:i]];
-        NSString *time = [NSString stringWithFormat:@"%@ PM",[timeArr objectAtIndex:i]];
+        
+        NSString *temperature = @"";
+        float temp = weather.temperature.floatValue - 272.15;
+        if (temp >= 0) {
+            temperature = [NSString stringWithFormat:@"%.0f°",weather.temperature.floatValue - 272.15];
+        }
+        
+        NSString *time = [self.hourlyFormatter stringFromDate:weather.date];;
         weatherView.temperatureLabel.text = temperature;
         weatherView.timeLabel.text = time;
+        weatherView.weatherImageView.image = [UIImage imageNamed:[weather imageName]];
+        
         CGRect frame = [weatherView frame];
         frame.origin.x = xPos;
         xPos += frame.size.width;
@@ -201,5 +216,14 @@
         
         self.chooseView.hidden = YES;
     }];
+}
+
+- (void)configureHourlyCell:(UITableViewCell *)cell weather:(WXCondition *)weather {
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.text = [self.hourlyFormatter stringFromDate:weather.date];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f°",weather.temperature.floatValue];
+    cell.imageView.image = [UIImage imageNamed:[weather imageName]];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 @end

@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-@class SWAppDelegate;
+@class AppDelegate;
 #import "GCDispatch.h"
 
 @interface SWUtil : NSObject
 
 + (SWUtil *)sharedUtil;
-+ (SWAppDelegate *)appDelegate;
++ (AppDelegate *)appDelegate;
 
 /*
  * Making univesal Viewcontroller with two .xib UI

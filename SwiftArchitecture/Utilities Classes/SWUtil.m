@@ -20,9 +20,9 @@
     
 }
 
-+ (SWAppDelegate *)appDelegate {
++ (AppDelegate *)appDelegate {
     
-    SWAppDelegate *appDelegate = (SWAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return appDelegate;
 }
 

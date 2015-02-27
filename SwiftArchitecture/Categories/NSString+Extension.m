@@ -21,7 +21,7 @@
 
 - (NSString*)urlencodedValue
 {
-	NSString* urlencodedString = (NSString*)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self, NULL, CFSTR(":/?#[]@!$&'()*+,;="), kCFStringEncodingUTF8);
+	NSString* urlencodedString = (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self, NULL, CFSTR(":/?#[]@!$&'()*+,;="), kCFStringEncodingUTF8));
 	return [urlencodedString autorelease];
 }
 
