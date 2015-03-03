@@ -8,8 +8,10 @@
 
 #import "SWRegisterViewController.h"
 
+#define DATE_FORMAT @"dd/MM/yyyy"
+
 #define CONTENT_VIEW_Y 20
-#define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Năm sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại mật khẩu"]
+#define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Ngày sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại mật khẩu"]
 #define First_Name 0
 #define Last_Name 1
 #define Gender 2
@@ -26,11 +28,16 @@
     UIButton *maleButton;
     UIButton *femaleButton;
     UITextField *registerTextField;
+    NSString *birthdayString;
 }
 @property (strong, nonatomic) NSArray *registerArray;
 @property (weak, nonatomic) IBOutlet UITableView *registerTableView;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIView *datePickerView;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
+- (IBAction)hiddenDatePickerButtonTapped:(id)sender;
+- (IBAction)completedDateButtonTapped:(id)sender;
 - (IBAction)registerButtonTapped:(id)sender;
 
 @end
@@ -50,6 +57,10 @@
 }
 
 - (void)initUI{
+    
+    self.datePickerView.hidden = YES;
+    self.datePickerView.alpha = 0;
+    
     [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
     switch (self.typeUser) {
         case register_new:
@@ -81,6 +92,42 @@
 
 - (void)editButtonTapped:(id)sender{
     self.registerTableView.userInteractionEnabled = YES;
+}
+
+- (IBAction)hiddenDatePickerButtonTapped:(id)sender {
+    
+    [UIView animateWithDuration:.3 animations:^{
+        
+        self.datePickerView.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+        self.datePickerView.hidden = YES;
+    }];
+}
+
+- (IBAction)completedDateButtonTapped:(id)sender {
+    
+    [UIView animateWithDuration:.3 animations:^{
+        
+        self.datePickerView.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+        self.datePickerView.hidden = YES;
+    }];
+    
+    NSString *_dateString;
+    NSDate *_chosenDate = [self.datePicker date];
+    NSDateFormatter *_dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateFormat:DATE_FORMAT];
+    _dateString = [_dateFormatter stringFromDate:_chosenDate];
+    
+    birthdayString = _dateString;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    
+    [self.registerTableView beginUpdates];
+    [self.registerTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.registerTableView endUpdates];
+    
 }
 
 - (IBAction)registerButtonTapped:(id)sender {
@@ -287,6 +334,12 @@
         }
             break;
         case Birthday:
+        {
+            UILabel *birthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 7, 160, 30)];
+            birthdayLabel.text = birthdayString;
+            birthdayLabel.textAlignment = NSTextAlignmentRight;
+            cell.accessoryView = birthdayLabel;
+        }
             
             break;
         case Password:
@@ -314,7 +367,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.view endEditing:YES];
+    if (indexPath.row == 3) {
+        if (self.datePickerView.hidden) {
+            
+            self.datePickerView.hidden = NO;
+            [UIView animateWithDuration:.3 animations:^{
+                
+                self.datePickerView.alpha = 1;
+            } completion:^(BOOL finished) {}];
+        }
+        else {
+            
+            [UIView animateWithDuration:.3 animations:^{
+                
+                self.datePickerView.alpha = 0;
+            } completion:^(BOOL finished) {
+                
+                self.datePickerView.hidden = YES;
+            }];
+        }
+
+    } else {
+        [self.view endEditing:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -346,4 +421,5 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     self.registerTableView.contentInset =  UIEdgeInsetsMake(0, 0, 0, 0);
 }
+
 @end
