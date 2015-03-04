@@ -297,15 +297,33 @@
             break;
             
         case Height:
-        case Weight:
         {
-            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 220, 30)];
+            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 200, 30)];
             registerTextField.tag = indexPath.row;
             [cell addSubview:registerTextField];
             registerTextField.borderStyle = UITextBorderStyleNone;
             registerTextField.textAlignment = NSTextAlignmentRight;
             registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
             registerTextField.delegate = self;
+            
+            UILabel *heightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260 , 7, 30, 30)];
+            heightLabel.text = @"cm";
+            [cell addSubview:heightLabel];
+        }
+            break;
+        case Weight:
+        {
+            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 200, 30)];
+            registerTextField.tag = indexPath.row;
+            [cell addSubview:registerTextField];
+            registerTextField.borderStyle = UITextBorderStyleNone;
+            registerTextField.textAlignment = NSTextAlignmentRight;
+            registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
+            registerTextField.delegate = self;
+            
+            UILabel *weightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260 , 7, 30, 30)];
+            weightLabel.text = @"kg";
+            [cell addSubview:weightLabel];
         }
             break;
         case Gender:
