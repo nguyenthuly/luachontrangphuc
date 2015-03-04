@@ -93,8 +93,8 @@
             cell.imageView.image = [UIImage imageNamed:[clothesIconArr objectAtIndex:indexPath.row]];
             break;
         case 1:
-            cell.textLabel.text = [clothesArr objectAtIndex:indexPath.row + 3];
-            cell.imageView.image = [UIImage imageNamed:[clothesIconArr objectAtIndex:indexPath.row + 3]];
+            cell.textLabel.text = [clothesArr objectAtIndex:indexPath.row + 4];
+            cell.imageView.image = [UIImage imageNamed:[clothesIconArr objectAtIndex:indexPath.row + 4]];
             break;
         case 2:
             cell.textLabel.text = [clothesArr objectAtIndex:indexPath.row + 6];
