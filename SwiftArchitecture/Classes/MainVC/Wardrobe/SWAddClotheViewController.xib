@@ -7,13 +7,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SWAddClotheViewController">
             <connections>
+                <outlet property="addButton" destination="Vm9-KW-T6h" id="RDn-yc-3P6"/>
                 <outlet property="addClotheTableView" destination="dHo-Er-RLk" id="V9i-xz-JEf"/>
+                <outlet property="categoryButton" destination="etD-3b-FkM" id="L9h-Rc-Y86"/>
                 <outlet property="categoryImageView" destination="85Q-S4-5Rr" id="rYi-0V-pna"/>
                 <outlet property="categoryLabel" destination="jXC-47-5Fe" id="qaN-EN-3Nw"/>
+                <outlet property="colorButton" destination="K5A-S0-RS4" id="Z45-Ye-pck"/>
                 <outlet property="colorImageView" destination="nDc-2R-k9X" id="fRh-HU-428"/>
                 <outlet property="colorLabel" destination="AMQ-At-QA7" id="6ai-a5-mOd"/>
                 <outlet property="nameTextField" destination="aPM-2s-fI8" id="bSv-9N-bbY"/>
                 <outlet property="photoImageView" destination="K8R-RS-Ptx" id="7rf-B2-NeU"/>
+                <outlet property="sizeButton" destination="qyq-us-HcY" id="y56-Yt-UOQ"/>
                 <outlet property="sizeImageView" destination="mQI-W4-hjA" id="4ij-iK-2Yt"/>
                 <outlet property="sizeLabel" destination="Fim-nY-MyK" id="3Wm-ge-ARP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

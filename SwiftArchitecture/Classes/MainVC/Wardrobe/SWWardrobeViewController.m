@@ -50,6 +50,7 @@
 - (void)addButtonTapped:(id)sender{
     SWAddClotheViewController *addClothesVC = [[SWAddClotheViewController alloc] initWithNibName:@"SWAddClotheViewController" bundle:nil];
     addClothesVC.typeCategory = addClother;
+    addClothesVC.typeClothe = newClothe;
     [self.navigationController pushViewController:addClothesVC animated:YES];
 }
 

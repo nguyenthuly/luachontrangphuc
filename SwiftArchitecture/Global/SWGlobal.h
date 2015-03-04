@@ -30,12 +30,18 @@ typedef enum {
     addClotherDetail
 }TypeCategory;
 
+typedef enum {
+    newClothe = 0,
+    detailClothe
+}TypeClothe;
+
 /*TITLE*/
 #define Register_Title @"Đăng ký"
 #define Login_Title @"Đăng nhập"
 #define DressTime_Title @"Lựa chọn quần áo"
 #define Wardrobe_Title @"Bộ sưu tập"
 #define AddClothe_Title @"Thêm mới"
+#define DetailClothe_Title @"Thông tin trang phục"
 #define Log_Title @"Lịch sử"
 #define Feel_Title @"Cảm nhận"
 #define Setting_Title @"Cài đặt"

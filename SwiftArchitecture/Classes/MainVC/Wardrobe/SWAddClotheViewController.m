@@ -21,6 +21,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *sizeImageView;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIButton *colorButton;
+@property (weak, nonatomic) IBOutlet UIButton *categoryButton;
+@property (weak, nonatomic) IBOutlet UIButton *sizeButton;
 
 - (IBAction)addButton:(id)sender;
 - (IBAction)colorButton:(id)sender;
@@ -45,19 +49,44 @@
 
 - (void)initUI{
     
-    self.title = AddClothe_Title;
     [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
-    [self setRightButtonWithImage:Check_Mark highlightedImage:nil target:self action:@selector(checkButtonTapped:)];
-    
     self.addClotheTableView.hidden = YES;
     self.addClotheTableView.alpha = 0;
     self.nameTextField.textColor = [UIColor colorWithHex:Gray_Color alpha:1.0];
     
-    if (self.typeCategory == addClotherDetail) {
-        self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
-        self.categoryImageView.hidden = YES;
+    switch (self.typeClothe) {
+        case newClothe:
+        {
+            self.title = AddClothe_Title;
+            [self setRightButtonWithImage:Check_Mark highlightedImage:nil target:self action:@selector(checkButtonTapped:)];
+
+            if (self.typeCategory == addClotherDetail) {
+                self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+                self.categoryImageView.hidden = YES;
+            }
+            [self checkSizeLabel];
+
+        }
+            break;
+        case detailClothe:
+        {
+            self.title = DetailClothe_Title;
+            self.categoryButton.enabled = NO;
+            self.sizeButton.enabled = NO;
+            self.colorButton.enabled = NO;
+            self.nameTextField.enabled = NO;
+
+            self.addButton.hidden = YES;
+            self.colorImageView.hidden = YES;
+            self.categoryImageView.hidden = YES;
+            self.sizeImageView.hidden = YES;
+        }
+            break;
+        default:
+            break;
     }
-    [self checkSizeLabel];
+    
+   
 }
 
 - (void)initData{
@@ -122,16 +151,6 @@
     picker.delegate = self;
     picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-//    CGAffineTransform translate = CGAffineTransformMakeTranslation(0.0, 71.0);
-//    picker.cameraViewTransform = translate;
-//    CGAffineTransform scale = CGAffineTransformScale(translate, 1.333333, 1.333333);
-//    picker.cameraViewTransform = scale;
-//    
-//    UIView * overlayView = [[UIView alloc]init];
-//    overlayView.frame = CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, SCREEN_HEIGHT_PORTRAIT);
-//    picker.cameraOverlayView = overlayView;
-    
     [self presentViewController:picker animated:YES completion:NULL];
 }
 

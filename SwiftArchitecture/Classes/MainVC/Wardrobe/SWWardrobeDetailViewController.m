@@ -63,6 +63,7 @@
 - (void)addButtonTapped:(id)sender{
     SWAddClotheViewController *addClothesVC = [[SWAddClotheViewController alloc] initWithNibName:@"SWAddClotheViewController" bundle:nil];
     addClothesVC.typeCategory = addClotherDetail;
+    addClothesVC.typeClothe = newClothe;
     [self.navigationController pushViewController:addClothesVC animated:YES];
 }
 
@@ -90,6 +91,13 @@
     CGSize size = CGSizeMake(70,90);//SCREEN_WIDTH_LANDSCAPE/4, self.contentWardrobeView.bounds.size.height/5);
     
     return size;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    SWAddClotheViewController *detailVC = [[SWAddClotheViewController alloc] init];
+    detailVC.typeClothe = detailClothe;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
