@@ -15,21 +15,27 @@
 }
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *materialLabel;
+
 @property (weak, nonatomic) IBOutlet UITableView *addClotheTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *colorImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *sizeImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *materialImageView;
+
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *colorButton;
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIButton *sizeButton;
+@property (weak, nonatomic) IBOutlet UIButton *materialButton;
 
 - (IBAction)addButton:(id)sender;
 - (IBAction)colorButton:(id)sender;
 - (IBAction)categoryButton:(id)sender;
 - (IBAction)sizeButton:(id)sender;
+- (IBAction)materialButtonTapped:(id)sender;
 
 @end
 
@@ -74,12 +80,14 @@
             self.categoryButton.enabled = NO;
             self.sizeButton.enabled = NO;
             self.colorButton.enabled = NO;
+            self.materialButton.enabled = NO;
             self.nameTextField.enabled = NO;
 
             self.addButton.hidden = YES;
             self.colorImageView.hidden = YES;
             self.categoryImageView.hidden = YES;
             self.sizeImageView.hidden = YES;
+            self.materialImageView.hidden = YES;
         }
             break;
         default:
@@ -106,6 +114,17 @@
             } else {
                 tableViewArr = [[NSMutableArray alloc] initWithArray:Size_Clothes_Arr];
             }
+        }
+            break;
+        case material:
+        {
+            if ([self.categoryLabel.text containsString:@"Giày"]) {
+                tableViewArr = [[NSMutableArray alloc] initWithArray:Material_Shoes_Arr];
+                
+            } else {
+                tableViewArr = [[NSMutableArray alloc] initWithArray:Material_Clothes_Arr];
+            }
+
         }
             break;
         default:
@@ -166,21 +185,40 @@
 
 - (void)checkButtonTapped:(id)sender{
     if (self.nameTextField.text.length == 0) {
-        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Alert_Validate cancelButton:OK_Button otherButton:nil tag:1 delegate:self];
+        [SWUtil showConfirmAlert:Title_Alert_Validate
+                         message:Message_Alert_Validate
+                    cancelButton:OK_Button
+                     otherButton:nil
+                             tag:1 delegate:self];
         return;
     }
     if (self.photoImageView.image == nil) {
-        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Alert_Camera cancelButton:OK_Button otherButton:nil tag:2 delegate:self];
+        [SWUtil showConfirmAlert:Title_Alert_Validate
+                         message:Message_Alert_Camera
+                    cancelButton:OK_Button
+                     otherButton:nil
+                             tag:2
+                        delegate:self];
 
     }else{
-        [SWUtil showConfirmAlert:Title_Alert message:Message_Alert cancelButton:Cancel otherButton:Yes tag:0 delegate:self];
+        [SWUtil showConfirmAlert:Title_Alert
+                         message:Message_Alert
+                    cancelButton:Cancel
+                     otherButton:Yes
+                             tag:0
+                        delegate:self];
 
     }
     
 }
 - (IBAction)addButton:(id)sender {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Camera cancelButton:OK_Button otherButton:nil tag:3 delegate:self];
+        [SWUtil showConfirmAlert:Title_Alert_Validate
+                         message:Message_Camera
+                    cancelButton:OK_Button
+                     otherButton:nil
+                             tag:3
+                        delegate:self];
     }else {
         UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
                                                                      delegate:self
@@ -232,6 +270,19 @@
     [self showPopupWithImageView:self.sizeImageView];
 }
 
+- (IBAction)materialButtonTapped:(id)sender {
+    
+    UIButton *button = (UIButton*)sender;
+    CGRect frame = self.addClotheTableView.frame;
+    frame.origin.y = button.frame.origin.y + button.frame.size.height;
+    self.addClotheTableView.frame = frame;
+    
+    self.typeTableView = material;
+    [self initData];
+    [self.addClotheTableView reloadData];
+    [self showPopupWithImageView:self.materialImageView];
+}
+
 #pragma mark - TableView
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [tableViewArr count];
@@ -261,6 +312,9 @@
             break;
         case size:
             self.sizeLabel.text = cell.textLabel.text;
+            break;
+        case material:
+            self.materialLabel.text =  cell.textLabel.text;
             break;
         default:
             break;

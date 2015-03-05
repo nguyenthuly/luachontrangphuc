@@ -17,7 +17,8 @@
 typedef enum {
     color = 0,
     category,
-    size
+    size,
+    material
 }TableViewType;
 
 typedef enum{
@@ -38,7 +39,7 @@ typedef enum {
 /*TITLE*/
 #define Register_Title @"Đăng ký"
 #define Login_Title @"Đăng nhập"
-#define DressTime_Title @"Lựa chọn quần áo"
+#define DressTime_Title @"Lựa chọn trang phục"
 #define Wardrobe_Title @"Bộ sưu tập"
 #define AddClothe_Title @"Thêm mới"
 #define DetailClothe_Title @"Thông tin trang phục"
@@ -84,7 +85,7 @@ typedef enum {
 #define OK_Button @"OK"
 
 #define Date_Format @"dd/MM/yyyy"
-#define Time_Format @"HH:mm"
+#define Time_Format @"hh:mm a"
 
 /*IMAGE*/
 #define Back_Button @"back_green.png"
@@ -121,6 +122,9 @@ typedef enum {
 #define Color_Arr @[@"Đỏ",@"Xanh da trời",@"Tím",@"Vàng",@"Hồng",@"Đen",@"Cam",@"Nâu",@"Xanh lá cây",@"Xanh nõn chuối",@"Hồng đỏ"]
 #define Size_Clothes_Arr @[@"S",@"M",@"L",@"XL",@"XXL"]
 #define Size_Shoes_Arr @[@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44"]
+#define Material_Clothes_Arr @[@"Vải",@"Len",@"Thun",@"Gió", @"Nỉ", @"Bò", @"Da", @"Lông"]
+#define Material_Shoes_Arr @[@"Vải",@"Da"]
+
 
 /*SIZE*/
 

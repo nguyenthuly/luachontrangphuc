@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043764031AA82CAF00C2E187 /* Icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = 043763FF1AA82CAF00C2E187 /* Icon58.png */; };
+		043764041AA82CAF00C2E187 /* Icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 043764001AA82CAF00C2E187 /* Icon80.png */; };
+		043764051AA82CAF00C2E187 /* Icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 043764011AA82CAF00C2E187 /* Icon120.png */; };
+		043764061AA82CAF00C2E187 /* Icon180.png in Resources */ = {isa = PBXBuildFile; fileRef = 043764021AA82CAF00C2E187 /* Icon180.png */; };
+		043764201AA83CE400C2E187 /* WXClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 043764171AA83CE400C2E187 /* WXClient.m */; };
+		043764211AA83CE400C2E187 /* WXCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 043764191AA83CE400C2E187 /* WXCondition.m */; };
+		043764221AA83CE400C2E187 /* WXController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641B1AA83CE400C2E187 /* WXController.m */; };
+		043764231AA83CE400C2E187 /* WXDailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641D1AA83CE400C2E187 /* WXDailyForecast.m */; };
+		043764241AA83CE400C2E187 /* WXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641F1AA83CE400C2E187 /* WXManager.m */; };
 		04ADDCE31AA053ED00C49FD4 /* add_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADDBE41AA053EC00C49FD4 /* add_image.png */; };
 		04ADDCE41AA053ED00C49FD4 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADDBE51AA053EC00C49FD4 /* back.png */; };
 		04ADDCE51AA053ED00C49FD4 /* back_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADDBE61AA053EC00C49FD4 /* back_green.png */; };
@@ -369,9 +378,6 @@
 		04B953EC1AA007DC005EFF2D /* SWWardrobeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B952821AA007DC005EFF2D /* SWWardrobeCollectionViewCell.xib */; };
 		04B953ED1AA007DC005EFF2D /* SWWeatherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B952841AA007DC005EFF2D /* SWWeatherView.m */; };
 		04B953EE1AA007DC005EFF2D /* SWWeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B952851AA007DC005EFF2D /* SWWeatherView.xib */; };
-		867A4FA61831B19B003F9195 /* WXController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867A4FA51831B19B003F9195 /* WXController.m */; };
-		867A4FC31831C733003F9195 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 867A4FA81831C733003F9195 /* bg.png */; };
-		867A4FC41831C733003F9195 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 867A4FA91831C733003F9195 /* bg@2x.png */; };
 		867A4FC51831C733003F9195 /* weather-broken.png in Resources */ = {isa = PBXBuildFile; fileRef = 867A4FAB1831C733003F9195 /* weather-broken.png */; };
 		867A4FC61831C733003F9195 /* weather-broken@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 867A4FAC1831C733003F9195 /* weather-broken@2x.png */; };
 		867A4FC71831C733003F9195 /* weather-clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 867A4FAD1831C733003F9195 /* weather-clear.png */; };
@@ -396,10 +402,6 @@
 		867A4FDA1831C733003F9195 /* weather-snow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 867A4FC01831C733003F9195 /* weather-snow@2x.png */; };
 		867A4FDB1831C733003F9195 /* weather-tstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = 867A4FC11831C733003F9195 /* weather-tstorm.png */; };
 		867A4FDC1831C733003F9195 /* weather-tstorm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 867A4FC21831C733003F9195 /* weather-tstorm@2x.png */; };
-		867A4FE21831DE8C003F9195 /* WXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 867A4FE11831DE8C003F9195 /* WXManager.m */; };
-		867A4FE51831DE99003F9195 /* WXDailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 867A4FE41831DE99003F9195 /* WXDailyForecast.m */; };
-		867A4FE81831DEA4003F9195 /* WXClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 867A4FE71831DEA4003F9195 /* WXClient.m */; };
-		867A4FEB1831DF0C003F9195 /* WXCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 867A4FEA1831DF0B003F9195 /* WXCondition.m */; };
 		868735C41831A1E700C0CCFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868735C31831A1E700C0CCFA /* Foundation.framework */; };
 		868735C61831A1E700C0CCFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868735C51831A1E700C0CCFA /* CoreGraphics.framework */; };
 		868735C81831A1E700C0CCFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868735C71831A1E700C0CCFA /* UIKit.framework */; };
@@ -426,6 +428,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		043763FF1AA82CAF00C2E187 /* Icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon58.png; sourceTree = "<group>"; };
+		043764001AA82CAF00C2E187 /* Icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon80.png; sourceTree = "<group>"; };
+		043764011AA82CAF00C2E187 /* Icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon120.png; sourceTree = "<group>"; };
+		043764021AA82CAF00C2E187 /* Icon180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon180.png; sourceTree = "<group>"; };
+		043764161AA83CE400C2E187 /* WXClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXClient.h; sourceTree = "<group>"; };
+		043764171AA83CE400C2E187 /* WXClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXClient.m; sourceTree = "<group>"; };
+		043764181AA83CE400C2E187 /* WXCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXCondition.h; sourceTree = "<group>"; };
+		043764191AA83CE400C2E187 /* WXCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXCondition.m; sourceTree = "<group>"; };
+		0437641A1AA83CE400C2E187 /* WXController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXController.h; sourceTree = "<group>"; };
+		0437641B1AA83CE400C2E187 /* WXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXController.m; sourceTree = "<group>"; };
+		0437641C1AA83CE400C2E187 /* WXDailyForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXDailyForecast.h; sourceTree = "<group>"; };
+		0437641D1AA83CE400C2E187 /* WXDailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXDailyForecast.m; sourceTree = "<group>"; };
+		0437641E1AA83CE400C2E187 /* WXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXManager.h; sourceTree = "<group>"; };
+		0437641F1AA83CE400C2E187 /* WXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXManager.m; sourceTree = "<group>"; };
 		04ADDBE41AA053EC00C49FD4 /* add_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_image.png; sourceTree = "<group>"; };
 		04ADDBE51AA053EC00C49FD4 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		04ADDBE61AA053EC00C49FD4 /* back_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_green.png; sourceTree = "<group>"; };
@@ -885,10 +901,6 @@
 		04B952841AA007DC005EFF2D /* SWWeatherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWWeatherView.m; sourceTree = "<group>"; };
 		04B952851AA007DC005EFF2D /* SWWeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWWeatherView.xib; sourceTree = "<group>"; };
 		60CC2EC0E0B64B4FA10B1AFE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		867A4FA41831B19B003F9195 /* WXController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXController.h; sourceTree = "<group>"; };
-		867A4FA51831B19B003F9195 /* WXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXController.m; sourceTree = "<group>"; };
-		867A4FA81831C733003F9195 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
-		867A4FA91831C733003F9195 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		867A4FAB1831C733003F9195 /* weather-broken.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-broken.png"; sourceTree = "<group>"; };
 		867A4FAC1831C733003F9195 /* weather-broken@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-broken@2x.png"; sourceTree = "<group>"; };
 		867A4FAD1831C733003F9195 /* weather-clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-clear.png"; sourceTree = "<group>"; };
@@ -913,14 +925,6 @@
 		867A4FC01831C733003F9195 /* weather-snow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-snow@2x.png"; sourceTree = "<group>"; };
 		867A4FC11831C733003F9195 /* weather-tstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-tstorm.png"; sourceTree = "<group>"; };
 		867A4FC21831C733003F9195 /* weather-tstorm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-tstorm@2x.png"; sourceTree = "<group>"; };
-		867A4FE01831DE8C003F9195 /* WXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXManager.h; sourceTree = "<group>"; };
-		867A4FE11831DE8C003F9195 /* WXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXManager.m; sourceTree = "<group>"; };
-		867A4FE31831DE99003F9195 /* WXDailyForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXDailyForecast.h; sourceTree = "<group>"; };
-		867A4FE41831DE99003F9195 /* WXDailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXDailyForecast.m; sourceTree = "<group>"; };
-		867A4FE61831DEA4003F9195 /* WXClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXClient.h; sourceTree = "<group>"; };
-		867A4FE71831DEA4003F9195 /* WXClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXClient.m; sourceTree = "<group>"; };
-		867A4FE91831DF0B003F9195 /* WXCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXCondition.h; sourceTree = "<group>"; };
-		867A4FEA1831DF0B003F9195 /* WXCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXCondition.m; sourceTree = "<group>"; };
 		868735C01831A1E700C0CCFA /* SimpleWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		868735C31831A1E700C0CCFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		868735C51831A1E700C0CCFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -929,8 +933,8 @@
 		868735CD1831A1E700C0CCFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		868735CF1831A1E700C0CCFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		868735D11831A1E700C0CCFA /* SimpleWeather-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleWeather-Prefix.pch"; sourceTree = "<group>"; };
-		868735D21831A1E700C0CCFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SimpleWeather/AppDelegate.h; sourceTree = "<group>"; };
-		868735D31831A1E700C0CCFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SimpleWeather/AppDelegate.m; sourceTree = "<group>"; };
+		868735D21831A1E700C0CCFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		868735D31831A1E700C0CCFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		868735D51831A1E700C0CCFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		868735DB1831A1E700C0CCFA /* SimpleWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		868735DC1831A1E700C0CCFA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -965,6 +969,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043763FE1AA82CA100C2E187 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				043763FF1AA82CAF00C2E187 /* Icon58.png */,
+				043764001AA82CAF00C2E187 /* Icon80.png */,
+				043764011AA82CAF00C2E187 /* Icon120.png */,
+				043764021AA82CAF00C2E187 /* Icon180.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+		043764151AA83CE400C2E187 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				043764161AA83CE400C2E187 /* WXClient.h */,
+				043764171AA83CE400C2E187 /* WXClient.m */,
+				043764181AA83CE400C2E187 /* WXCondition.h */,
+				043764191AA83CE400C2E187 /* WXCondition.m */,
+				0437641A1AA83CE400C2E187 /* WXController.h */,
+				0437641B1AA83CE400C2E187 /* WXController.m */,
+				0437641C1AA83CE400C2E187 /* WXDailyForecast.h */,
+				0437641D1AA83CE400C2E187 /* WXDailyForecast.m */,
+				0437641E1AA83CE400C2E187 /* WXManager.h */,
+				0437641F1AA83CE400C2E187 /* WXManager.m */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
 		04ADDBE11AA053EC00C49FD4 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -976,6 +1008,7 @@
 		04ADDBE21AA053EC00C49FD4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				043763FE1AA82CA100C2E187 /* Icons */,
 				04ADDBE31AA053EC00C49FD4 /* 1x */,
 				04ADDC051AA053EC00C49FD4 /* 2x */,
 				04ADDC271AA053EC00C49FD4 /* AO */,
@@ -1770,8 +1803,6 @@
 		867A4FA71831C733003F9195 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				867A4FA81831C733003F9195 /* bg.png */,
-				867A4FA91831C733003F9195 /* bg@2x.png */,
 				867A4FAA1831C733003F9195 /* Weather Icons */,
 			);
 			path = Images;
@@ -1811,6 +1842,7 @@
 		868735B71831A1E700C0CCFA = {
 			isa = PBXGroup;
 			children = (
+				043764151AA83CE400C2E187 /* Weather */,
 				04ADDBE11AA053EC00C49FD4 /* Resource */,
 				04B950931AA007DB005EFF2D /* 3Party */,
 				04B950EF1AA007DC005EFF2D /* Categories */,
@@ -1819,18 +1851,6 @@
 				04B951771AA007DC005EFF2D /* Global */,
 				04B9527C1AA007DC005EFF2D /* Utilities Classes */,
 				04B9527F1AA007DC005EFF2D /* Views */,
-				867A4FE91831DF0B003F9195 /* WXCondition.h */,
-				867A4FEA1831DF0B003F9195 /* WXCondition.m */,
-				867A4FA41831B19B003F9195 /* WXController.h */,
-				867A4FA51831B19B003F9195 /* WXController.m */,
-				867A4FE01831DE8C003F9195 /* WXManager.h */,
-				867A4FE11831DE8C003F9195 /* WXManager.m */,
-				867A4FE31831DE99003F9195 /* WXDailyForecast.h */,
-				867A4FE41831DE99003F9195 /* WXDailyForecast.m */,
-				867A4FE61831DEA4003F9195 /* WXClient.h */,
-				867A4FE71831DEA4003F9195 /* WXClient.m */,
-				868735D21831A1E700C0CCFA /* AppDelegate.h */,
-				868735D31831A1E700C0CCFA /* AppDelegate.m */,
 				867A4FA71831C733003F9195 /* Images */,
 				868735C91831A1E700C0CCFA /* SimpleWeather */,
 				868735E21831A1E700C0CCFA /* SimpleWeatherTests */,
@@ -1864,6 +1884,8 @@
 		868735C91831A1E700C0CCFA /* SimpleWeather */ = {
 			isa = PBXGroup;
 			children = (
+				868735D21831A1E700C0CCFA /* AppDelegate.h */,
+				868735D31831A1E700C0CCFA /* AppDelegate.m */,
 				868735D51831A1E700C0CCFA /* Images.xcassets */,
 				868735CA1831A1E700C0CCFA /* Supporting Files */,
 			);
@@ -2099,6 +2121,7 @@
 				04B952E71AA007DC005EFF2D /* icon_unselect.png in Resources */,
 				04ADDDBE1AA053ED00C49FD4 /* sleet_gray@2x.png in Resources */,
 				04ADDCE81AA053ED00C49FD4 /* checkmark.png in Resources */,
+				043764031AA82CAF00C2E187 /* Icon58.png in Resources */,
 				04ADDD121AA053ED00C49FD4 /* forward_green@2x.png in Resources */,
 				04ADDDC91AA053ED00C49FD4 /* hail_red@2x.png in Resources */,
 				04ADDCF71AA053ED00C49FD4 /* plus.png in Resources */,
@@ -2106,6 +2129,7 @@
 				04ADDD6E1AA053ED00C49FD4 /* shoe_man@2x.png in Resources */,
 				04ADDD8A1AA053ED00C49FD4 /* clouds_gray.png in Resources */,
 				04ADDD5A1AA053ED00C49FD4 /* wardrobe_off.png in Resources */,
+				043764051AA82CAF00C2E187 /* Icon120.png in Resources */,
 				04ADDD281AA053ED00C49FD4 /* 12.jpg in Resources */,
 				04ADDD381AA053ED00C49FD4 /* hat.png in Resources */,
 				04ADDD751AA053ED00C49FD4 /* skirt_red@2x.png in Resources */,
@@ -2161,10 +2185,12 @@
 				04ADDD191AA053ED00C49FD4 /* remove_image@2x.png in Resources */,
 				04ADDD141AA053ED00C49FD4 /* left_green@2x.png in Resources */,
 				04ADDD2E1AA053ED00C49FD4 /* 6.jpg in Resources */,
+				043764041AA82CAF00C2E187 /* Icon80.png in Resources */,
 				04ADDD841AA053ED00C49FD4 /* vegan_shoes_red@2x.png in Resources */,
 				867A4FCF1831C733003F9195 /* weather-moon.png in Resources */,
 				04ADDD921AA053ED00C49FD4 /* little_snow_gray.png in Resources */,
 				04ADDD431AA053ED00C49FD4 /* shoe_man.png in Resources */,
+				043764061AA82CAF00C2E187 /* Icon180.png in Resources */,
 				04ADDD271AA053ED00C49FD4 /* 11.jpg in Resources */,
 				04ADDD871AA053ED00C49FD4 /* winter_boots@2x.png in Resources */,
 				04B952CC1AA007DC005EFF2D /* SWLogViewController.xib in Resources */,
@@ -2232,7 +2258,6 @@
 				04B952E81AA007DC005EFF2D /* icon_unselect@2x.png in Resources */,
 				867A4FD51831C733003F9195 /* weather-scattered.png in Resources */,
 				867A4FC81831C733003F9195 /* weather-clear@2x.png in Resources */,
-				867A4FC31831C733003F9195 /* bg.png in Resources */,
 				04ADDD3B1AA053ED00C49FD4 /* jumper.png in Resources */,
 				04ADDD801AA053ED00C49FD4 /* trousers_red@2x.png in Resources */,
 				04ADDD8D1AA053ED00C49FD4 /* fog_day_gray.png in Resources */,
@@ -2255,7 +2280,6 @@
 				04ADDD161AA053ED00C49FD4 /* like_outline@2x.png in Resources */,
 				04ADDDAC1AA053ED00C49FD4 /* snow_red.png in Resources */,
 				04B952E51AA007DC005EFF2D /* icon_selected.png in Resources */,
-				867A4FC41831C733003F9195 /* bg@2x.png in Resources */,
 				04B952CA1AA007DC005EFF2D /* SWListLogViewController.xib in Resources */,
 				04ADDD0F1AA053ED00C49FD4 /* edit_user_gray@2x.png in Resources */,
 				04B952F01AA007DC005EFF2D /* navbar_bg@2x.png in Resources */,
@@ -2346,26 +2370,26 @@
 				04B952961AA007DC005EFF2D /* NSObject+MagicalDataImport.m in Sources */,
 				04B952A41AA007DC005EFF2D /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				04B952C01AA007DC005EFF2D /* UIImage+Ext.m in Sources */,
+				043764241AA83CE400C2E187 /* WXManager.m in Sources */,
 				04B952921AA007DC005EFF2D /* MagicalImportFunctions.m in Sources */,
 				04B952931AA007DC005EFF2D /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				04B952B31AA007DC005EFF2D /* NSDate+Helpers.m in Sources */,
 				04B952F21AA007DC005EFF2D /* StarRatingControl.m in Sources */,
 				04B952C41AA007DC005EFF2D /* SWBaseViewController.m in Sources */,
 				04B952AE1AA007DC005EFF2D /* Base64Transcoder.c in Sources */,
-				867A4FE81831DEA4003F9195 /* WXClient.m in Sources */,
 				04B952A81AA007DC005EFF2D /* MagicalRecord+Options.m in Sources */,
 				04B952941AA007DC005EFF2D /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				04B952AF1AA007DC005EFF2D /* GraphicFilter.c in Sources */,
 				04B952F41AA007DC005EFF2D /* SWTabbarItem.m in Sources */,
+				043764201AA83CE400C2E187 /* WXClient.m in Sources */,
 				04B952CD1AA007DC005EFF2D /* SWLoginViewController.m in Sources */,
 				04B952D91AA007DC005EFF2D /* SWWardrobeViewController.m in Sources */,
-				867A4FE21831DE8C003F9195 /* WXManager.m in Sources */,
 				04B952C51AA007DC005EFF2D /* SWDressTimeViewController.m in Sources */,
 				04B952DE1AA007DC005EFF2D /* UIButton+Bootstrap.m in Sources */,
-				867A4FE51831DE99003F9195 /* WXDailyForecast.m in Sources */,
 				04B952C21AA007DC005EFF2D /* UILabel+Ext.m in Sources */,
 				04B953EB1AA007DC005EFF2D /* SWWardrobeCollectionViewCell.m in Sources */,
 				04B952EB1AA007DC005EFF2D /* SWMultiSelectContactViewController.m in Sources */,
+				043764231AA83CE400C2E187 /* WXDailyForecast.m in Sources */,
 				04B952BA1AA007DC005EFF2D /* NSString+HTML.m in Sources */,
 				04B952E91AA007DC005EFF2D /* SWContact.m in Sources */,
 				04B952BB1AA007DC005EFF2D /* NSString+TKUtilities.m in Sources */,
@@ -2379,6 +2403,7 @@
 				04B952B41AA007DC005EFF2D /* NSDictionary+Additions.m in Sources */,
 				868735D01831A1E700C0CCFA /* main.m in Sources */,
 				04B952E01AA007DC005EFF2D /* SWSegmentControl.m in Sources */,
+				043764211AA83CE400C2E187 /* WXCondition.m in Sources */,
 				04B952AA1AA007DC005EFF2D /* MagicalRecord+ShorthandSupport.m in Sources */,
 				04B952A91AA007DC005EFF2D /* MagicalRecord+Setup.m in Sources */,
 				04B952BE1AA007DC005EFF2D /* UIColor+Ext.m in Sources */,
@@ -2386,6 +2411,7 @@
 				04B9529B1AA007DC005EFF2D /* NSManagedObject+MagicalFinders.m in Sources */,
 				04B952AC1AA007DC005EFF2D /* NSArray+Accessors.m in Sources */,
 				04B952B71AA007DC005EFF2D /* NSMutableDictionary+Additions.m in Sources */,
+				043764221AA83CE400C2E187 /* WXController.m in Sources */,
 				04B952981AA007DC005EFF2D /* NSString+MagicalDataImport.m in Sources */,
 				04B952A21AA007DC005EFF2D /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				04B9529D1AA007DC005EFF2D /* NSManagedObject+MagicalRequests.m in Sources */,
@@ -2406,9 +2432,7 @@
 				04B952B61AA007DC005EFF2D /* NSMutableArray+Queue.m in Sources */,
 				04B952A51AA007DC005EFF2D /* MagicalRecord+Actions.m in Sources */,
 				04B952951AA007DC005EFF2D /* NSNumber+MagicalDataImport.m in Sources */,
-				867A4FA61831B19B003F9195 /* WXController.m in Sources */,
 				04B952A01AA007DC005EFF2D /* NSManagedObjectContext+MagicalSaves.m in Sources */,
-				867A4FEB1831DF0C003F9195 /* WXCondition.m in Sources */,
 				04ADDDDE1AA0644F00C49FD4 /* MBProgressHUD.m in Sources */,
 				04B9529A1AA007DC005EFF2D /* NSManagedObject+MagicalDataImport.m in Sources */,
 				04B952CF1AA007DC005EFF2D /* SWRegisterViewController.m in Sources */,
