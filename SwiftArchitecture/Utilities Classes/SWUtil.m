@@ -136,16 +136,10 @@
     return stringFromDate;
 }
 
-+ (NSString *)currentDateTime{
-    NSString *dateTimeString;
-    NSDate *date = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setLocale:[NSLocale currentLocale]];
-    [formatter setDateStyle:NSDateFormatterMediumStyle];
-    [formatter setTimeStyle:NSDateFormatterMediumStyle];
-    dateTimeString = [SWUtil convertDate:date toStringFormat:Date_Format];
++ (void)showConfirmAlert:(NSString *)title message:(NSString *)message delegate:(id)delegate {
     
-    return dateTimeString;
+    UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"Đóng" otherButtonTitles: nil];
+    [alrt show];
 }
 
 @end

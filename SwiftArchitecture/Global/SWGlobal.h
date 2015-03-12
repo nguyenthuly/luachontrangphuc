@@ -36,6 +36,11 @@ typedef enum {
     detailClothe
 }TypeClothe;
 
+/*URL*/
+
+#define URL_BASE @"http://localhost/LuaChonTrangPhuc/index.php/api/"
+#define uLogin @"users/api_login"
+
 /*TITLE*/
 #define Register_Title @"Đăng ký"
 #define Login_Title @"Đăng nhập"
@@ -84,7 +89,7 @@ typedef enum {
 #define Yes @"Có"
 #define OK_Button @"OK"
 
-#define Date_Format @"dd/MM/yyyy"
+#define Date_Format @"eee dd/MM/yyyy"
 #define Time_Format @"hh:mm a"
 
 /*IMAGE*/

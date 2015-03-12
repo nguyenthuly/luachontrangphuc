@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 Nguyen Thu Ly. All rights reserved.
 //
 
+
+#import <SystemConfiguration/SCNetworkReachability.h>
+#import <Security/Security.h>
+
 #import "SWLoginViewController.h"
 #import "SWRegisterViewController.h"
 #import "SWDressTimeViewController.h"
@@ -49,7 +53,49 @@
 }
 
 - (IBAction)loginButtonTapped:(id)sender {
-    [[SWUtil appDelegate] initTabbar];
+    
+    [[SWUtil sharedUtil] showLoadingView];
+    
+    SCNetworkReachabilityFlags flags;
+    SCNetworkReachabilityRef address = SCNetworkReachabilityCreateWithName(NULL, "www.google.com" );
+    Boolean success = SCNetworkReachabilityGetFlags(address, &flags);
+    CFRelease(address);
+    
+    bool canReachOnExistingConnection =     success
+    && !(flags & kSCNetworkReachabilityFlagsConnectionRequired)
+    && (flags & kSCNetworkReachabilityFlagsReachable);
+    
+    if( canReachOnExistingConnection ) {
+        NSLog(@"Network available");
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, uLogin];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        
+        NSDictionary *parameters = @{@"email": self.emailTextField.text,
+                                     @"password": self.passWordTextField.text};
+        
+        [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [[SWUtil appDelegate] initTabbar];
+            NSLog(@"LOGIN JSON: %@", responseObject);
+            [[SWUtil sharedUtil] hideLoadingView];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            NSLog(@"Error: %@", error);
+            [SWUtil showConfirmAlert:@"Thông báo" message:@"Email hoặc tài khoản chưa đúng" delegate:nil];
+            self.emailTextField.text = @"";
+            self.passWordTextField.text = @"";
+            [[SWUtil sharedUtil] hideLoadingView];
+        }];
+    } else {
+        NSLog(@"Network not available");
+        [SWUtil showConfirmAlert:@"Lỗi!" message:@"Yêu cầu kết nối mạng để đăng nhập" delegate:nil];
+        [[SWUtil sharedUtil] hideLoadingView];
+    }
+    
 }
 
 - (IBAction)registerButtonTapped:(id)sender {
@@ -78,24 +124,11 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-//    float Y;
-//    if (SCREEN_HEIGHT_PORTRAIT <= 480) {
-//        Y = 5;
-//    } else if (SCREEN_HEIGHT_PORTRAIT < 568) {
-//        Y = 100;
-//    } else {
-//        Y = 50;
-//    }
-//    
-//    [UIView animateWithDuration:.3 animations:^{
-//        self.contentView.frame = CGRectMake(0, Y, self.contentView.bounds.size.width, self.contentView.bounds.size.height);
-//    }];
+
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-//    [UIView animateWithDuration:.3 animations:^{
-//        self.contentView.frame = CGRectMake(0, CONTENT_VIEW_Y, self.contentView.bounds.size.width, self.contentView.bounds.size.height);
-//    }];
+
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

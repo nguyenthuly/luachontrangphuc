@@ -35,4 +35,6 @@
 #import "NSString+FontAwesome.h"
 #import "UIButton+Bootstrap.h"
 
+#import "AFHTTPRequestOperationManager.h"
+
 #endif
