@@ -39,7 +39,9 @@ typedef enum {
 /*URL*/
 
 #define URL_BASE @"http://localhost/LuaChonTrangPhuc/index.php/api/"
-#define uLogin @"users/api_login"
+#define URL_LOGIN @"users/api_login"
+#define URL_REGISTER @"users/api_register"
+
 
 /*TITLE*/
 #define Register_Title @"Đăng ký"
@@ -58,7 +60,9 @@ typedef enum {
 #define First_Name_Message @"Mời bạn nhập họ!"
 #define Last_Name_Message @"Mời bạn nhập tên!"
 #define Height_Message @"Mời bạn nhập chiều cao!"
+#define Height_Error_Message @"Mời bạn nhập lại chiều cao!"
 #define Weight_Message @"Mời bạn nhập cân nặng!"
+#define Weight_Error_Message @"Mời bạn nhập lại cân nặng!"
 #define Telephone_Message @"Số điện thoại không đúng!"
 #define Email_Message @"Email không tồn tại!"
 #define Password_Message @"Mật khẩu của bạn chưa đủ kí tự"
@@ -88,6 +92,9 @@ typedef enum {
 #define Cancel @"Không"
 #define Yes @"Có"
 #define OK_Button @"OK"
+#define Register_message_success @"Đăng ký thành công"
+#define Register_message_fail @"Đăng ký không thành công"
+#define Email_existed_message @"Email đã được đăng ký"
 
 #define Date_Format @"eee dd/MM/yyyy"
 #define Time_Format @"hh:mm a"
@@ -122,7 +129,7 @@ typedef enum {
 #define Red_Color @"F65D63"
 
 /*ARRAY*/
-#define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần jeans",@"Váy",@"Giày thể thao",@"Giày hài",@"Giày bốt"]
+#define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần",@"Váy",@"Giày thể thao",@"Giày hài",@"Giày bốt"]
 #define Clothes_IconArr @[@"shirt_red.png",@"t_shirt_red.png",@"coat_red.png",@"jacket_red.png",@"trousers_red.png",@"skirt_red.png",@"trainers_red.png",@"shoe_woman_red.png",@"winter_boots_red.png"]
 #define Color_Arr @[@"Đỏ",@"Xanh da trời",@"Tím",@"Vàng",@"Hồng",@"Đen",@"Cam",@"Nâu",@"Xanh lá cây",@"Xanh nõn chuối",@"Hồng đỏ"]
 #define Size_Clothes_Arr @[@"S",@"M",@"L",@"XL",@"XXL"]

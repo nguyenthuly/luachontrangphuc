@@ -68,7 +68,7 @@
     if( canReachOnExistingConnection ) {
         NSLog(@"Network available");
         
-        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, uLogin];
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_LOGIN];
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -76,29 +76,32 @@
         NSDictionary *parameters = @{@"email": self.emailTextField.text,
                                      @"password": self.passWordTextField.text};
         
-        [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager GET:url
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            [[SWUtil appDelegate] initTabbar];
-            NSLog(@"LOGIN JSON: %@", responseObject);
-            [[SWUtil sharedUtil] hideLoadingView];
+                 [[SWUtil appDelegate] initTabbar];
+                 NSLog(@"LOGIN JSON: %@", responseObject);
+                 [[SWUtil sharedUtil] hideLoadingView];
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
-            NSLog(@"Error: %@", error);
-            [SWUtil showConfirmAlert:@"Thông báo" message:@"Email hoặc tài khoản chưa đúng" delegate:nil];
-            self.emailTextField.text = @"";
-            self.passWordTextField.text = @"";
-            [[SWUtil sharedUtil] hideLoadingView];
+                NSLog(@"Error: %@", error);
+                [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Email hoặc tài khoản chưa đúng" delegate:nil];
+                self.emailTextField.text = @"";
+                self.passWordTextField.text = @"";
+                [[SWUtil sharedUtil] hideLoadingView];
         }];
     } else {
         NSLog(@"Network not available");
-        [SWUtil showConfirmAlert:@"Lỗi!" message:@"Yêu cầu kết nối mạng để đăng nhập" delegate:nil];
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Yêu cầu kết nối mạng để đăng nhập" delegate:nil];
         [[SWUtil sharedUtil] hideLoadingView];
     }
     
 }
 
 - (IBAction)registerButtonTapped:(id)sender {
+    
     SWRegisterViewController *registerVC = [[SWRegisterViewController alloc] initWithNibName:@"SWRegisterViewController" bundle:nil];
     registerVC.typeUser = register_new;
     [self.navigationController pushViewController:registerVC animated:YES];
@@ -112,7 +115,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disableLoginbutton) name:UITextFieldTextDidChangeNotification object:nil];
     
-    //[self.emailTextField becomeFirstResponder];
     [self disableLoginbutton];
 }
 

@@ -11,7 +11,7 @@
 #define DATE_FORMAT @"dd/MM/yyyy"
 
 #define CONTENT_VIEW_Y 20
-#define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Ngày sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại mật khẩu"]
+#define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Ngày sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại"]
 #define First_Name 0
 #define Last_Name 1
 #define Gender 2
@@ -29,6 +29,15 @@
     UIButton *femaleButton;
     UITextField *registerTextField;
     NSString *birthdayString;
+    NSString *firstname;
+    NSString *lastname;
+    NSInteger gender;
+    NSNumber *birthday;
+    NSString *height;
+    NSString *weight;
+    NSString *telephone;
+    NSString *email;
+    NSString *password;
 }
 @property (strong, nonatomic) NSArray *registerArray;
 @property (weak, nonatomic) IBOutlet UITableView *registerTableView;
@@ -47,6 +56,15 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[SWUtil appDelegate] hideTabbar:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -122,6 +140,7 @@
     _dateString = [_dateFormatter stringFromDate:_chosenDate];
     
     birthdayString = _dateString;
+    birthday = [SWUtil convertDateToNumber:_chosenDate];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     
     [self.registerTableView beginUpdates];
@@ -131,21 +150,77 @@
 }
 
 - (IBAction)registerButtonTapped:(id)sender {
+    
     NSString *errorMessage = [self validateForm];
     if (errorMessage) {
         [[[UIAlertView alloc] initWithTitle:nil message:errorMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
         return;
     }
+    
+    [[SWUtil sharedUtil] showLoadingView];
+    NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_REGISTER];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    NSDictionary *parameters = @{@"firstname"   : firstname,
+                                 @"lastname"    : lastname,
+                                 @"email"       : email,
+                                 @"birthday"    : NULL_IF_NIL(birthday),
+                                 @"gender"      : [NSNumber numberWithInteger:gender],
+                                 @"height"      : height,
+                                 @"weight"      : weight,
+                                 @"password"    : password,
+                                 @"telephone"   : telephone};
+    
+    [manager POST:url
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSDictionary *dict = (NSDictionary*)responseObject;
+        
+              NSInteger code = [[dict objectForKey:@"code"] integerValue];
+              
+              NSLog(@"%ld",(long)code);
+              
+              NSString *message;
+              switch (code) {
+                  case 0:
+                      message = Register_message_fail;
+                      break;
+                  case 1:
+                      message = Register_message_success;
+                      [self.navigationController popViewControllerAnimated:YES];
+                      break;
+                  case 2:
+                  {
+                      message = Email_existed_message;
+                  }
+                      break;
+                  default:
+                      break;
+              }
+              
+              [SWUtil showConfirmAlert:Title_Alert_Validate message:message delegate:nil];
+              [[SWUtil sharedUtil] hideLoadingView];
+              
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            [SWUtil showConfirmAlert:Title_Alert_Validate message:[error localizedDescription] delegate:nil];
+            [[SWUtil sharedUtil] hideLoadingView];
+    }];
+
 }
 
 - (void)maleButtonTapped:(id)sender{
     [self setButton:femaleButton andBackground:Button_bg andTitleColor:Black_Color];
     [self setButton:maleButton andBackground:Button_bg_Selected andTitleColor:White_Color];
+    gender = 0;
 }
 
 - (void)femaleButtonTapped:(id)sender{
     [self setButton:maleButton andBackground:Button_bg andTitleColor:Black_Color];
     [self setButton:femaleButton andBackground:Button_bg_Selected andTitleColor:White_Color];
+    gender = 1;
 }
 
 - (void)setButton:(UIButton *)button andBackground:(NSString *)bg andTitleColor:(NSString *)title{
@@ -176,6 +251,15 @@
 - (BOOL)isValidName:(NSString *)name {
     
     if (name.length == 0) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)isValidNumber:(NSString *)number{
+    
+    if ([number integerValue] <= 0) {
         return NO;
     } else {
         return YES;
@@ -213,6 +297,8 @@
                     {
                         if (![self isValidName:text]) {
                             errorMessage = Height_Message;
+                        } else if (![self isValidNumber:text]){
+                            errorMessage = Height_Error_Message;
                         }
                     }
                         break;
@@ -220,6 +306,8 @@
                     {
                         if (![self isValidName:text]) {
                             errorMessage = Weight_Message;
+                        } else if (![self isValidNumber:text]){
+                            errorMessage = Weight_Error_Message;
                         }
                     }
                         break;
@@ -239,7 +327,7 @@
                         break;
                     case Password:
                     {
-                        passWord = registerTextField.text;
+                        passWord = text;
                         if (![self isValidPassword:text]) {
                             errorMessage = Password_Message;
                         }
@@ -247,7 +335,7 @@
                         break;
                     case Re_Password:
                     {
-                        if (![registerTextField.text isEqualToString:passWord]) {
+                        if (![text isEqualToString:passWord]) {
                             errorMessage = Re_Password_Message;
                         }
                     }
@@ -279,113 +367,114 @@
     if (!cell) {
         
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(100 , 3, 190, 30)];
+        [cell addSubview:registerTextField];
+        
+        registerTextField.borderStyle = UITextBorderStyleNone;
+        registerTextField.textAlignment = NSTextAlignmentRight;
+        registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
+        registerTextField.delegate = self;
+        
+        registerTextField.tag = indexPath.row;
+        switch (indexPath.row) {
+            case First_Name:
+            case Last_Name:
+            case Telephone:
+            case Email:
+            {
+                if ([registerTextField.text length] > 30) {
+                    registerTextField.font = [UIFont fontHelveticaNeue_Medium:12];
+                }
+            }
+                break;
+                
+            case Height:
+            {
+                CGRect frame = registerTextField.frame;
+                frame.size.width = 150;
+                registerTextField.frame = frame;
+                
+                UILabel *heightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260 , 7, 30, 30)];
+                heightLabel.text = @"cm";
+                [cell addSubview:heightLabel];
+            }
+                break;
+            case Weight:
+            {
+                CGRect frame = registerTextField.frame;
+                frame.size.width = 150;
+                registerTextField.frame = frame;
+                
+                UILabel *weightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260 , 7, 30, 30)];
+                weightLabel.text = @"kg";
+                [cell addSubview:weightLabel];
+                
+            }
+                break;
+            case Gender:
+            {
+                registerTextField.enabled = NO;
+                maleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+                [maleButton addTarget:self
+                               action:@selector(maleButtonTapped:)
+                     forControlEvents:UIControlEventTouchUpInside];
+                [maleButton setTitle:@"Nam" forState:UIControlStateNormal];
+                maleButton.layer.masksToBounds = YES;
+                maleButton.layer.cornerRadius = 5.0;
+                [self setButton:maleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
+                maleButton.frame = CGRectMake(120.0, 6, 80, 30.0);
+                [cell addSubview:maleButton];
+                
+                femaleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+                [femaleButton addTarget:self
+                                 action:@selector(femaleButtonTapped:)
+                       forControlEvents:UIControlEventTouchUpInside];
+                [femaleButton setTitle:@"Nữ" forState:UIControlStateNormal];
+                femaleButton.layer.masksToBounds = YES;
+                femaleButton.layer.cornerRadius = 5.0;
+                [self setButton:femaleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
+                femaleButton.frame = CGRectMake(210.0, 6, 80, 30.0);
+                [cell addSubview:femaleButton];
+                
+                
+            }
+                break;
+            
+            case Password:
+            case Re_Password:
+            {
+                registerTextField.secureTextEntry = YES;
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+        cell.textLabel.text = [self.registerArray objectAtIndex:indexPath.row];
     }
-    switch (indexPath.row) {
-        case First_Name:
-        case Last_Name:
-        case Telephone:
-        case Email:
-        {
-            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 220, 30)];
-            registerTextField.tag = indexPath.row;
-            [cell addSubview:registerTextField];
-            registerTextField.borderStyle = UITextBorderStyleNone;
-            registerTextField.textAlignment = NSTextAlignmentRight;
-            registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
-            registerTextField.delegate = self;
-        }
-            break;
-            
-        case Height:
-        {
-            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 200, 30)];
-            registerTextField.tag = indexPath.row;
-            [cell addSubview:registerTextField];
-            registerTextField.borderStyle = UITextBorderStyleNone;
-            registerTextField.textAlignment = NSTextAlignmentRight;
-            registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
-            registerTextField.delegate = self;
-            
-            UILabel *heightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260 , 7, 30, 30)];
-            heightLabel.text = @"cm";
-            [cell addSubview:heightLabel];
-        }
-            break;
-        case Weight:
-        {
-            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50 , 3, 200, 30)];
-            registerTextField.tag = indexPath.row;
-            [cell addSubview:registerTextField];
-            registerTextField.borderStyle = UITextBorderStyleNone;
-            registerTextField.textAlignment = NSTextAlignmentRight;
-            registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
-            registerTextField.delegate = self;
-            
-            UILabel *weightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260 , 7, 30, 30)];
-            weightLabel.text = @"kg";
-            [cell addSubview:weightLabel];
-        }
-            break;
-        case Gender:
-        {
-            maleButton = [UIButton buttonWithType:UIButtonTypeSystem];
-            [maleButton addTarget:self
-                           action:@selector(maleButtonTapped:)
-             forControlEvents:UIControlEventTouchUpInside];
-            [maleButton setTitle:@"Nam" forState:UIControlStateNormal];
-            maleButton.layer.masksToBounds = YES;
-            maleButton.layer.cornerRadius = 5.0;
-            [self setButton:maleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
-            maleButton.frame = CGRectMake(120.0, 6, 80, 30.0);
-            [cell addSubview:maleButton];
-            
-            femaleButton = [UIButton buttonWithType:UIButtonTypeSystem];
-            [femaleButton addTarget:self
-                           action:@selector(femaleButtonTapped:)
-                 forControlEvents:UIControlEventTouchUpInside];
-            [femaleButton setTitle:@"Nữ" forState:UIControlStateNormal];
-            femaleButton.layer.masksToBounds = YES;
-            femaleButton.layer.cornerRadius = 5.0;
-            [self setButton:femaleButton andBackground:@"EAEAEA" andTitleColor:@"000000"];
-            femaleButton.frame = CGRectMake(210.0, 6, 80, 30.0);
-            [cell addSubview:femaleButton];
-        }
-            break;
-        case Birthday:
-        {
-            UILabel *birthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 7, 160, 30)];
-            birthdayLabel.text = birthdayString;
-            birthdayLabel.textAlignment = NSTextAlignmentRight;
-            cell.accessoryView = birthdayLabel;
-        }
-            
-            break;
-        case Password:
-        case Re_Password:
-        {
-            registerTextField = [[UITextField alloc] initWithFrame:CGRectMake(160 , 3, 130, 30)];
-            registerTextField.tag = indexPath.row;
-            [cell addSubview:registerTextField];
-            registerTextField.borderStyle = UITextBorderStyleNone;
-            registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
-            registerTextField.textAlignment = NSTextAlignmentRight;
-            registerTextField.secureTextEntry = YES;
-            registerTextField.delegate = self;
 
-        }
-            break;
-            
-        default:
-            break;
-    }
-    cell.textLabel.text = [self.registerArray objectAtIndex:indexPath.row];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if (indexPath.row == Birthday) {
+        registerTextField.enabled = NO;
+        UILabel *birthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 7, 160, 30)];
+        birthdayLabel.text = birthdayString;
+        birthdayLabel.textAlignment = NSTextAlignmentRight;
+        cell.accessoryView = birthdayLabel;
+    }
+    
+
+
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 3) {
+        [self.view endEditing:YES];
+
         if (self.datePickerView.hidden) {
             
             self.datePickerView.hidden = NO;
@@ -405,7 +494,7 @@
             }];
         }
 
-    } else {
+    } else{
         [self.view endEditing:YES];
     }
 }
@@ -437,6 +526,40 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    switch (textField.tag) {
+        case First_Name:
+            firstname = textField.text;
+            break;
+        case Last_Name:
+            lastname = textField.text;
+            break;
+        case Telephone:
+            telephone = textField.text;
+            break;
+        case Email:
+            email = textField.text;
+            break;
+        case Height:
+            height = textField.text;
+            break;
+        case Weight:
+            weight = textField.text;
+            break;
+        case Password:
+            password = textField.text;
+            break;
+        default:
+            break;
+    }
+
+}
+
+- (void)keyboardWillShow:(NSNotification *)notifi {
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notifi {
     self.registerTableView.contentInset =  UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
