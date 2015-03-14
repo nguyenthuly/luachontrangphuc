@@ -36,5 +36,6 @@
 #import "UIButton+Bootstrap.h"
 
 #import "AFHTTPRequestOperationManager.h"
+#import "UIImageView+WebCache.h"
 
 #endif

@@ -14,6 +14,7 @@
 @interface SWWardrobeDetailViewController ()
 @property(nonatomic, strong) IBOutlet UICollectionView *wardrobeCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *contentWardrobeView;
+@property (nonatomic, strong) NSMutableArray *data;
 
 @end
 
@@ -22,6 +23,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[SWUtil appDelegate] hideTabbar:YES];
+    //[[SWUtil sharedUtil] showLoadingView];
 }
 
 - (void)viewDidLoad {
@@ -55,13 +57,42 @@
 
 - (void)initData{
     
+    NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_WARDROBE_CATEGORY];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:1],
+                                 @"categoryid":[NSNumber numberWithInteger:self.categoryId]
+                                 };
+    [[SWUtil sharedUtil] showLoadingView];
+    [manager GET:url
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             
+             self.data = (NSMutableArray *)responseObject;
+             [self.wardrobeCollectionView reloadData];
+             NSLog(@"WARDROBE JSON: %@", responseObject);
+             [[SWUtil sharedUtil] hideLoadingView];
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+             NSLog(@"Error: %@", error);
+             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             [[SWUtil sharedUtil] hideLoadingView];
+         }];
+    
 }
 
 - (void)backButtonTapped:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)addButtonTapped:(id)sender{
-    SWAddClotheViewController *addClothesVC = [[SWAddClotheViewController alloc] initWithNibName:@"SWAddClotheViewController" bundle:nil];
+    SWAddClotheViewController *addClothesVC = [[SWAddClotheViewController alloc]
+                                               initWithNibName:@"SWAddClotheViewController"
+                                               bundle:nil];
+    
     addClothesVC.typeCategory = addClotherDetail;
     addClothesVC.typeClothe = newClothe;
     [self.navigationController pushViewController:addClothesVC animated:YES];
@@ -75,7 +106,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 90;
+    return [self.data count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -83,12 +114,15 @@
     
     static NSString *reuseIdentifier = Cell;
     SWWardrobeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+    NSString *imageLink = [NSString stringWithFormat:@"%@%@",URL_IMAGE,[[self.data objectAtIndex:indexPath.row] objectForKey:@"image"]];
+    [cell.clotheImageView sd_setImageWithURL:[NSURL URLWithString:imageLink]];
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGSize size = CGSizeMake(70,90);//SCREEN_WIDTH_LANDSCAPE/4, self.contentWardrobeView.bounds.size.height/5);
+    CGSize size = CGSizeMake(70,90);
     
     return size;
 }
@@ -96,6 +130,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     SWAddClotheViewController *detailVC = [[SWAddClotheViewController alloc] init];
+    
+    NSString *wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
+    [[NSUserDefaults standardUserDefaults] setObject:wardrobeId forKey:@"wardrobeid"];
+    
     detailVC.typeClothe = detailClothe;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

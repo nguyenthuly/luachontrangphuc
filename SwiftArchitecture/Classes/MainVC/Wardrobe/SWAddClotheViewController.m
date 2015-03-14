@@ -13,6 +13,7 @@
 @interface SWAddClotheViewController (){
     NSMutableArray *tableViewArr;
 }
+
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *materialLabel;
@@ -30,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIButton *sizeButton;
 @property (weak, nonatomic) IBOutlet UIButton *materialButton;
+
+@property (nonatomic, strong) NSDictionary *dataDict;
 
 - (IBAction)addButton:(id)sender;
 - (IBAction)colorButton:(id)sender;
@@ -50,7 +53,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initUI];
-    //[self initData];
 }
 
 - (void)initUI{
@@ -88,6 +90,7 @@
             self.categoryImageView.hidden = YES;
             self.sizeImageView.hidden = YES;
             self.materialImageView.hidden = YES;
+            [self initDataFromServer];
         }
             break;
         default:
@@ -95,6 +98,49 @@
     }
     
    
+}
+
+- (void)initDataFromServer{
+ 
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_WARDROBE_DETAIL];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:1],
+                                 @"wardrobeid":[[NSUserDefaults standardUserDefaults] objectForKey:@"wardrobeid"]
+                                 };
+    [[SWUtil sharedUtil] showLoadingView];
+    [manager GET:url
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+             NSMutableArray *arr = (NSMutableArray *)responseObject;
+             self.dataDict = [arr objectAtIndex:0];
+             [self loadDetail];
+             NSLog(@"WARDROBE DETAIL JSON: %@", responseObject);
+             [[SWUtil sharedUtil] hideLoadingView];
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+             NSLog(@"Error: %@", error);
+             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             [[SWUtil sharedUtil] hideLoadingView];
+         }];
+
+}
+
+- (void)loadDetail{
+    
+    NSString *imageLink = [NSString stringWithFormat:@"%@%@",URL_IMAGE,[self.dataDict objectForKey:@"image"]];
+    self.nameTextField.text = [self.dataDict objectForKey:@"name"];
+    self.colorLabel.text    = [self.dataDict objectForKey:@"color"];
+    self.categoryLabel.text = [self.dataDict objectForKey:@"category"];
+    self.materialLabel.text = [self.dataDict objectForKey:@"material"];
+    self.sizeLabel.text     = [self.dataDict objectForKey:@"size"];
+    [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:imageLink]];
 }
 
 - (void)initData{
@@ -111,7 +157,9 @@
             if ([self.categoryLabel.text containsString:@"Giày"]) {
                 tableViewArr = [[NSMutableArray alloc] initWithArray:Size_Shoes_Arr];
 
-            } else {
+            } else if ([self.categoryLabel.text containsString:@"Quần"]){
+                tableViewArr = [[NSMutableArray alloc] initWithArray:Size_Jean_Arr];
+            }else {
                 tableViewArr = [[NSMutableArray alloc] initWithArray:Size_Clothes_Arr];
             }
         }

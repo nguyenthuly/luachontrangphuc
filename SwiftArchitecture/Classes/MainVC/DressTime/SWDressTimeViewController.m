@@ -44,6 +44,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    
     [[SWUtil appDelegate] hideTabbar:NO];
     [[SWUtil sharedUtil] showLoadingView];
     
@@ -62,7 +63,7 @@
              self.temperatureLabel.text = @"";
          }
          
-         self.descriptionLabel.text = [newCondition.condition capitalizedString];
+         self.descriptionLabel.text = [newCondition.conditionDescription capitalizedString];
          self.cityLabel.text = [newCondition.locationName capitalizedString];
          
          NSString *imageStringCurrent = [NSString stringWithFormat:@"%@",[newCondition imageName]];
@@ -85,9 +86,6 @@
     // Do any additional setup after loading the view from its nib.
     [self initUI];
     [[SWUtil sharedUtil] showLoadingView];
-
-//    [self initData];
-//    [self initScroll];
     
 }
 

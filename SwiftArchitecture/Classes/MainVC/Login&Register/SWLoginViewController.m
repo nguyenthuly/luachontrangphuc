@@ -54,49 +54,51 @@
 
 - (IBAction)loginButtonTapped:(id)sender {
     
-    [[SWUtil sharedUtil] showLoadingView];
+//    [[SWUtil sharedUtil] showLoadingView];
+//    
+//    SCNetworkReachabilityFlags flags;
+//    SCNetworkReachabilityRef address = SCNetworkReachabilityCreateWithName(NULL, "www.google.com" );
+//    Boolean success = SCNetworkReachabilityGetFlags(address, &flags);
+//    CFRelease(address);
+//    
+//    bool canReachOnExistingConnection =     success
+//    && !(flags & kSCNetworkReachabilityFlagsConnectionRequired)
+//    && (flags & kSCNetworkReachabilityFlagsReachable);
+//    
+//    if( canReachOnExistingConnection ) {
+//        NSLog(@"Network available");
+//        
+//        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_LOGIN];
+//        
+//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//        
+//        NSDictionary *parameters = @{@"email": self.emailTextField.text,
+//                                     @"password": self.passWordTextField.text};
+//        
+//        [manager GET:url
+//          parameters:parameters
+//             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            
+//                 [[SWUtil appDelegate] initTabbar];
+//                 NSLog(@"LOGIN JSON: %@", responseObject);
+//                 [[SWUtil sharedUtil] hideLoadingView];
+//            
+//            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            
+//                NSLog(@"Error: %@", error);
+//                [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Email hoặc tài khoản chưa đúng" delegate:nil];
+//                self.emailTextField.text = @"";
+//                self.passWordTextField.text = @"";
+//                [[SWUtil sharedUtil] hideLoadingView];
+//        }];
+//    } else {
+//        NSLog(@"Network not available");
+//        [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Yêu cầu kết nối mạng để đăng nhập" delegate:nil];
+//        [[SWUtil sharedUtil] hideLoadingView];
+//    }
     
-    SCNetworkReachabilityFlags flags;
-    SCNetworkReachabilityRef address = SCNetworkReachabilityCreateWithName(NULL, "www.google.com" );
-    Boolean success = SCNetworkReachabilityGetFlags(address, &flags);
-    CFRelease(address);
-    
-    bool canReachOnExistingConnection =     success
-    && !(flags & kSCNetworkReachabilityFlagsConnectionRequired)
-    && (flags & kSCNetworkReachabilityFlagsReachable);
-    
-    if( canReachOnExistingConnection ) {
-        NSLog(@"Network available");
-        
-        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_LOGIN];
-        
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        
-        NSDictionary *parameters = @{@"email": self.emailTextField.text,
-                                     @"password": self.passWordTextField.text};
-        
-        [manager GET:url
-          parameters:parameters
-             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-                 [[SWUtil appDelegate] initTabbar];
-                 NSLog(@"LOGIN JSON: %@", responseObject);
-                 [[SWUtil sharedUtil] hideLoadingView];
-            
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
-                NSLog(@"Error: %@", error);
-                [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Email hoặc tài khoản chưa đúng" delegate:nil];
-                self.emailTextField.text = @"";
-                self.passWordTextField.text = @"";
-                [[SWUtil sharedUtil] hideLoadingView];
-        }];
-    } else {
-        NSLog(@"Network not available");
-        [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Yêu cầu kết nối mạng để đăng nhập" delegate:nil];
-        [[SWUtil sharedUtil] hideLoadingView];
-    }
+    [[SWUtil appDelegate] initTabbar];
     
 }
 

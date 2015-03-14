@@ -39,9 +39,11 @@ typedef enum {
 /*URL*/
 
 #define URL_BASE @"http://localhost/LuaChonTrangPhuc/index.php/api/"
+#define URL_IMAGE @"http://localhost/LuaChonTrangPhuc/"
 #define URL_LOGIN @"users/api_login"
 #define URL_REGISTER @"users/api_register"
-
+#define URL_WARDROBE_CATEGORY @"wardrobe/api_WardrobeByCategory"
+#define URL_WARDROBE_DETAIL @"wardrobe/api_WardrobeDetail"
 
 /*TITLE*/
 #define Register_Title @"Đăng ký"
@@ -134,11 +136,21 @@ typedef enum {
 #define Color_Arr @[@"Đỏ",@"Xanh da trời",@"Tím",@"Vàng",@"Hồng",@"Đen",@"Cam",@"Nâu",@"Xanh lá cây",@"Xanh nõn chuối",@"Hồng đỏ"]
 #define Size_Clothes_Arr @[@"S",@"M",@"L",@"XL",@"XXL"]
 #define Size_Shoes_Arr @[@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44"]
+#define Size_Jean_Arr @[@"26",@"27",@"28",@"29",@"30",@"31",@"32"]
 #define Material_Clothes_Arr @[@"Vải",@"Len",@"Thun",@"Gió", @"Nỉ", @"Bò", @"Da", @"Lông"]
 #define Material_Shoes_Arr @[@"Vải",@"Da"]
 
 
-/*SIZE*/
+/*CATEGORY*/
 
+#define Aosomi 1
+#define Aophong 2
+#define Aokhoac 3
+#define Aolen 4
+#define Quan 5
+#define Vay 6
+#define Giaythethao 7
+#define Giayhai 8
+#define Giaybot 9
 
 #endif

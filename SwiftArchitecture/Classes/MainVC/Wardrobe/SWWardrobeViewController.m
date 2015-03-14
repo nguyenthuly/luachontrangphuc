@@ -34,7 +34,7 @@
 
 - (void)initUI{
     self.title = Wardrobe_Title;
-    [self setBackButtonWithImage:Search highlightedImage:nil target:self action:@selector(searchButtonTapped:)];
+    //[self setBackButtonWithImage:Search highlightedImage:nil target:self action:@selector(searchButtonTapped:)];
     [self setRightButtonWithImage:Add highlightedImage:nil target:self action:@selector(addButtonTapped:)];
 }
 
@@ -112,8 +112,21 @@
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     SWWardrobeDetailViewController *wardrobeDetailVC = [[SWWardrobeDetailViewController alloc] init];
     wardrobeDetailVC.title = cell.textLabel.text;
-    [[NSUserDefaults standardUserDefaults] setObject:cell.textLabel.text forKey:@"category"];
     
+    switch (indexPath.section) {
+        case 0:
+            wardrobeDetailVC.categoryId = indexPath.row + 1;
+            break;
+        case 1:
+            wardrobeDetailVC.categoryId = indexPath.row + 5;
+            break;
+        case 2:
+            wardrobeDetailVC.categoryId = indexPath.row + 7;
+            break;
+        default:
+            break;
+    }
+        
     [self.navigationController pushViewController:wardrobeDetailVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
