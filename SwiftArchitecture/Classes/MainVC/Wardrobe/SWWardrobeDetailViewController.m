@@ -63,7 +63,7 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:1],
+    NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
                                  @"categoryid":[NSNumber numberWithInteger:self.categoryId]
                                  };
     [[SWUtil sharedUtil] showLoadingView];

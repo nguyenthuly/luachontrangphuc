@@ -84,9 +84,10 @@
     if (!cell) {
         
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        [cell.textLabel setTextColor:[UIColor colorWithHex: Gray_Color alpha:1.0]];
     }
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    [cell.textLabel setTextColor:[UIColor colorWithHex: Gray_Color alpha:1.0]];
+   
     switch (indexPath.section) {
         case 0:
             cell.textLabel.text = [clothesArr objectAtIndex:indexPath.row];
@@ -136,7 +137,7 @@
     return 44;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, 39)];
     [view setBackgroundColor:[UIColor colorWithHex:Green_Color alpha:1.0]];

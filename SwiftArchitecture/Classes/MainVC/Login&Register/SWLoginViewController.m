@@ -13,6 +13,7 @@
 #import "SWLoginViewController.h"
 #import "SWRegisterViewController.h"
 #import "SWDressTimeViewController.h"
+#import "SWSettingViewController.h"
 
 @interface SWLoginViewController ()
 - (IBAction)loginButtonTapped:(id)sender;
@@ -54,58 +55,89 @@
 
 - (IBAction)loginButtonTapped:(id)sender {
     
-//    [[SWUtil sharedUtil] showLoadingView];
-//    
-//    SCNetworkReachabilityFlags flags;
-//    SCNetworkReachabilityRef address = SCNetworkReachabilityCreateWithName(NULL, "www.google.com" );
-//    Boolean success = SCNetworkReachabilityGetFlags(address, &flags);
-//    CFRelease(address);
-//    
-//    bool canReachOnExistingConnection =     success
-//    && !(flags & kSCNetworkReachabilityFlagsConnectionRequired)
-//    && (flags & kSCNetworkReachabilityFlagsReachable);
-//    
-//    if( canReachOnExistingConnection ) {
-//        NSLog(@"Network available");
-//        
-//        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_LOGIN];
-//        
-//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//        
-//        NSDictionary *parameters = @{@"email": self.emailTextField.text,
-//                                     @"password": self.passWordTextField.text};
-//        
-//        [manager GET:url
-//          parameters:parameters
-//             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            
-//                 [[SWUtil appDelegate] initTabbar];
-//                 NSLog(@"LOGIN JSON: %@", responseObject);
-//                 [[SWUtil sharedUtil] hideLoadingView];
-//            
-//            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            
-//                NSLog(@"Error: %@", error);
-//                [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Email hoặc tài khoản chưa đúng" delegate:nil];
-//                self.emailTextField.text = @"";
-//                self.passWordTextField.text = @"";
-//                [[SWUtil sharedUtil] hideLoadingView];
-//        }];
-//    } else {
-//        NSLog(@"Network not available");
-//        [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Yêu cầu kết nối mạng để đăng nhập" delegate:nil];
-//        [[SWUtil sharedUtil] hideLoadingView];
-//    }
+    [[SWUtil sharedUtil] showLoadingView];
     
-    [[SWUtil appDelegate] initTabbar];
+    SCNetworkReachabilityFlags flags;
+    SCNetworkReachabilityRef address = SCNetworkReachabilityCreateWithName(NULL, "www.google.com" );
+    Boolean success = SCNetworkReachabilityGetFlags(address, &flags);
+    CFRelease(address);
+    
+    bool canReachOnExistingConnection =     success
+    && !(flags & kSCNetworkReachabilityFlagsConnectionRequired)
+    && (flags & kSCNetworkReachabilityFlagsReachable);
+    
+    if( canReachOnExistingConnection ) {
+        NSLog(@"Network available");
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_LOGIN];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        NSDictionary *parameters = @{@"email": self.emailTextField.text,
+                                     @"password": self.passWordTextField.text};
+        
+        [manager GET:url
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+                 [[SWUtil appDelegate] initTabbar];
+                 
+                 NSString *email = [[responseObject objectAtIndex:0] objectForKey:@"email"];
+                 NSString *firstname = [[responseObject objectAtIndex:0] objectForKey:@"firstname"];
+                 NSString *lastname = [[responseObject objectAtIndex:0] objectForKey:@"lastname"];
+                 NSString *avatar = [[responseObject objectAtIndex:0] objectForKey:@"avatar"];
+                 long long birthday = [[[responseObject objectAtIndex:0] objectForKey:@"birthday"] longLongValue];
+                 NSInteger gender = [[[responseObject objectAtIndex:0] objectForKey:@"gender"] integerValue];
+                 NSString *height = [[responseObject objectAtIndex:0] objectForKey:@"height"];
+                 NSString *weight = [[responseObject objectAtIndex:0] objectForKey:@"weight"];
+                 NSString *userid = [[responseObject objectAtIndex:0] objectForKey:@"userid"];
+                 NSString *telephone = [[responseObject objectAtIndex:0] objectForKey:@"telephone"];
+                 
+                 [[NSUserDefaults standardUserDefaults] setObject:email forKey:@"email"];
+                 [[NSUserDefaults standardUserDefaults] setObject:firstname forKey:@"firstname"];
+                 [[NSUserDefaults standardUserDefaults] setObject:lastname forKey:@"lastname"];
+                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLongLong:birthday] forKey:@"birthday"];
+                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:gender] forKey:@"gender"];
+                 [[NSUserDefaults standardUserDefaults] setObject:height forKey:@"height"];
+                 [[NSUserDefaults standardUserDefaults] setObject:weight forKey:@"weight"];
+                 [[NSUserDefaults standardUserDefaults] setObject:userid forKey:@"userid"];
+                 [[NSUserDefaults standardUserDefaults] setObject:telephone forKey:@"telephone"];
+                 
+                 if (([avatar length ]> 0)) {
+                     [[NSUserDefaults standardUserDefaults] setObject:avatar forKey:@"avatar"];
+                 }
+
+                 
+                 NSLog(@"LOGIN JSON: %@", responseObject);
+                 [[SWUtil sharedUtil] hideLoadingView];
+            
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+                NSLog(@"Error: %@", error);
+                [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Email hoặc tài khoản chưa đúng" delegate:nil];
+                self.emailTextField.text = @"";
+                self.passWordTextField.text = @"";
+                [[SWUtil sharedUtil] hideLoadingView];
+        }];
+    } else {
+        NSLog(@"Network not available");
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Yêu cầu kết nối mạng để đăng nhập" delegate:nil];
+        [[SWUtil sharedUtil] hideLoadingView];
+    }
+    
+    //[[SWUtil appDelegate] initTabbar];
     
 }
+
 
 - (IBAction)registerButtonTapped:(id)sender {
     
     SWRegisterViewController *registerVC = [[SWRegisterViewController alloc] initWithNibName:@"SWRegisterViewController" bundle:nil];
     registerVC.typeUser = register_new;
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     [self.navigationController pushViewController:registerVC animated:YES];
 }
 

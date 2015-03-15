@@ -14,6 +14,7 @@
 @interface SWDressTimeViewController () <UIScrollViewDelegate>{
     SWWeatherView *weatherGrid;
 }
+
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLabel;

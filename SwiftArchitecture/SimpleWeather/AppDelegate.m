@@ -66,7 +66,9 @@
     [self.tabbarController hoverAtIndex:0];
     self.window.rootViewController = nil;
     self.window.rootViewController = self.tabbarController;
+    
 }
+
 
 - (void)hideTabbar:(BOOL)hide{
     [self.tabbarController hideTabbar:hide];

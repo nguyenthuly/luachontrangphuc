@@ -42,6 +42,7 @@ typedef enum {
 #define URL_IMAGE @"http://localhost/LuaChonTrangPhuc/"
 #define URL_LOGIN @"users/api_login"
 #define URL_REGISTER @"users/api_register"
+#define URL_UPDATE_USER @"users/api_updateUser"
 #define URL_WARDROBE_CATEGORY @"wardrobe/api_WardrobeByCategory"
 #define URL_WARDROBE_DETAIL @"wardrobe/api_WardrobeDetail"
 
@@ -131,7 +132,7 @@ typedef enum {
 #define Red_Color @"F65D63"
 
 /*ARRAY*/
-#define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần",@"Váy",@"Giày thể thao",@"Giày hài",@"Giày bốt"]
+#define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần/Chân váy",@"Váy",@"Giày thể thao",@"Giày hài",@"Giày bốt"]
 #define Clothes_IconArr @[@"shirt_red.png",@"t_shirt_red.png",@"coat_red.png",@"jacket_red.png",@"trousers_red.png",@"skirt_red.png",@"trainers_red.png",@"shoe_woman_red.png",@"winter_boots_red.png"]
 #define Color_Arr @[@"Đỏ",@"Xanh da trời",@"Tím",@"Vàng",@"Hồng",@"Đen",@"Cam",@"Nâu",@"Xanh lá cây",@"Xanh nõn chuối",@"Hồng đỏ"]
 #define Size_Clothes_Arr @[@"S",@"M",@"L",@"XL",@"XXL"]
@@ -152,5 +153,18 @@ typedef enum {
 #define Giaythethao 7
 #define Giayhai 8
 #define Giaybot 9
+
+
+#define First_Name 0
+#define Last_Name 1
+#define Gender 2
+#define Birthday 3
+#define Height 4
+#define Weight 5
+#define Telephone 6
+#define Email 7
+#define Password 8
+#define Re_Password 9
+
 
 #endif

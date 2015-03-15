@@ -43,20 +43,24 @@
     self.title = Setting_Title;
 }
 
+- (void)initData{
+    
+    NSString *firstname = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstname"];
+    NSString *lastname = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastname"];
+    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
+    NSString *avatar = [[NSUserDefaults standardUserDefaults] objectForKey:@"avatar"];
+    NSString *avatarLink = [NSString stringWithFormat:@"%@%@",URL_IMAGE,avatar];
+    
+    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@",firstname, lastname];
+    self.emailLabel.text = email;
+    [self.imageUserImageView sd_setImageWithURL:[NSURL URLWithString:avatarLink]];
+}
+
 - (void)takePhoto{
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    //    CGAffineTransform translate = CGAffineTransformMakeTranslation(0.0, 71.0);
-    //    picker.cameraViewTransform = translate;
-    //    CGAffineTransform scale = CGAffineTransformScale(translate, 1.333333, 1.333333);
-    //    picker.cameraViewTransform = scale;
-    //
-    //    UIView * overlayView = [[UIView alloc]init];
-    //    overlayView.frame = CGRectMake(0, 0, SCREEN_WIDTH_PORTRAIT, SCREEN_HEIGHT_PORTRAIT);
-    //    picker.cameraOverlayView = overlayView;
     
     [self presentViewController:picker animated:YES completion:NULL];
 }
@@ -72,6 +76,7 @@
 #pragma mark - Action
 
 - (IBAction)inforButton:(id)sender {
+    
     SWRegisterViewController *inforVC = [[SWRegisterViewController alloc] initWithNibName:@"SWRegisterViewController" bundle:nil];
     inforVC.typeUser = edit_infor;
     [self.navigationController pushViewController:inforVC animated:YES];

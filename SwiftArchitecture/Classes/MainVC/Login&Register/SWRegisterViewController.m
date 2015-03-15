@@ -12,16 +12,6 @@
 
 #define CONTENT_VIEW_Y 20
 #define Register_Arr @[@"Họ",@"Tên",@"Giới tính",@"Ngày sinh",@"Chiều cao",@"Cân nặng",@"Số điện thoại",@"Email",@"Mật khẩu",@"Nhắc lại"]
-#define First_Name 0
-#define Last_Name 1
-#define Gender 2
-#define Birthday 3
-#define Height 4
-#define Weight 5
-#define Telephone 6
-#define Email 7
-#define Password 8
-#define Re_Password 9
 
 @interface SWRegisterViewController ()
 {
@@ -59,6 +49,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [self.registerTableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -92,7 +84,16 @@
             self.title = InforUser_Title;
             [self setRightButtonWithImage:Edit highlightedImage:nil target:self action:@selector(editButtonTapped:)];
             self.registerTableView.userInteractionEnabled = NO;
+            
+            CGRect frame = self.registerTableView.frame;
+            frame.size.height = frame.size.height - 132;
+            self.registerTableView.frame = frame;
+            
             [self.registerButton setTitle:Complete_Button forState:UIControlStateNormal];
+            CGRect frameButton = self.registerButton.frame;
+            frameButton.origin.y = frameButton.origin.y - 128;
+            self.registerButton.frame = frameButton;
+          
         }
             break;
         default:
@@ -151,64 +152,101 @@
 
 - (IBAction)registerButtonTapped:(id)sender {
     
-    NSString *errorMessage = [self validateForm];
-    if (errorMessage) {
-        [[[UIAlertView alloc] initWithTitle:nil message:errorMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
-        return;
+    if (self.typeUser == register_new) {
+        
+        NSString *errorMessage = [self validateForm];
+        if (errorMessage) {
+            [[[UIAlertView alloc] initWithTitle:nil message:errorMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+            return;
+        }
+        
+        [[SWUtil sharedUtil] showLoadingView];
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_REGISTER];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        NSDictionary *parameters = @{@"firstname"   : firstname,
+                                     @"lastname"    : lastname,
+                                     @"email"       : email,
+                                     @"birthday"    : NULL_IF_NIL(birthday),
+                                     @"gender"      : [NSNumber numberWithInteger:gender],
+                                     @"height"      : height,
+                                     @"weight"      : weight,
+                                     @"password"    : password,
+                                     @"telephone"   : telephone};
+        
+        [manager POST:url
+           parameters:parameters
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  NSDictionary *dict = (NSDictionary*)responseObject;
+                  
+                  NSInteger code = [[dict objectForKey:@"code"] integerValue];
+                                    
+                  NSString *message;
+                  switch (code) {
+                      case 0:
+                          message = Register_message_fail;
+                          break;
+                      case 1:
+                          message = Register_message_success;
+                          [self.navigationController popViewControllerAnimated:YES];
+                          break;
+                      case 2:
+                      {
+                          message = Email_existed_message;
+                      }
+                          break;
+                      default:
+                          break;
+                  }
+                  
+                  [SWUtil showConfirmAlert:Title_Alert_Validate message:message delegate:nil];
+                  [[SWUtil sharedUtil] hideLoadingView];
+                  
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Error: %@", error);
+                  [SWUtil showConfirmAlert:Title_Alert_Validate message:[error localizedDescription] delegate:nil];
+                  [[SWUtil sharedUtil] hideLoadingView];
+              }];
+
+    }else{
+        
+        [[SWUtil sharedUtil] showLoadingView];
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_UPDATE_USER];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        NSLog(@"Firstname: %@",firstname);
+        
+        NSDictionary *parameters = @{@"userid"      :[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"],
+                                     @"firstname"   : firstname,
+                                     @"lastname"    : lastname,
+                                     @"birthday"    : NULL_IF_NIL(birthday),
+                                     @"gender"      : [NSNumber numberWithInteger:gender],
+                                     @"height"      : height,
+                                     @"weight"      : weight,
+                                     @"telephone"   : telephone};
+        
+        
+        [manager POST:url
+           parameters:parameters
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Cập nhật thông tin thành công" delegate:nil];
+                  [self.registerTableView reloadData];
+                  [[SWUtil sharedUtil] hideLoadingView];
+                  
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Error: %@", error);
+                  [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Cập nhật thông tin không thành công" delegate:nil];
+                  [[SWUtil sharedUtil] hideLoadingView];
+              }];
     }
     
-    [[SWUtil sharedUtil] showLoadingView];
-    NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_REGISTER];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
-    NSDictionary *parameters = @{@"firstname"   : firstname,
-                                 @"lastname"    : lastname,
-                                 @"email"       : email,
-                                 @"birthday"    : NULL_IF_NIL(birthday),
-                                 @"gender"      : [NSNumber numberWithInteger:gender],
-                                 @"height"      : height,
-                                 @"weight"      : weight,
-                                 @"password"    : password,
-                                 @"telephone"   : telephone};
-    
-    [manager POST:url
-       parameters:parameters
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSDictionary *dict = (NSDictionary*)responseObject;
-        
-              NSInteger code = [[dict objectForKey:@"code"] integerValue];
-              
-              NSLog(@"%ld",(long)code);
-              
-              NSString *message;
-              switch (code) {
-                  case 0:
-                      message = Register_message_fail;
-                      break;
-                  case 1:
-                      message = Register_message_success;
-                      [self.navigationController popViewControllerAnimated:YES];
-                      break;
-                  case 2:
-                  {
-                      message = Email_existed_message;
-                  }
-                      break;
-                  default:
-                      break;
-              }
-              
-              [SWUtil showConfirmAlert:Title_Alert_Validate message:message delegate:nil];
-              [[SWUtil sharedUtil] hideLoadingView];
-              
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            [SWUtil showConfirmAlert:Title_Alert_Validate message:[error localizedDescription] delegate:nil];
-            [[SWUtil sharedUtil] hideLoadingView];
-    }];
-
+  
 }
 
 - (void)maleButtonTapped:(id)sender{
@@ -358,7 +396,11 @@
 
 #pragma mark - TableView
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    if (self.typeUser == register_new) {
+        return 10;
+    } else {
+        return 7;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -374,18 +416,25 @@
         registerTextField.textAlignment = NSTextAlignmentRight;
         registerTextField.contentVerticalAlignment = UIControlContentHorizontalAlignmentRight;
         registerTextField.delegate = self;
-        
         registerTextField.tag = indexPath.row;
+        
         switch (indexPath.row) {
             case First_Name:
+                registerTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstname"];
+                firstname = registerTextField.text;
+                break;
             case Last_Name:
+                registerTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastname"];
+                lastname = registerTextField.text;
+
+                break;
             case Telephone:
+                registerTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"telephone"];
+                telephone = registerTextField.text;
+
+                break;
             case Email:
-            {
-                if ([registerTextField.text length] > 30) {
-                    registerTextField.font = [UIFont fontHelveticaNeue_Medium:12];
-                }
-            }
+                registerTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
                 break;
                 
             case Height:
@@ -393,7 +442,9 @@
                 CGRect frame = registerTextField.frame;
                 frame.size.width = 150;
                 registerTextField.frame = frame;
-                
+                registerTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"height"];
+                height = registerTextField.text;
+
                 UILabel *heightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260 , 7, 30, 30)];
                 heightLabel.text = @"cm";
                 [cell addSubview:heightLabel];
@@ -404,7 +455,9 @@
                 CGRect frame = registerTextField.frame;
                 frame.size.width = 150;
                 registerTextField.frame = frame;
-                
+                registerTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"weight"];
+                weight = registerTextField.text;
+
                 UILabel *weightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260 , 7, 30, 30)];
                 weightLabel.text = @"kg";
                 [cell addSubview:weightLabel];
@@ -413,6 +466,7 @@
                 break;
             case Gender:
             {
+                
                 registerTextField.enabled = NO;
                 maleButton = [UIButton buttonWithType:UIButtonTypeSystem];
                 [maleButton addTarget:self
@@ -436,6 +490,16 @@
                 femaleButton.frame = CGRectMake(210.0, 6, 80, 30.0);
                 [cell addSubview:femaleButton];
                 
+                if (self.typeUser == edit_infor) {
+                    NSInteger genderN = [[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"] integerValue];
+                    if (genderN == 0) {
+                        [self setButton:maleButton andBackground:Button_bg_Selected andTitleColor:White_Color];
+                    } else{
+                        [self setButton:femaleButton andBackground:Button_bg_Selected andTitleColor:White_Color];
+                    }
+                    gender = genderN;
+
+                }
                 
             }
                 break;
@@ -459,10 +523,18 @@
     
     if (indexPath.row == Birthday) {
         registerTextField.enabled = NO;
+        long long birthdayNumber =[[[NSUserDefaults standardUserDefaults] objectForKey:@"birthday"] longLongValue];
         UILabel *birthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 7, 160, 30)];
+        
+        if (self.typeUser == edit_infor) {
+            if (birthdayString == nil) {
+                birthdayString = [SWUtil convert:birthdayNumber toDateStringWithFormat:DATE_FORMAT];
+            }
+        }
         birthdayLabel.text = birthdayString;
         birthdayLabel.textAlignment = NSTextAlignmentRight;
         cell.accessoryView = birthdayLabel;
+        
     }
     
 
