@@ -10,11 +10,13 @@
 #import "SWAddClotheViewController.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
 #import "SWWardrobeCollectionViewCell.h"
+#import "SWDressTimeViewController.h"
 
 @interface SWWardrobeDetailViewController ()
 @property(nonatomic, strong) IBOutlet UICollectionView *wardrobeCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *contentWardrobeView;
 @property (nonatomic, strong) NSMutableArray *data;
+@property (weak, nonatomic) IBOutlet UILabel *noClotheLabel;
 
 @end
 
@@ -41,7 +43,7 @@
     LXReorderableCollectionViewFlowLayout *layout = [[LXReorderableCollectionViewFlowLayout alloc] init];
     [layout setMinimumLineSpacing:0];
     [layout setMinimumInteritemSpacing:0];
-    layout.itemSize = CGSizeMake(70,90);//SCREEN_WIDTH_LANDSCAPE/2, self.contentWardrobeView.bounds.size.height/5);
+    layout.itemSize = CGSizeMake(70,90);
     [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     self.wardrobeCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH_PORTRAIT,self.contentWardrobeView.bounds.size.height ) collectionViewLayout:layout];
@@ -53,6 +55,7 @@
     [self.wardrobeCollectionView registerNib:[UINib nibWithNibName:@"SWWardrobeCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:Cell];
     
     [self.contentWardrobeView addSubview:self.wardrobeCollectionView];
+    self.noClotheLabel.hidden = YES;
 }
 
 - (void)initData{
@@ -71,14 +74,30 @@
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              
-             self.data = (NSMutableArray *)responseObject;
-             [self.wardrobeCollectionView reloadData];
-             NSLog(@"WARDROBE JSON: %@", responseObject);
+             if ([responseObject isKindOfClass:[NSArray class]]) {
+                 self.data = (NSMutableArray *)responseObject;
+             }
+             
+             NSDictionary *dict;
+             if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                 dict = (NSDictionary *)responseObject;
+             }
+             
+             NSInteger code = [[dict objectForKey:@"code"] integerValue];
+             
+             if (code == 0 && self.data.count == 0) {
+                 self.noClotheLabel.hidden = NO;
+                 
+             } else {
+                 self.noClotheLabel.hidden = YES;
+                 [self.wardrobeCollectionView reloadData];
+                 self.title = [[self.data objectAtIndex:0] objectForKey:@"category"];
+                 NSLog(@"WARDROBE JSON: %@", responseObject);
+             }
              [[SWUtil sharedUtil] hideLoadingView];
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
-             NSLog(@"Error: %@", error);
              [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
@@ -116,6 +135,7 @@
     SWWardrobeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     NSString *imageLink = [NSString stringWithFormat:@"%@%@",URL_IMAGE,[[self.data objectAtIndex:indexPath.row] objectForKey:@"image"]];
+    cell.imageLink = [[self.data objectAtIndex:indexPath.row] objectForKey:@"image"];
     [cell.clotheImageView sd_setImageWithURL:[NSURL URLWithString:imageLink]];
     return cell;
 }
@@ -129,13 +149,47 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    SWAddClotheViewController *detailVC = [[SWAddClotheViewController alloc] init];
-    
-    NSString *wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
-    [[NSUserDefaults standardUserDefaults] setObject:wardrobeId forKey:@"wardrobeid"];
-    
-    detailVC.typeClothe = detailClothe;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    switch (self.typeWardrobe) {
+        case detail:
+        {
+            SWAddClotheViewController *detailVC = [[SWAddClotheViewController alloc] init];
+            NSString *wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
+            [[NSUserDefaults standardUserDefaults] setObject:wardrobeId forKey:@"wardrobeid"];
+            detailVC.typeClothe = detailClothe;
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }
+            break;
+        case choose:
+        {
+            SWWardrobeCollectionViewCell *cell = (SWWardrobeCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+            NSArray *viewControllers = [self.navigationController viewControllers];
+            for (UIViewController *controller in viewControllers) {
+                if ([controller isKindOfClass:[SWDressTimeViewController class]]) {
+                    SWDressTimeViewController *dressTimeVC = (SWDressTimeViewController *)controller;
+                    switch (dressTimeVC.typeChooseClothe) {
+                        case skirt:
+                            dressTimeVC.skirtImageLink = cell.imageLink;
+                            break;
+                        case jean:
+                            dressTimeVC.jeanImageLink = cell.imageLink;
+                            break;
+                        case shoe:
+                            dressTimeVC.shoeImageLink = cell.imageLink;
+                            break;
+                        default:
+                            break;
+                    }
+                    [self.navigationController popToViewController:controller animated:YES];
+                    break;
+                }
+            }
+            
+        }
+            
+        default:
+            break;
+    }
+  
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

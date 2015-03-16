@@ -36,6 +36,18 @@ typedef enum {
     detailClothe
 }TypeClothe;
 
+typedef enum {
+    skirt = 0,
+    jean,
+    shoe
+}TypeChooseClothe;
+
+
+typedef enum {
+    detail = 0,
+    choose
+}TypeWardrobe;
+
 /*URL*/
 
 #define URL_BASE @"http://localhost/LuaChonTrangPhuc/index.php/api/"
@@ -45,6 +57,7 @@ typedef enum {
 #define URL_UPDATE_USER @"users/api_updateUser"
 #define URL_WARDROBE_CATEGORY @"wardrobe/api_WardrobeByCategory"
 #define URL_WARDROBE_DETAIL @"wardrobe/api_WardrobeDetail"
+#define URL_HISTORY @"history/api_insertHistory"
 
 /*TITLE*/
 #define Register_Title @"Đăng ký"

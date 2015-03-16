@@ -236,7 +236,8 @@
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Cập nhật thông tin thành công" delegate:nil];
-                  [self.registerTableView reloadData];
+                  [SWUtil saveUserInfor:responseObject];
+                  [self.registerTableView reloadData];                  
                   [[SWUtil sharedUtil] hideLoadingView];
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

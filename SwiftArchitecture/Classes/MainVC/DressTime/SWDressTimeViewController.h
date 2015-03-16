@@ -10,5 +10,9 @@
 #import "SWWeatherView.h"
 
 @interface SWDressTimeViewController : SWBaseViewController<UIScrollViewDelegate, SWWeatherViewDelegate>
+@property (assign, nonatomic) TypeChooseClothe typeChooseClothe;
+@property (strong, nonatomic) NSString *skirtImageLink;
+@property (strong, nonatomic) NSString *jeanImageLink;
+@property (strong, nonatomic) NSString *shoeImageLink;
 
 @end

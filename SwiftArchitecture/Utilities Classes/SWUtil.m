@@ -122,7 +122,7 @@
 }
 
 + (NSNumber *)convertDateToNumber:(NSDate *)date {
-    long long milliseconds = (long long)([date timeIntervalSince1970]*1000.0);
+    long long milliseconds = (long long)([date timeIntervalSince1970]);
     return [NSNumber numberWithLongLong:milliseconds];
 }
 
@@ -130,7 +130,7 @@
     NSDateFormatter *objDateformat = [[NSDateFormatter alloc] init];
     [objDateformat setDateFormat:format];
     [objDateformat setTimeZone:[NSTimeZone systemTimeZone]];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:dateValue/1000.0];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:dateValue];
     NSString *stringFromDate = [objDateformat stringFromDate:date];
     
     return stringFromDate;
@@ -140,6 +140,35 @@
     
     UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"Đóng" otherButtonTitles: nil];
     [alrt show];
+}
+
++ (void)saveUserInfor:(id)responseObject{
+    
+    NSString *email = [[responseObject objectAtIndex:0] objectForKey:@"email"];
+    NSString *firstname = [[responseObject objectAtIndex:0] objectForKey:@"firstname"];
+    NSString *lastname = [[responseObject objectAtIndex:0] objectForKey:@"lastname"];
+    NSString *avatar = [[responseObject objectAtIndex:0] objectForKey:@"avatar"];
+    long long birthday = [[[responseObject objectAtIndex:0] objectForKey:@"birthday"] longLongValue];
+    NSInteger gender = [[[responseObject objectAtIndex:0] objectForKey:@"gender"] integerValue];
+    NSString *height = [[responseObject objectAtIndex:0] objectForKey:@"height"];
+    NSString *weight = [[responseObject objectAtIndex:0] objectForKey:@"weight"];
+    NSString *userid = [[responseObject objectAtIndex:0] objectForKey:@"userid"];
+    NSString *telephone = [[responseObject objectAtIndex:0] objectForKey:@"telephone"];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:email forKey:@"email"];
+    [[NSUserDefaults standardUserDefaults] setObject:firstname forKey:@"firstname"];
+    [[NSUserDefaults standardUserDefaults] setObject:lastname forKey:@"lastname"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLongLong:birthday] forKey:@"birthday"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:gender] forKey:@"gender"];
+    [[NSUserDefaults standardUserDefaults] setObject:height forKey:@"height"];
+    [[NSUserDefaults standardUserDefaults] setObject:weight forKey:@"weight"];
+    [[NSUserDefaults standardUserDefaults] setObject:userid forKey:@"userid"];
+    [[NSUserDefaults standardUserDefaults] setObject:telephone forKey:@"telephone"];
+    
+    if (([avatar length ]> 0)) {
+        [[NSUserDefaults standardUserDefaults] setObject:avatar forKey:@"avatar"];
+    }
+
 }
 
 @end

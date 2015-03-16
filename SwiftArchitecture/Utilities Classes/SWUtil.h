@@ -53,4 +53,6 @@
  */
 
 + (void)showConfirmAlert:(NSString *)title message:(NSString *)message delegate:(id)delegate;
++ (void)saveUserInfor:(id)responseObject;
+
 @end

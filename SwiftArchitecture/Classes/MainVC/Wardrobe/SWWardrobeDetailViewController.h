@@ -11,5 +11,6 @@
 @interface SWWardrobeDetailViewController : SWBaseViewController<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property(assign, nonatomic) NSInteger categoryId;
+@property(assign, nonatomic) TypeWardrobe typeWardrobe;
 
 @end
