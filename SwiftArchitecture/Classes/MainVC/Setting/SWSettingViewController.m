@@ -53,7 +53,12 @@
     
     self.nameLabel.text = [NSString stringWithFormat:@"%@ %@",firstname, lastname];
     self.emailLabel.text = email;
-    [self.imageUserImageView sd_setImageWithURL:[NSURL URLWithString:avatarLink]];
+    
+    if ([avatar length] > 0) {
+        [self.imageUserImageView sd_setImageWithURL:[NSURL URLWithString:avatarLink]];
+    } else{
+        self.imageUserImageView.image = [UIImage imageNamed:@"user_female.png"];
+    }
 }
 
 - (void)takePhoto{

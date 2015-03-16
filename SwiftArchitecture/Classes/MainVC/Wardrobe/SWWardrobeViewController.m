@@ -112,6 +112,7 @@
 {
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     SWWardrobeDetailViewController *wardrobeDetailVC = [[SWWardrobeDetailViewController alloc] init];
+    wardrobeDetailVC.typeWardrobe = detail;
     wardrobeDetailVC.title = cell.textLabel.text;
     
     switch (indexPath.section) {

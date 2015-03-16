@@ -13,11 +13,14 @@
                 <outlet property="dateTimeLabel" destination="o5M-Wu-4zG" id="J53-fV-4Sp"/>
                 <outlet property="descriptionLabel" destination="plU-Ot-HcA" id="908-Jj-7aS"/>
                 <outlet property="jeanButton" destination="MXu-k8-EPt" id="3sV-Cc-lsU"/>
+                <outlet property="jeanImageView" destination="ILV-nd-3fH" id="gCz-Ik-zFR"/>
                 <outlet property="shoeButton" destination="yS1-0F-bcr" id="CZh-0f-nMu"/>
+                <outlet property="shoeImageView" destination="Dil-Fy-jbl" id="tpI-cq-MVz"/>
                 <outlet property="skirtButton" destination="Ju3-1y-PN0" id="lhg-Wh-WwU"/>
+                <outlet property="skirtImageView" destination="aYu-bM-W6a" id="zTy-VM-CvV"/>
                 <outlet property="temperatureLabel" destination="hBn-7Z-OVo" id="YJo-BT-lCX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="weatherLabel" destination="INT-Md-ct4" id="e1d-oc-pHB"/>
+                <outlet property="weatherImageView" destination="INT-Md-ct4" id="YZ3-U5-otA"/>
                 <outlet property="weatherScrollView" destination="w1o-ZE-J8l" id="ccy-N2-c9o"/>
             </connections>
         </placeholder>
@@ -97,21 +100,8 @@
                     <rect key="frame" x="10" y="200" width="300" height="240"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dek-Kc-PiW">
-                            <rect key="frame" x="10" y="203" width="120" height="37"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.96470588239999999" green="0.36470588240000001" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                            <state key="normal" title="Chọn lại">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="chooseAgainButton:" destination="-1" eventType="touchUpInside" id="EYP-63-UbD"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wnY-c0-FNk">
-                            <rect key="frame" x="170" y="203" width="120" height="37"/>
+                            <rect key="frame" x="90" y="181" width="120" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.96470588239999999" green="0.36470588240000001" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
@@ -126,33 +116,45 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ju3-1y-PN0">
                             <rect key="frame" x="5" y="36" width="90" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="9.jpg">
+                            <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="skirtButton:" destination="-1" eventType="touchUpInside" id="xvP-Ah-Vl7"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aYu-bM-W6a">
+                            <rect key="frame" x="5" y="36" width="90" height="120"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MXu-k8-EPt">
                             <rect key="frame" x="105" y="36" width="90" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="11.jpg">
+                            <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="jeanButton:" destination="-1" eventType="touchUpInside" id="tRZ-By-vvJ"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ILV-nd-3fH">
+                            <rect key="frame" x="105" y="36" width="90" height="120"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yS1-0F-bcr">
                             <rect key="frame" x="205" y="36" width="90" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="12.jpg">
+                            <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="shoeButton:" destination="-1" eventType="touchUpInside" id="75e-gg-IGU"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Dil-Fy-jbl">
+                            <rect key="frame" x="205" y="36" width="90" height="120"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.82745098039215681" green="0.94901960784313721" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
@@ -164,9 +166,6 @@
         </view>
     </objects>
     <resources>
-        <image name="11.jpg" width="213" height="237"/>
-        <image name="12.jpg" width="277" height="182"/>
-        <image name="9.jpg" width="231" height="219"/>
         <image name="clouds_gray.png" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

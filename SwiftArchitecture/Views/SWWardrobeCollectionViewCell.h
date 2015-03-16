@@ -10,5 +10,5 @@
 
 @interface SWWardrobeCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *clotheImageView;
-
+@property (weak, nonatomic) NSString *imageLink;
 @end
