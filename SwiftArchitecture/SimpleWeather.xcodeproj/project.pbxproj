@@ -16,6 +16,7 @@
 		041AE9D21AB18F390086B0B2 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 041AE9C71AB18F390086B0B2 /* AFURLRequestSerialization.m */; };
 		041AE9D31AB18F390086B0B2 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 041AE9C91AB18F390086B0B2 /* AFURLResponseSerialization.m */; };
 		041AE9D41AB18F390086B0B2 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 041AE9CB1AB18F390086B0B2 /* AFURLSessionManager.m */; };
+		041B5E461AB97B580082EAEF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041B5E451AB97B580082EAEF /* AssetsLibrary.framework */; };
 		043764031AA82CAF00C2E187 /* Icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = 043763FF1AA82CAF00C2E187 /* Icon58.png */; };
 		043764041AA82CAF00C2E187 /* Icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 043764001AA82CAF00C2E187 /* Icon80.png */; };
 		043764051AA82CAF00C2E187 /* Icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 043764011AA82CAF00C2E187 /* Icon120.png */; };
@@ -463,6 +464,7 @@
 		041AE9C91AB18F390086B0B2 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		041AE9CA1AB18F390086B0B2 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		041AE9CB1AB18F390086B0B2 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		041B5E451AB97B580082EAEF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		043763FF1AA82CAF00C2E187 /* Icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon58.png; sourceTree = "<group>"; };
 		043764001AA82CAF00C2E187 /* Icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon80.png; sourceTree = "<group>"; };
 		043764011AA82CAF00C2E187 /* Icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon120.png; sourceTree = "<group>"; };
@@ -998,6 +1000,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041B5E461AB97B580082EAEF /* AssetsLibrary.framework in Frameworks */,
 				868735C61831A1E700C0CCFA /* CoreGraphics.framework in Frameworks */,
 				868735C81831A1E700C0CCFA /* UIKit.framework in Frameworks */,
 				868735C41831A1E700C0CCFA /* Foundation.framework in Frameworks */,
@@ -1962,6 +1965,7 @@
 		868735C21831A1E700C0CCFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				041B5E451AB97B580082EAEF /* AssetsLibrary.framework */,
 				868735C31831A1E700C0CCFA /* Foundation.framework */,
 				868735C51831A1E700C0CCFA /* CoreGraphics.framework */,
 				868735C71831A1E700C0CCFA /* UIKit.framework */,

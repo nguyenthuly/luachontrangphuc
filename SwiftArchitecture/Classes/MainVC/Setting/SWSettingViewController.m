@@ -10,6 +10,7 @@
 #import "SWRegisterViewController.h"
 #import "SWLoginViewController.h"
 #import "SWAboutViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface SWSettingViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageUserImageView;
@@ -90,7 +91,8 @@
 
 - (IBAction)userButton:(id)sender {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Camera cancelButton:OK_Button otherButton:nil tag:3 delegate:self];
+        [self chooseFromLibrary];
+        //[SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Camera cancelButton:OK_Button otherButton:nil tag:3 delegate:self];
     }else{
 
         UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
@@ -135,6 +137,45 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     self.imageUserImageView.image = chosenImage;
+    
+    NSURL *refURL = [info valueForKey:UIImagePickerControllerReferenceURL];
+    
+    // define the block to call when we get the asset based on the url (below)
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
+    {
+        ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
+        NSLog(@"[imageRep filename] : %@", [imageRep filename]);
+        
+        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.5);
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_UPLOAD_AVARTAR];
+        
+        if (imageData) {
+            NSDictionary *parameters = @{@"userid": [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]};
+            
+            AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
+            
+            AFHTTPRequestOperation *op = [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                [formData appendPartWithFileData:imageData name:@"avatar" fileName:[imageRep filename] mimeType:@"image/jpeg"];
+            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [[SWUtil sharedUtil] hideLoadingView];
+                
+                NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@ ***** %@", operation.responseString, error);
+                [SWUtil showConfirmAlert:@"Lỗi!" message:[error localizedDescription] delegate:nil];
+                [[SWUtil sharedUtil] hideLoadingView];
+            }];
+            [op start];
+        }
+    };
+    
+    // get the asset library and fetch the asset based on the ref url (pass in block above)
+    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+    [assetslibrary assetForURL:refURL
+                   resultBlock:resultblock
+                  failureBlock:nil];
+    
+    
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }

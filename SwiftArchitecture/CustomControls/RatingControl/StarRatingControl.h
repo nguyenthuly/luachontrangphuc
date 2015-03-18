@@ -17,7 +17,7 @@ typedef void (^EditingDidEndBlock)(NSUInteger rating);
 #pragma mark - Getters and Setters
 
 @property (nonatomic, assign) NSInteger maxRating;
-@property (nonatomic, assign) float rating;
+@property (nonatomic, assign) NSInteger rating;
 @property (nonatomic, readwrite) NSUInteger starFontSize;
 @property (nonatomic, readwrite) NSUInteger starWidthAndHeight;
 @property (nonatomic, readwrite) NSUInteger starSpacing;
@@ -43,7 +43,7 @@ typedef void (^EditingDidEndBlock)(NSUInteger rating);
 - (id)initWithLocation:(CGPoint)location
             emptyColor:(UIColor *)emptyColor
             solidColor:(UIColor *)solidColor
-         initialRating:(float)initialRating
+         initialRating:(NSInteger)initialRating
           andMaxRating:(NSInteger)maxRating;
 
 /**
@@ -71,7 +71,7 @@ typedef void (^EditingDidEndBlock)(NSUInteger rating);
 - (id)initWithLocation:(CGPoint)location
             emptyImage:(UIImage *)emptyImageOrNil
             solidImage:(UIImage *)solidImageOrNil
-         initialRating:(float)initialRating
+         initialRating:(NSInteger)initialRating
           andMaxRating:(NSInteger)maxRating;
 
 
