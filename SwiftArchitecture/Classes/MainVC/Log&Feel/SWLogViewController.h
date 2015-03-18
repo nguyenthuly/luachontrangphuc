@@ -9,5 +9,5 @@
 #import "SWBaseViewController.h"
 
 @interface SWLogViewController : SWBaseViewController
-
+@property (nonatomic, strong) NSString *historyId;
 @end

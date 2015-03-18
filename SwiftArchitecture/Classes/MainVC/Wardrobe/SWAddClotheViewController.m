@@ -8,10 +8,11 @@
 
 #import "SWAddClotheViewController.h"
 #import "SWUtil.h"
-
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface SWAddClotheViewController (){
     NSMutableArray *tableViewArr;
+    NSString *imageNameStr;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
@@ -249,24 +250,47 @@
                         delegate:self];
 
     }else{
-        [SWUtil showConfirmAlert:Title_Alert
-                         message:Message_Alert
-                    cancelButton:Cancel
-                     otherButton:Yes
-                             tag:0
-                        delegate:self];
+        
+        [[SWUtil sharedUtil] showLoadingView];
+        NSData *imageData = UIImageJPEGRepresentation(self.photoImageView.image, 0.5);
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_ADD_WARDROBE];
+        
+        if (imageData) {
+            NSDictionary *parameters = @{@"userid": [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"],
+                                         @"name":self.nameTextField.text,
+                                         @"category":self.categoryLabel.text,
+                                         @"color":self.colorLabel.text,
+                                         @"size":self.sizeLabel.text,
+                                         @"material":self.materialLabel.text};
+            
+            AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
+            
+            AFHTTPRequestOperation *op = [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                [formData appendPartWithFileData:imageData name:@"image" fileName:imageNameStr mimeType:@"image/jpeg"];
+            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [[SWUtil sharedUtil] hideLoadingView];
+                NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@ ***** %@", operation.responseString, error);
+                [SWUtil showConfirmAlert:@"Lỗi!" message:[error localizedDescription] delegate:nil];
+                [[SWUtil sharedUtil] hideLoadingView];
+            }];
+            [op start];
+        }
+
 
     }
     
 }
 - (IBAction)addButton:(id)sender {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [SWUtil showConfirmAlert:Title_Alert_Validate
-                         message:Message_Camera
-                    cancelButton:OK_Button
-                     otherButton:nil
-                             tag:3
-                        delegate:self];
+//        [SWUtil showConfirmAlert:Title_Alert_Validate
+//                         message:Message_Camera
+//                    cancelButton:OK_Button
+//                     otherButton:nil
+//                             tag:3
+//                        delegate:self];
+        [self chooseFromLibrary];
     }else {
         UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
                                                                      delegate:self
@@ -414,6 +438,23 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     self.photoImageView.image = chosenImage;
+    
+    NSURL *refURL = [info valueForKey:UIImagePickerControllerReferenceURL];
+    
+    // define the block to call when we get the asset based on the url (below)
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
+    {
+        ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
+        NSLog(@"[imageRep filename] : %@", [imageRep filename]);
+        imageNameStr = [imageRep filename];
+        };
+    
+    // get the asset library and fetch the asset based on the ref url (pass in block above)
+    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+    [assetslibrary assetForURL:refURL
+                   resultBlock:resultblock
+                  failureBlock:nil];
+    
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }

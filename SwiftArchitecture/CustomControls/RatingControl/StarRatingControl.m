@@ -52,7 +52,7 @@ static const NSString *kDefaultSolidChar = @"★";
     [self setNeedsDisplay];
 }
 
-- (void)setRating:(float)rating
+- (void)setRating:(NSInteger)rating
 {
     _rating = (rating < 0) ? 0 : rating;
     _rating = (rating > _maxRating) ? _maxRating : rating;
@@ -103,7 +103,7 @@ static const NSString *kDefaultSolidChar = @"★";
 - (id)initWithLocation:(CGPoint)location
             emptyImage:(UIImage *)emptyImageOrNil
             solidImage:(UIImage *)solidImageOrNil
-         initialRating:(float)initialRating
+         initialRating:(NSInteger)initialRating
           andMaxRating:(NSInteger)maxRating
 {
     return [self initWithLocation:location
@@ -119,7 +119,7 @@ static const NSString *kDefaultSolidChar = @"★";
 - (id)initWithLocation:(CGPoint)location
             emptyColor:(UIColor *)emptyColor
             solidColor:(UIColor *)solidColor
-         initialRating:(float)initialRating
+         initialRating:(NSInteger)initialRating
           andMaxRating:(NSInteger)maxRating
 {
     return [self initWithLocation:location
@@ -245,7 +245,7 @@ static const NSString *kDefaultSolidChar = @"★";
                       solidImage:(UIImage *)solidImageOrNil
                       emptyColor:(UIColor *)emptyColor
                       solidColor:(UIColor *)solidColor
-                   initialRating:(float)initialRating
+                   initialRating:(NSInteger)initialRating
                     andMaxRating:(NSInteger)maxRating
 {
     _respondsToTranslatesAutoresizingMaskIntoConstraints = [self respondsToSelector:@selector(translatesAutoresizingMaskIntoConstraints)];
@@ -289,7 +289,7 @@ static const NSString *kDefaultSolidChar = @"★";
             solidImage:(UIImage *)solidImageOrNil
             emptyColor:(UIColor *)emptyColor
             solidColor:(UIColor *)solidColor
-         initialRating:(float)initialRating
+         initialRating:(NSInteger)initialRating
           andMaxRating:(NSInteger)maxRating
 {
     if (self = [self initWithFrame:CGRectMake(location.x,
@@ -311,7 +311,7 @@ static const NSString *kDefaultSolidChar = @"★";
 - (id)initWithLocation:(CGPoint)location
             emptyImage:(UIImage *)emptyImageOrNil
             solidImage:(UIImage *)solidImageOrNil
-         initialRating:(float)initialRating
+         initialRating:(NSInteger)initialRating
             emptyColor:(UIColor *)emptyColor
             solidColor:(UIColor *)solidColor
           andMaxRating:(NSInteger)maxRating

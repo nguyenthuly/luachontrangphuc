@@ -58,6 +58,11 @@ typedef enum {
 #define URL_WARDROBE_CATEGORY @"wardrobe/api_WardrobeByCategory"
 #define URL_WARDROBE_DETAIL @"wardrobe/api_WardrobeDetail"
 #define URL_HISTORY @"history/api_insertHistory"
+#define URL_LIST_HISTORY @"history/api_allHistory"
+#define URL_HISTORYID @"history/api_historyByHistoryId"
+#define URL_FEEL @"history/api_updateHistory"
+#define URL_UPLOAD_AVARTAR @"users/api_updateAvatar"
+#define URL_ADD_WARDROBE @"wardrobe/api_insertWardrobe"
 
 /*TITLE*/
 #define Register_Title @"Đăng ký"
@@ -114,6 +119,7 @@ typedef enum {
 
 #define Date_Format @"eee dd/MM/yyyy"
 #define Time_Format @"hh:mm a"
+#define DateTime_Format @"hh:mm a eee dd/MM/yyyy"
 
 /*IMAGE*/
 #define Back_Button @"back_green.png"

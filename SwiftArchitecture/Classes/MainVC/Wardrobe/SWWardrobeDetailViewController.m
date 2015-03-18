@@ -25,14 +25,13 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[SWUtil appDelegate] hideTabbar:YES];
-    //[[SWUtil sharedUtil] showLoadingView];
+    [self initData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initUI];
-    [self initData];
 }
 
 - (void)initUI{

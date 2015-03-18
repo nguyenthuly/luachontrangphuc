@@ -9,9 +9,10 @@
 #import "SWFeelViewController.h"
 #import "SWUtil.h"
 #import "StarRatingControl.h"
-#import "SWListLogViewController.h"
+#import "SWLogViewController.h"
 
 #define Message_Alert_Feel @"Cảm ơn đánh giá của bạn!"
+#define Message_Feel @"Mời bạn nhập cảm nhận về bộ trang phục!"
 #define OK_Button @"OK"
 
 @interface SWFeelViewController (){
@@ -20,6 +21,9 @@
     StarRatingControl *shoeRating;
 }
 @property (weak, nonatomic) IBOutlet UITextField *feelTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *skirtImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *jeanImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *shoeImageView;
 
 - (IBAction)sendButtonTapped:(id)sender;
 
@@ -38,28 +42,24 @@
 - (void)initUI{
     self.title = Feel_Title;
     [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];
-    self.feelTextField.layer.masksToBounds = YES;
-    self.feelTextField.layer.cornerRadius = 5.0;
-    self.feelTextField.layer.borderWidth = 1.0;
-    self.feelTextField.layer.borderColor = [[UIColor colorWithHex:Gray_Color alpha:1.0] CGColor];
     
     //Init Rating View
    
     skirtRating = [[StarRatingControl alloc] initWithLocation:CGPointMake(130, 175)
                                                                       emptyColor:[UIColor colorWithHex:Red_Color alpha:1.0]
                                                                       solidColor:[UIColor colorWithHex:Red_Color alpha:1.0]
-                                                                   initialRating:2
+                                                                   initialRating:[[self.logData objectForKey:@"skirtRate"] integerValue]
                                                                     andMaxRating:5];
     
     jeanRating = [[StarRatingControl alloc] initWithLocation:CGPointMake(130, 223)
                                                                      emptyColor:[UIColor colorWithHex:Red_Color alpha:1.0]
                                                                      solidColor:[UIColor colorWithHex:Red_Color alpha:1.0]
-                                                                           initialRating:2
+                                                                           initialRating:[[self.logData objectForKey:@"jeanRate"] integerValue]
                                                                             andMaxRating:5];
     shoeRating = [[StarRatingControl alloc] initWithLocation:CGPointMake(130, 271)
                                                                      emptyColor:[UIColor colorWithHex:Red_Color alpha:1.0]
                                                                      solidColor:[UIColor colorWithHex:Red_Color alpha:1.0]
-                                                                           initialRating:2
+                                                                           initialRating:[[self.logData objectForKey:@"shoeRate"] integerValue]
                                                                             andMaxRating:5];
     [self.view addSubview:skirtRating];
     [self.view addSubview:jeanRating];
@@ -68,6 +68,10 @@
 
 - (void)initData{
     
+    [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:self.skirtImage]];
+    [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:self.jeanImage]];
+    [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:self.shoeImage]];
+    self.feelTextField.text = [self.logData objectForKey:@"feel"];
 }
 
 - (void)backButtonTapped:(id)sender{
@@ -75,7 +79,39 @@
 }
 
 - (IBAction)sendButtonTapped:(id)sender {
-    [SWUtil showConfirmAlert:nil message:Message_Alert_Feel cancelButton:OK_Button otherButton:nil tag:0 delegate:self];
+    
+    if ([self.feelTextField.text length] > 0) {
+        [self.view endEditing:YES];
+        [[SWUtil sharedUtil] showLoadingView];
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_FEEL];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        NSDictionary *parameters = @{@"historyid":self.historyId,
+                                     @"skirtRate":[NSNumber numberWithInteger:skirtRating.rating],
+                                     @"jeanRate":[NSNumber numberWithInteger:jeanRating.rating],
+                                     @"shoeRate":[NSNumber numberWithInteger:shoeRating.rating],
+                                     @"feel":self.feelTextField.text};
+        
+        [manager POST:url
+           parameters:parameters
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  NSLog(@"Log JSON: %@", responseObject);
+                  [SWUtil showConfirmAlert:nil message:Message_Alert_Feel cancelButton:OK_Button otherButton:nil tag:0 delegate:self];
+                  [[SWUtil sharedUtil] hideLoadingView];
+                  
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  
+                  NSLog(@"Error: %@", error);
+                  [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Lỗi" delegate:nil];
+                  [[SWUtil sharedUtil] hideLoadingView];
+              }];
+
+    } else {
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:Message_Feel cancelButton:OK_Button otherButton:nil tag:1 delegate:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -141,7 +177,7 @@
         if (buttonIndex == 0) {
             NSArray *viewControllers = [self.navigationController viewControllers];
             for (UIViewController *controller in viewControllers) {
-                if ([controller isKindOfClass:[SWListLogViewController class]]) {
+                if ([controller isKindOfClass:[SWLogViewController class]]) {
                     [self.navigationController popToViewController:controller animated:YES];
                     break;
                 }
