@@ -153,8 +153,13 @@
         {
             SWAddClotheViewController *detailVC = [[SWAddClotheViewController alloc] init];
             NSString *wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
+            NSString *category = [[self.data objectAtIndex:indexPath.row] objectForKey:@"category"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:category forKey:@"category"];
             [[NSUserDefaults standardUserDefaults] setObject:wardrobeId forKey:@"wardrobeid"];
+            detailVC.categoryId = self.categoryId;
             detailVC.typeClothe = detailClothe;
+            detailVC.categoryLabel.text = self.title;
             [self.navigationController pushViewController:detailVC animated:YES];
         }
             break;

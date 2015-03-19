@@ -70,8 +70,8 @@
             [self setRightButtonWithImage:Check_Mark highlightedImage:nil target:self action:@selector(checkButtonTapped:)];
 
             if (self.typeCategory == addClotherDetail) {
-                self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
                 self.categoryImageView.hidden = YES;
+                //self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
             }
             [self checkSizeLabel];
 
@@ -261,7 +261,8 @@
                                          @"category":self.categoryLabel.text,
                                          @"color":self.colorLabel.text,
                                          @"size":self.sizeLabel.text,
-                                         @"material":self.materialLabel.text};
+                                         @"material":self.materialLabel.text,
+                                         @"categoryid":[NSNumber numberWithInteger:self.categoryId]};
             
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
             
@@ -380,7 +381,12 @@
             self.colorLabel.text = cell.textLabel.text;
             break;
         case category:
+        {
             self.categoryLabel.text = cell.textLabel.text;
+            if (self.typeClothe == addClother) {
+                self.categoryId = indexPath.row + 1;
+            }
+        }
             break;
         case size:
             self.sizeLabel.text = cell.textLabel.text;

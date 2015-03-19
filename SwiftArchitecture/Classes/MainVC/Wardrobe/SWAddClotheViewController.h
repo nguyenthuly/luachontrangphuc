@@ -12,7 +12,7 @@
 @property (nonatomic, assign) TableViewType typeTableView;
 @property (nonatomic, assign) TypeCategory typeCategory;
 @property (nonatomic, assign) TypeClothe typeClothe;
-
+@property (nonatomic, assign) NSInteger categoryId;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 
 @end
