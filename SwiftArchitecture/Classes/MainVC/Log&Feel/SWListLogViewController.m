@@ -15,11 +15,15 @@
 
 @end
 
-@implementation SWListLogViewController
+@implementation SWListLogViewController{
+    BOOL _endOfRespond;
+
+}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [[SWUtil appDelegate] hideTabbar:NO];    [self initData];
+    [[SWUtil appDelegate] hideTabbar:NO];
+    [self initData];
 
 }
 
@@ -32,10 +36,14 @@
 
 - (void)initUI{
     self.title = Log_Title;
+    _endOfRespond = NO;
 }
 
 - (void)initData{
     
+    if (!self.listLogArr) {
+        self.listLogArr = [[NSMutableArray alloc] initWithCapacity:10];
+    }
     [[SWUtil sharedUtil] showLoadingView];
     NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_LIST_HISTORY];
     
@@ -43,15 +51,37 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSDictionary *parameters = @{@"userid": [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]};
+    NSDictionary *parameters = @{@"userid": [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"],
+                                  @"offset":[NSNumber numberWithInteger:self.listLogArr.count]};
     [manager GET:url
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"List Log JSON: %@", responseObject);
              if ([responseObject isKindOfClass:[NSArray class]]) {
-                 self.listLogArr =  (NSMutableArray *)responseObject;
-                 [self.listLogTableView reloadData];
+                 NSArray *result = (NSArray *)responseObject;
+                 for (int i = 0; i < result.count; i++) {
+                     NSDictionary *dict = [result objectAtIndex:i];
+                     if (![self.listLogArr containsObject:dict]) {
+                         [self.listLogArr addObject:dict];
+                     }
+                 }
+                 _endOfRespond = NO;
              }
+             
+             NSDictionary *dict;
+             if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                 dict = (NSDictionary *)responseObject;
+                 _endOfRespond = YES;
+             }
+             
+             NSInteger code = [[dict objectForKey:@"code"] integerValue];
+             
+             if (code == 0 && self.listLogArr.count == 0) {
+                 _endOfRespond = YES;
+             } else {
+                [self.listLogTableView reloadData];
+             }
+             
              [[SWUtil sharedUtil] hideLoadingView];
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -96,6 +126,12 @@
     logVC.historyId = [[self.listLogArr objectAtIndex:indexPath.row] objectForKey:@"historyid"];
     [self.navigationController pushViewController:logVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == self.listLogArr.count - 1  && !_endOfRespond){
+        [self initData];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -153,11 +153,11 @@ typedef enum {
 /*ARRAY*/
 #define Clothes_Arr @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần/Chân váy",@"Váy",@"Giày thể thao",@"Giày hài",@"Giày bốt"]
 #define Clothes_IconArr @[@"shirt_red.png",@"t_shirt_red.png",@"coat_red.png",@"jacket_red.png",@"trousers_red.png",@"skirt_red.png",@"trainers_red.png",@"shoe_woman_red.png",@"winter_boots_red.png"]
-#define Color_Arr @[@"Đỏ",@"Xanh da trời",@"Tím",@"Vàng",@"Hồng",@"Đen",@"Cam",@"Nâu",@"Xanh lá cây",@"Xanh nõn chuối",@"Hồng đỏ"]
+#define Color_Arr @[@"Đỏ",@"Cam",@"Hồng",@"Vàng",@"Trắng",@"Kem",@"Đen",@"Xám",@"Nâu",@"Ghi",@"Bạc",@"Xanh"]
 #define Size_Clothes_Arr @[@"S",@"M",@"L",@"XL",@"XXL"]
 #define Size_Shoes_Arr @[@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44"]
 #define Size_Jean_Arr @[@"26",@"27",@"28",@"29",@"30",@"31",@"32"]
-#define Material_Clothes_Arr @[@"Vải",@"Len",@"Thun",@"Gió", @"Nỉ", @"Bò", @"Da", @"Lông"]
+#define Material_Clothes_Arr @[@"Vải",@"Bò",@"Da",@"Cotton",@"Len"]
 #define Material_Shoes_Arr @[@"Vải",@"Da"]
 
 
@@ -173,6 +173,8 @@ typedef enum {
 #define Giayhai 8
 #define Giaybot 9
 
+
+/*COLOR*/
 
 #define First_Name 0
 #define Last_Name 1

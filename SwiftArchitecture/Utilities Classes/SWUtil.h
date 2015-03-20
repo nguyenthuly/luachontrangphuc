@@ -54,5 +54,7 @@
 
 + (void)showConfirmAlert:(NSString *)title message:(NSString *)message delegate:(id)delegate;
 + (void)saveUserInfor:(id)responseObject;
++ (NSString *)checkColorId:(NSString *)color;
++ (NSString *)checkMaterialId:(NSString *)material;
 
 @end

@@ -82,7 +82,6 @@
          self.cityLabel.text = [newCondition.locationName capitalizedString];
          NSString *imageStringCurrent = [NSString stringWithFormat:@"%@",[newCondition imageName]];
          self.weatherImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",imageStringCurrent, Gray_Weather]];
-         
          //if didnot select
          city = self.cityLabel.text;
          weatherImage = imageStringCurrent;
@@ -193,6 +192,14 @@
     
 }
 
+- (void)configureHourlyCell:(UITableViewCell *)cell weather:(WXCondition *)weather {
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.text = [self.hourlyFormatter stringFromDate:weather.date];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f°",weather.temperature.floatValue];
+    cell.imageView.image = [UIImage imageNamed:[weather imageName]];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+}
 
 #pragma mark - WeatherViewDelegate
 
@@ -208,7 +215,6 @@
                 weatherImage = optionGrid.imageString;
                 datetime = optionGrid.datetime;
                 description = optionGrid.descrip;
-                
                 
             } else {
                 [optionGrid setGridSelected:NO];
@@ -244,20 +250,39 @@
     [self.navigationController pushViewController:wardrobeVC animated:YES];
 }
 
+- (NSInteger)randomWithMin:(NSInteger)min andMax:(NSInteger)max{
+    NSInteger random = (arc4random() % (max - min + 1)) + min;
+    
+    return random;
+}
+
 - (void)chooseRandom{
     
-    if (temperature < 15) {
-        categorySkirt = 4;
-        categoryJean = 5;
-        categoryShoe = 9;
-    } else if (temperature < 25) {
-        categorySkirt = 2;
-        categoryJean = 5;
-        categoryShoe = 8;
+    self.skirtImageView.hidden = NO;
+    if (temperature < 12) {
+        categoryJean = Quan;
+        categorySkirt = Aokhoac;
+        categoryShoe = Giaybot;
+        
+    } else if (temperature < 18) {
+        categoryJean = Quan;
+        categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
+        categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
+        
     } else {
-        categorySkirt = 2;
-        categoryJean = 5;
-        categoryShoe = 8;
+        categoryJean = [self randomWithMin:Quan andMax:Vay];
+        if (categoryJean == Vay) {
+            categoryShoe = Giayhai;
+            self.skirtImageView.hidden = YES;
+            self.skirtButton.enabled = NO;
+
+        }else {
+            categorySkirt = [self randomWithMin:Aosomi andMax:Aophong];
+            categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
+            self.skirtButton.enabled = YES;
+            self.skirtImageView.hidden = NO;
+
+        }
     }
     
     for (int i = 0; i < 3; i++) {
@@ -278,6 +303,18 @@
     }
 }
 
+- (void)chooseWork{
+    [self chooseRandom];
+}
+
+- (void)chooseGoout{
+    
+}
+
+- (void)chooseParty{
+    
+}
+
 - (void)chooseClothesWithCategoryId:(NSInteger)categoryId withCategory:(TypeChooseClothe)type{
     
     NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_WARDROBE_CATEGORY];
@@ -295,20 +332,16 @@
              if ([responseObject isKindOfClass:[NSArray class]]) {
                  self.data = (NSMutableArray *)responseObject;
              }
-             
              NSDictionary *dict;
              if ([responseObject isKindOfClass:[NSDictionary class]]) {
                  dict = (NSDictionary *)responseObject;
              }
-             
              NSInteger code = [[dict objectForKey:@"code"] integerValue];
              
              if (code == 0 && self.data.count == 0) {
                     //Ko co trang phuc
              } else {
-                 NSInteger max = [self.data count];
-                 NSInteger min = 1;
-                 NSInteger randNum = rand() % (max - min + min);
+                 NSInteger randNum = [self randomWithMin:0 andMax:self.data.count-1];
                  self.linkImage = [[self.data objectAtIndex:randNum] objectForKey:@"image"];
                  switch (type) {
                      case skirt:
@@ -346,9 +379,17 @@
 }
 
 - (IBAction)suggestButton:(id)sender {
+        
+    UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
+                                                                     delegate:self
+                                                            cancelButtonTitle:Cancel_ActionSheet
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles:@"Trang phục đi làm/đi học",@"Trang phục đi chơi thoải mái",@"Trang phục dự tiệc",nil];
+    [addPhotoActionSheet showInView:self.view];
     
-    //[[SWUtil sharedUtil] showLoadingView];
-    [self chooseRandom];
+}
+
+- (void)showView{
     
     if (self.chooseView.hidden) {
         
@@ -373,10 +414,6 @@
 
 - (IBAction)AcceptButton:(id)sender {
     
-    NSLog(@"L1: %@",self.skirtImageLink);
-    NSLog(@"L2: %@",self.jeanImageLink);
-    NSLog(@"L3: %@",self.shoeImageLink);
-    
     [UIView animateWithDuration:.3 animations:^{
         
         self.chooseView.alpha = 0;
@@ -384,6 +421,10 @@
         
         self.chooseView.hidden = YES;
     }];
+    
+    if (![self.skirtImageLink length] > 0) {
+        self.skirtImageLink = @"Khong";
+    }
 
     //insert to History
     userId = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
@@ -417,13 +458,34 @@
 
 }
 
-- (void)configureHourlyCell:(UITableViewCell *)cell weather:(WXCondition *)weather {
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
-    cell.textLabel.text = [self.hourlyFormatter stringFromDate:weather.date];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f°",weather.temperature.floatValue];
-    cell.imageView.image = [UIImage imageNamed:[weather imageName]];
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+
+#pragma mark - ActionSheet
+
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            [self chooseWork];
+            [self showView];
+            break;
+        }
+        case 1:
+        {
+            [self chooseGoout];
+            [self showView];
+        }
+            break;
+        case 2:
+        {
+            [self chooseParty];
+            [self showView];
+        }
+            break;
+        case 3:
+            break;
+        default:
+            break;
+    }
 }
 
 @end

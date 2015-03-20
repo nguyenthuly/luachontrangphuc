@@ -171,4 +171,67 @@
 
 }
 
++ (NSString *)checkColorId:(NSString *)color{
+    NSString *colorId;
+    
+    if (([color isEqualToString:@"Đỏ"]) || ([color isEqualToString:@"Cam"])) {
+        colorId = @"do";
+    }
+    
+    if ([color isEqualToString:@"Hồng"]) {
+        colorId = @"hong";
+    }
+    
+    if ([color isEqualToString:@"Vàng"]) {
+        colorId = @"vang";
+    }
+    
+    if (([color isEqualToString:@"Trắng"]) || ([color isEqualToString:@"Kem"])) {
+        colorId = @"kem";
+    }
+    
+    if ([color isEqualToString:@"Đen"]) {
+        colorId = @"den";
+    }
+    
+    if ([color isEqualToString:@"Xám"]) {
+        colorId = @"xam";
+    }
+    
+    if ([color isEqualToString:@"Nâu"]) {
+        colorId = @"nau";
+    }
+    
+    if ([color isEqualToString:@"Xanh"]) {
+        colorId = @"xanh";
+    }
+    
+    if (([color isEqualToString:@"Ghi"]) || ([color isEqualToString:@"Bạc"])) {
+        colorId = @"ghi";
+    }
+    
+    return colorId;
+    
+}
++ (NSString *)checkMaterialId:(NSString *)material;
+{
+    NSString *materialId;
+    if ([material isEqualToString:@"Vải"]) {
+        materialId = @"vai";
+    }
+    if ([material isEqualToString:@"Bò"]) {
+        materialId = @"bo";
+    }
+    if ([material isEqualToString:@"Da"]) {
+        materialId = @"da";
+    }
+    if ([material isEqualToString:@"Cotton"]) {
+        materialId = @"cotton";
+    }
+    if ([material isEqualToString:@"Len"]) {
+        materialId = @"len";
+    }
+    return materialId;
+}
+
 @end

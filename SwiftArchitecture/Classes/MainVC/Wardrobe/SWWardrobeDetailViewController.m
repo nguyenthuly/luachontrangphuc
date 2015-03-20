@@ -20,7 +20,9 @@
 
 @end
 
-@implementation SWWardrobeDetailViewController
+@implementation SWWardrobeDetailViewController {
+    BOOL _endOfRespond;
+}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
@@ -31,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _endOfRespond = NO;
     [self initUI];
 }
 
@@ -59,6 +62,10 @@
 
 - (void)initData{
     
+    if (!self.data) {
+        self.data = [[NSMutableArray alloc] initWithCapacity:10];
+    }
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_WARDROBE_CATEGORY];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -66,25 +73,37 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
-                                 @"categoryid":[NSNumber numberWithInteger:self.categoryId]
-                                 };
+                                 @"categoryid":[NSNumber numberWithInteger:self.categoryId],
+                                     @"offset":[NSNumber numberWithInteger:self.data.count]};
+    
     [[SWUtil sharedUtil] showLoadingView];
     [manager GET:url
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              
              if ([responseObject isKindOfClass:[NSArray class]]) {
-                 self.data = (NSMutableArray *)responseObject;
+                 
+                 NSArray *result = (NSArray *)responseObject;
+
+                 for (int i = 0; i< result.count; i++) {
+                     NSDictionary *dict = [result objectAtIndex:i];
+                     if (![self.data containsObject:dict]) {
+                         [self.data addObject:dict];
+                     }
+                 }
+                 _endOfRespond = NO;
              }
              
-             NSDictionary *dict;
+            NSDictionary *dict;
              if ([responseObject isKindOfClass:[NSDictionary class]]) {
                  dict = (NSDictionary *)responseObject;
+                 _endOfRespond = YES;
              }
              
              NSInteger code = [[dict objectForKey:@"code"] integerValue];
              
              if (code == 0 && self.data.count == 0) {
+                 _endOfRespond = YES;
                  self.noClotheLabel.hidden = NO;
                  
              } else {
@@ -96,7 +115,7 @@
              [[SWUtil sharedUtil] hideLoadingView];
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             
+             NSLog(@"Error: %@",error);
              [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
@@ -111,8 +130,11 @@
                                                initWithNibName:@"SWAddClotheViewController"
                                                bundle:nil];
     
+    [[NSUserDefaults standardUserDefaults] setObject:self.title forKey:@"category"];
     addClothesVC.typeCategory = addClotherDetail;
     addClothesVC.typeClothe = newClothe;
+    addClothesVC.categoryId = self.categoryId;
+
     [self.navigationController pushViewController:addClothesVC animated:YES];
 }
 
@@ -136,6 +158,11 @@
     NSString *imageLink = [NSString stringWithFormat:@"%@%@",URL_IMAGE,[[self.data objectAtIndex:indexPath.row] objectForKey:@"image"]];
     cell.imageLink = [[self.data objectAtIndex:indexPath.row] objectForKey:@"image"];
     [cell.clotheImageView sd_setImageWithURL:[NSURL URLWithString:imageLink]];
+    
+    if(indexPath.row == self.data.count - 1 && !_endOfRespond){
+        [self initData];
+    }
+    
     return cell;
 }
 
@@ -153,13 +180,8 @@
         {
             SWAddClotheViewController *detailVC = [[SWAddClotheViewController alloc] init];
             NSString *wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
-            NSString *category = [[self.data objectAtIndex:indexPath.row] objectForKey:@"category"];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:category forKey:@"category"];
             [[NSUserDefaults standardUserDefaults] setObject:wardrobeId forKey:@"wardrobeid"];
-            detailVC.categoryId = self.categoryId;
             detailVC.typeClothe = detailClothe;
-            detailVC.categoryLabel.text = self.title;
             [self.navigationController pushViewController:detailVC animated:YES];
         }
             break;

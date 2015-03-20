@@ -13,6 +13,8 @@
 @interface SWAddClotheViewController (){
     NSMutableArray *tableViewArr;
     NSString *imageNameStr;
+    NSString *colorId;
+    NSString *materialId;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
@@ -71,7 +73,7 @@
 
             if (self.typeCategory == addClotherDetail) {
                 self.categoryImageView.hidden = YES;
-                //self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+                self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
             }
             [self checkSizeLabel];
 
@@ -98,7 +100,10 @@
             break;
     }
     
-   
+    if (self.typeCategory == addClother) {
+        self.categoryId = 1;
+    }
+    
 }
 
 - (void)initDataFromServer{
@@ -252,9 +257,12 @@
     }else{
         
         [[SWUtil sharedUtil] showLoadingView];
+        
         NSData *imageData = UIImageJPEGRepresentation(self.photoImageView.image, 0.5);
         NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_ADD_WARDROBE];
         
+        colorId = [SWUtil checkColorId:self.colorLabel.text];
+        materialId = [SWUtil checkMaterialId:self.materialLabel.text];
         if (imageData) {
             NSDictionary *parameters = @{@"userid": [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"],
                                          @"name":self.nameTextField.text,
@@ -262,7 +270,10 @@
                                          @"color":self.colorLabel.text,
                                          @"size":self.sizeLabel.text,
                                          @"material":self.materialLabel.text,
-                                         @"categoryid":[NSNumber numberWithInteger:self.categoryId]};
+                                         @"categoryid":[NSNumber numberWithInteger:self.categoryId],
+                                         @"colorid":colorId,
+                                         @"materialid":materialId};
+            
             
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
             
@@ -383,7 +394,7 @@
         case category:
         {
             self.categoryLabel.text = cell.textLabel.text;
-            if (self.typeClothe == addClother) {
+            if (self.typeCategory == addClother) {
                 self.categoryId = indexPath.row + 1;
             }
         }
