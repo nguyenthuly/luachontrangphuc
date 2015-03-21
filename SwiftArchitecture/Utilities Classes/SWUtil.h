@@ -56,5 +56,7 @@
 + (void)saveUserInfor:(id)responseObject;
 + (NSString *)checkColorId:(NSString *)color;
 + (NSString *)checkMaterialId:(NSString *)material;
++ (NSString *)chooseColor:(NSString *)colorId;
++ (NSInteger)randomWithMin:(NSInteger)min andMax:(NSInteger)max;
 
 @end

@@ -37,8 +37,8 @@ typedef enum {
 }TypeClothe;
 
 typedef enum {
-    skirt = 0,
-    jean,
+    jean = 0,
+    skirt,
     shoe
 }TypeChooseClothe;
 
@@ -63,6 +63,9 @@ typedef enum {
 #define URL_FEEL @"history/api_updateHistory"
 #define URL_UPLOAD_AVARTAR @"users/api_updateAvatar"
 #define URL_ADD_WARDROBE @"wardrobe/api_insertWardrobe"
+#define URL_SUGGEST_BY_CATEGORYID @"wardrobe/api_WardrobeCountByCategoryId"
+#define URL_SUGGEST_BY_CATEGORYID_COLORID @"wardrobe/api_WardrobeCountByCategoryIdAndColorId"
+
 
 /*TITLE*/
 #define Register_Title @"Đăng ký"

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/MainVC/DressTime/SWDressTimeViewController.m"
-            timestampString = "448539719.239445"
+            timestampString = "448656013.066249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "-chooseClothesWithCategoryId:withCategory:"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
+            landmarkName = "-chooseClothesWithCategoryId:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

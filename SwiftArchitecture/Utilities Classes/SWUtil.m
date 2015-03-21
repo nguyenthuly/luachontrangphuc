@@ -7,6 +7,17 @@
 //
 
 #import "SWUtil.h"
+
+#define do_Color @"do"
+#define hong_Color @"hong"
+#define vang_Color @"vang"
+#define xanh_Color @"xanh"
+#define trang_Color @"trang"
+#define den_Color @"den"
+#define nau_Color @"nau"
+#define ghi_Color @"ghi"
+#define xam_Color @"xam"
+
 @implementation SWUtil
 
 + (SWUtil *)sharedUtil {
@@ -233,5 +244,50 @@
     }
     return materialId;
 }
+
++ (NSInteger)randomWithMin:(NSInteger)min andMax:(NSInteger)max{
+    NSInteger random = (arc4random() % (max - min + 1)) + min;
+    
+    return random;
+}
+
+
++ (NSString *)chooseColor:(NSString *)colorId{
+    NSString *color;
+    NSMutableArray *colorArr;
+    if ([colorId isEqualToString:do_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
+    }
+    if ([colorId isEqualToString:hong_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
+    }
+    if ([colorId isEqualToString:vang_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color,nau_Color]];
+    }
+    if ([colorId isEqualToString:xanh_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color,nau_Color]];
+    }
+    if ([colorId isEqualToString:trang_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color,nau_Color]];
+    }
+    if ([colorId isEqualToString:den_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
+    }
+    if ([colorId isEqualToString:xam_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
+    }
+    if ([colorId isEqualToString:nau_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
+    }
+    if ([colorId isEqualToString:ghi_Color]) {
+        colorArr = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color]];
+    }
+    
+    NSInteger random = [self randomWithMin:0 andMax:colorArr.count - 1];
+    color = [colorArr objectAtIndex:random];
+    
+    return color;
+}
+
 
 @end
