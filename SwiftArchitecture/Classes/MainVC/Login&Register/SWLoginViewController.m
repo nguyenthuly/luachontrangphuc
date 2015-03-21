@@ -39,7 +39,8 @@
 
 - (void)initUI{
     self.title = Login_Title;
-
+self.emailTextField.text = @"mrskem.iu@gmail.com";
+    self.passWordTextField.text = @"13042011";
     self.loginView.layer.borderWidth = 1.0;
     self.loginView.layer.borderColor = [[UIColor colorWithHex:Gray_Color alpha:1.0] CGColor];
     self.loginView.layer.masksToBounds = YES;

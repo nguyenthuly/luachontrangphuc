@@ -42,7 +42,13 @@
 
 @property (nonatomic, strong) NSDateFormatter *hourlyFormatter;
 @property (nonatomic, strong) NSMutableArray *data;
+@property (nonatomic, strong) NSMutableArray *resultData;
+@property (nonatomic, strong) NSString *linkImageJean;
 @property (nonatomic, strong) NSString *linkImage;
+
+@property (nonatomic, strong) NSString *jeanColor;
+@property (nonatomic, strong) NSString *skirtColor;
+@property (nonatomic, strong) NSString *shoeColor;
 
 - (IBAction)skirtButton:(id)sender;
 - (IBAction)jeanButton:(id)sender;
@@ -201,6 +207,7 @@
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
+
 #pragma mark - WeatherViewDelegate
 
 - (void)didSelect:(id)grid{
@@ -258,7 +265,6 @@
 
 - (void)chooseRandom{
     
-    self.skirtImageView.hidden = NO;
     if (temperature < 12) {
         categoryJean = Quan;
         categorySkirt = Aokhoac;
@@ -273,34 +279,20 @@
         categoryJean = [self randomWithMin:Quan andMax:Vay];
         if (categoryJean == Vay) {
             categoryShoe = Giayhai;
-            self.skirtImageView.hidden = YES;
+            categorySkirt = 0;
+            
+            self.skirtImageView.image = [UIImage imageNamed:@"Ko"];
             self.skirtButton.enabled = NO;
 
         }else {
             categorySkirt = [self randomWithMin:Aosomi andMax:Aophong];
             categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
             self.skirtButton.enabled = YES;
-            self.skirtImageView.hidden = NO;
-
         }
     }
     
-    for (int i = 0; i < 3; i++) {
-        TypeChooseClothe type = i;
-        switch (type) {
-            case skirt:
-                [self chooseClothesWithCategoryId:categorySkirt withCategory:type];
-                break;
-            case jean:
-                [self chooseClothesWithCategoryId:categoryJean withCategory:type];
-                break;
-            case shoe:
-                [self chooseClothesWithCategoryId:categoryShoe withCategory:type];
-                break;
-            default:
-                break;
-        }
-    }
+    [self chooseClothesWithCategoryId:categoryJean];
+    
 }
 
 - (void)chooseWork{
@@ -315,9 +307,9 @@
     
 }
 
-- (void)chooseClothesWithCategoryId:(NSInteger)categoryId withCategory:(TypeChooseClothe)type{
+- (void)chooseClothesWithCategoryId:(NSInteger)categoryId{
     
-    NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_WARDROBE_CATEGORY];
+    NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_SUGGEST_BY_CATEGORYID];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -331,44 +323,86 @@
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              if ([responseObject isKindOfClass:[NSArray class]]) {
                  self.data = (NSMutableArray *)responseObject;
+                 NSLog(@"Data: %@",responseObject);
              }
-             NSDictionary *dict;
-             if ([responseObject isKindOfClass:[NSDictionary class]]) {
-                 dict = (NSDictionary *)responseObject;
-             }
-             NSInteger code = [[dict objectForKey:@"code"] integerValue];
              
-             if (code == 0 && self.data.count == 0) {
-                    //Ko co trang phuc
-             } else {
-                 NSInteger randNum = [self randomWithMin:0 andMax:self.data.count-1];
-                 self.linkImage = [[self.data objectAtIndex:randNum] objectForKey:@"image"];
-                 switch (type) {
-                     case skirt:
-                     {
-                         self.skirtImageLink = self.linkImage;
-                         [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]];
-                     }
-                         break;
-                     case jean:
-                     {
-                         self.jeanImageLink = self.linkImage;
-                         [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.jeanImageLink]]];
+             NSInteger randNum = [self randomWithMin:0 andMax:self.data.count - 1];
+             self.linkImageJean = [[self.data objectAtIndex:randNum] objectForKey:@"image"];
+             self.jeanImageLink = self.linkImageJean;
+             [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.jeanImageLink]]];
+             self.jeanColor = [[self.data objectAtIndex:randNum] objectForKey:@"colorid"];
+             
+             for (int i = 1; i < 3; i++) {
+                TypeChooseClothe type = i;
+                NSString *color = [SWUtil chooseColor:self.jeanColor];
+                switch (type) {
+                    case skirt:
+                    {
+                        if (categorySkirt != 0) {
+                            [self chooseClothesWithCategoryId:categorySkirt colorId:color withCategory:skirt];
+                        }
+                    }
+                        break;
+                    case shoe:
+                        [self chooseClothesWithCategoryId:categoryShoe colorId:color withCategory:shoe];
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-                     }
-                         break;
-                     case shoe:
-                     {
-                         self.shoeImageLink = self.linkImage;
-                         [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.shoeImageLink]]];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             [[SWUtil sharedUtil] hideLoadingView];
+         }];
+    
+}
 
-                     }
-                         break;
-                     default:
-                         break;
-                 }
-                 
+- (void)chooseClothesWithCategoryId:(NSInteger)categoryId colorId:(NSString *)colorid withCategory:(TypeChooseClothe)type{
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_SUGGEST_BY_CATEGORYID_COLORID];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
+                                 @"categoryid":[NSNumber numberWithInteger:categoryId],
+                                 @"colorid":colorid
+                                 };
+    [manager GET:url
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             if ([responseObject isKindOfClass:[NSArray class]]) {
+                 self.resultData = (NSMutableArray *)responseObject;
+                 NSLog(@"ResultData: %@",responseObject);
              }
+             
+             NSInteger randNum = [self randomWithMin:0 andMax:self.resultData.count - 1];
+             
+             self.linkImage = [[self.resultData objectAtIndex:randNum] objectForKey:@"image"];
+             
+             switch (type) {
+                 case skirt:
+                 {
+                    self.skirtImageLink = self.linkImage;
+                    [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]];
+                 }
+                     break;
+                     
+                 case shoe:
+                 {
+                     self.shoeImageLink = self.linkImage;
+                     [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.shoeImageLink]]];
+                     
+                 }
+                     break;
+                 default:
+                     break;
+             }
+             
+             
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
@@ -379,7 +413,7 @@
 }
 
 - (IBAction)suggestButton:(id)sender {
-        
+    
     UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
                                                                      delegate:self
                                                             cancelButtonTitle:Cancel_ActionSheet
