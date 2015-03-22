@@ -43,6 +43,7 @@
 @property (nonatomic, strong) NSDateFormatter *hourlyFormatter;
 @property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) NSMutableArray *resultData;
+@property (nonatomic, strong) NSMutableArray *colorData;
 @property (nonatomic, strong) NSString *linkImageJean;
 @property (nonatomic, strong) NSString *linkImage;
 
@@ -263,48 +264,119 @@
     return random;
 }
 
-- (void)chooseRandom{
+
+- (void)chooseWork {
     
+    //Rat lanh
     if (temperature < 12) {
         categoryJean = Quan;
         categorySkirt = Aokhoac;
         categoryShoe = Giaybot;
-        
-    } else if (temperature < 18) {
+    
+    //Lanh
+    } else if (temperature < 15) {
         categoryJean = Quan;
         categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
-        categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
-        
-    } else {
+        categoryShoe = [self randomWithMin:Giayhai andMax:Giaybot];
+    
+    //Se lanh
+    } else if (temperature < 18){
+        categoryJean = Quan;
+        categoryShoe = Giayhai;
+        categorySkirt = Aolen;
+    
+    //Khong lanh
+    } else{
         categoryJean = [self randomWithMin:Quan andMax:Vay];
+        categoryShoe = Giayhai;
         if (categoryJean == Vay) {
-            categoryShoe = Giayhai;
             categorySkirt = 0;
-            
             self.skirtImageView.image = [UIImage imageNamed:@"Ko"];
             self.skirtButton.enabled = NO;
-
+            
         }else {
-            categorySkirt = [self randomWithMin:Aosomi andMax:Aophong];
-            categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
+            categorySkirt = Aosomi;
             self.skirtButton.enabled = YES;
         }
     }
     
     [self chooseClothesWithCategoryId:categoryJean];
-    
-}
-
-- (void)chooseWork{
-    [self chooseRandom];
 }
 
 - (void)chooseGoout{
     
+    //Rat lanh
+    if (temperature < 12) {
+        categoryJean = Quan;
+        categorySkirt = Aokhoac;
+        categoryShoe = Giaybot;
+        
+        //Lanh
+    } else if (temperature < 15) {
+        categoryJean = Quan;
+        categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
+        categoryShoe = [self randomWithMin:Giaythethao andMax:Giaybot];
+        
+        //Se lanh
+    } else if (temperature < 18){
+        categoryJean = Quan;
+        categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
+        categorySkirt = Aolen;
+        
+        //Khong lanh
+    } else{
+        categoryJean = [self randomWithMin:Quan andMax:Vay];
+        categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
+        if (categoryJean == Vay) {
+            categorySkirt = 0;
+            self.skirtImageView.image = [UIImage imageNamed:@"Ko"];
+            self.skirtButton.enabled = NO;
+            
+        }else {
+            categorySkirt = [self randomWithMin:Aosomi andMax:Aophong];;
+            self.skirtButton.enabled = YES;
+        }
+    }
+    
+    [self chooseClothesWithCategoryId:categoryJean];
 }
 
 - (void)chooseParty{
     
+    //Rat lanh
+    if (temperature < 12) {
+        categoryJean = Quan;
+        categorySkirt = Aokhoac;
+        categoryShoe = Giaybot;
+        
+        //Lanh
+    } else if (temperature < 15) {
+        categoryJean = Quan;
+        categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
+        categoryShoe = [self randomWithMin:Giayhai andMax:Giaybot];
+        
+        //Se lanh
+    } else if (temperature < 18){
+        categoryJean = Quan;
+        categoryShoe = Giayhai;
+        categorySkirt = Aolen;
+        
+        //Khong lanh
+    } else{
+        categoryJean = [self randomWithMin:Quan andMax:Vay];
+        categoryShoe = Giayhai;
+        if (categoryJean == Vay) {
+            categorySkirt = 0;
+            self.skirtImageView.image = [UIImage imageNamed:@"Ko"];
+            self.skirtButton.enabled = NO;
+            
+        }else {
+            categorySkirt = Aosomi;
+            self.skirtButton.enabled = YES;
+        }
+    }
+    
+    [self chooseClothesWithCategoryId:categoryJean];
 }
 
 - (void)chooseClothesWithCategoryId:(NSInteger)categoryId{
@@ -334,17 +406,16 @@
              
              for (int i = 1; i < 3; i++) {
                 TypeChooseClothe type = i;
-                NSString *color = [SWUtil chooseColor:self.jeanColor];
                 switch (type) {
                     case skirt:
                     {
                         if (categorySkirt != 0) {
-                            [self chooseClothesWithCategoryId:categorySkirt colorId:color withCategory:skirt];
+                            [self chooseColor:categorySkirt withCategory:skirt andColor:self.jeanColor];
                         }
                     }
                         break;
                     case shoe:
-                        [self chooseClothesWithCategoryId:categoryShoe colorId:color withCategory:shoe];
+                        [self chooseColor:categoryShoe withCategory:shoe andColor:self.jeanColor];
                         break;
                     default:
                         break;
@@ -359,7 +430,48 @@
     
 }
 
-- (void)chooseClothesWithCategoryId:(NSInteger)categoryId colorId:(NSString *)colorid withCategory:(TypeChooseClothe)type{
+
+- (void)chooseColor:(NSInteger)categoryId withCategory:(TypeChooseClothe)type andColor:(NSString *)color{
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_CHOOSE_COLOR_BY_CATEGORY];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
+                                 @"categoryid":[NSNumber numberWithInteger:categoryId],
+                                 };
+    [manager GET:url
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             if ([responseObject isKindOfClass:[NSArray class]]) {
+                 self.colorData = (NSMutableArray *)responseObject;
+                 NSLog(@"ColorData: %@",responseObject);
+                 NSLog(@"Color count: %ld",self.colorData.count);
+             }
+             NSString * colorChoose = [SWUtil chooseColor:color andArr:self.colorData];
+             switch (type) {
+                 case skirt:
+                     [self chooseClothesWithCategoryId:categorySkirt colorId:colorChoose withType:skirt];
+                     break;
+                 case shoe:
+                     [self chooseClothesWithCategoryId:categoryShoe colorId:colorChoose withType:shoe];
+                     break;
+                 default:
+                     break;
+             }
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             [[SWUtil sharedUtil] hideLoadingView];
+         }];
+    
+}
+
+
+- (void)chooseClothesWithCategoryId:(NSInteger)categoryId colorId:(NSString *)colorid withType:(TypeChooseClothe)type{
     
     NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_SUGGEST_BY_CATEGORYID_COLORID];
     
@@ -401,7 +513,6 @@
                  default:
                      break;
              }
-             
              
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

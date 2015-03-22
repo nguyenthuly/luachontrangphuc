@@ -134,19 +134,37 @@
         self.datePickerView.hidden = YES;
     }];
     
+    //CurrentDate
+    NSNumber *currentDatetime;
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    currentDatetime = [SWUtil convertDateToNumber:date];
+    
+    //ChooseDate
     NSString *_dateString;
+    NSNumber *dateTimeChoose;
     NSDate *_chosenDate = [self.datePicker date];
     NSDateFormatter *_dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:DATE_FORMAT];
     _dateString = [_dateFormatter stringFromDate:_chosenDate];
+    dateTimeChoose = [SWUtil convertDateToNumber:_chosenDate];
     
-    birthdayString = _dateString;
-    birthday = [SWUtil convertDateToNumber:_chosenDate];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
-    
-    [self.registerTableView beginUpdates];
-    [self.registerTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [self.registerTableView endUpdates];
+    if (dateTimeChoose > currentDatetime) {
+       
+        [SWUtil showConfirmAlert:Title_Alert_Validate message:Check_Datetime delegate:nil];
+        
+    } else{
+        birthdayString = _dateString;
+        birthday = [SWUtil convertDateToNumber:_chosenDate];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+        
+        [self.registerTableView beginUpdates];
+        [self.registerTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.registerTableView endUpdates];
+    }
     
 }
 
