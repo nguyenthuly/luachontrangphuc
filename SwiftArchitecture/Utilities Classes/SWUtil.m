@@ -224,6 +224,7 @@
     return colorId;
     
 }
+
 + (NSString *)checkMaterialId:(NSString *)material;
 {
     NSString *materialId;
@@ -327,9 +328,10 @@
                 listColor = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color]];
                 commonMutableArr = [self chooseArr1:colorArr andArr2:listColor];
             }
-   
-    NSInteger random = [self randomWithMin:0 andMax:commonMutableArr.count - 1];
-    color = [[commonMutableArr objectAtIndex:random] objectForKey:@"colorid"];
+    if (commonMutableArr.count > 0) {
+        NSInteger random = [self randomWithMin:0 andMax:commonMutableArr.count - 1];
+        color = [[commonMutableArr objectAtIndex:random] objectForKey:@"colorid"];
+    }
     
     return color;
 }
