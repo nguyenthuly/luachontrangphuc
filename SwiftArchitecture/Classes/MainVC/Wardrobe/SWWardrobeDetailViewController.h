@@ -8,7 +8,7 @@
 
 #import "SWBaseViewController.h"
 
-@interface SWWardrobeDetailViewController : SWBaseViewController<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SWWardrobeDetailViewController : SWBaseViewController<UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
 @property(assign, nonatomic) NSInteger categoryId;
 @property(assign, nonatomic) TypeWardrobe typeWardrobe;

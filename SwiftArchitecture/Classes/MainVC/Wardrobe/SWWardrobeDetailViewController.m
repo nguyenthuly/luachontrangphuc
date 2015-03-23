@@ -17,11 +17,14 @@
 @property (weak, nonatomic) IBOutlet UIView *contentWardrobeView;
 @property (nonatomic, strong) NSMutableArray *data;
 @property (weak, nonatomic) IBOutlet UILabel *noClotheLabel;
+@property (nonatomic,strong) NSMutableArray *selectedCell;
+@property (nonatomic, strong) NSMutableArray *wardrobeIds;
 
 @end
 
 @implementation SWWardrobeDetailViewController {
     BOOL _endOfRespond;
+    BOOL checkDeleted;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -34,6 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _endOfRespond = NO;
+    checkDeleted = NO;
     [self initUI];
 }
 
@@ -58,9 +62,60 @@
     
     [self.contentWardrobeView addSubview:self.wardrobeCollectionView];
     self.noClotheLabel.hidden = YES;
+    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = .5; //seconds
+    lpgr.delegate = self;
+    [self.wardrobeCollectionView addGestureRecognizer:lpgr];
+  
 }
 
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        
+        checkDeleted = YES;
+        [self setRightButtonWithImage:@"Delete Sign Filled" highlightedImage:nil target:self action:@selector(deleteClothes:)];
+        NSIndexPath *indexPath = [self.wardrobeCollectionView indexPathForItemAtPoint:[gestureRecognizer locationInView:self.wardrobeCollectionView]];
+        //SWWardrobeCollectionViewCell *cell = (SWWardrobeCollectionViewCell *)[self.wardrobeCollectionView cellForItemAtIndexPath:indexPath];
+        
+        NSString *wardrobeIdDeleted = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
+        NSString *indexString = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        
+        if ([self.wardrobeIds containsObject:wardrobeIdDeleted]) {
+            [self.wardrobeIds removeObject:wardrobeIdDeleted];
+        } else {
+            [self.wardrobeIds addObject:wardrobeIdDeleted];
+        }
+        
+        if ([self.selectedCell containsObject:indexString]) {
+            
+            [self.selectedCell removeObject:indexString];
+        }
+        else {
+            [self.selectedCell addObject:indexString];
+        }
+        [self.wardrobeCollectionView reloadData];
+    }
+}
+
+- (void)deleteClothes:(id)sender{
+    NSLog(@"%@",self.wardrobeIds);
+    
+    NSString *wardrobeID;
+    if ([self.wardrobeIds count] > 0) {
+        for (int i = 0; i < self.wardrobeIds.count; i ++) {
+            wardrobeID = [self.wardrobeIds objectAtIndex:i];
+        }
+    }
+    
+}
+
+
 - (void)initData{
+    
+    self.selectedCell = [[NSMutableArray alloc] initWithCapacity:10];
+    self.wardrobeIds = [[NSMutableArray alloc] initWithCapacity:10];
     
     if (!self.data) {
         self.data = [[NSMutableArray alloc] initWithCapacity:10];
@@ -149,8 +204,7 @@
     return [self.data count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *reuseIdentifier = Cell;
     SWWardrobeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -161,6 +215,22 @@
     
     if(indexPath.row == self.data.count - 1 && !_endOfRespond){
         [self initData];
+    }
+    
+    if (checkDeleted) {
+        cell.checkImageView.hidden = NO;
+    } else {
+        cell.checkImageView.hidden = YES;
+    }
+    
+    //ON/OFF check box.
+    UIImage *_imageUnCheck = [UIImage imageNamed:@"image_blue_uncheck"];
+    UIImage *_imageChecked = [UIImage imageNamed:@"image_blue_checked"];
+    if ([self.selectedCell  containsObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]]) {
+        cell.checkImageView.image = _imageChecked;
+    }
+    else {
+        cell.checkImageView.image = _imageUnCheck;
     }
     
     return cell;
@@ -178,11 +248,35 @@
     switch (self.typeWardrobe) {
         case detail:
         {
-            SWAddClotheViewController *detailVC = [[SWAddClotheViewController alloc] init];
-            NSString *wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
-            [[NSUserDefaults standardUserDefaults] setObject:wardrobeId forKey:@"wardrobeid"];
-            detailVC.typeClothe = detailClothe;
-            [self.navigationController pushViewController:detailVC animated:YES];
+            if (!checkDeleted) {
+                SWAddClotheViewController *detailVC = [[SWAddClotheViewController alloc] init];
+                NSString *wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
+                [[NSUserDefaults standardUserDefaults] setObject:wardrobeId forKey:@"wardrobeid"];
+                detailVC.typeClothe = detailClothe;
+                [self.navigationController pushViewController:detailVC animated:YES];
+                
+            } else {
+                
+                NSString *wardrobeIdDeleted = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
+                NSString *indexString = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+                
+                if ([self.wardrobeIds containsObject:wardrobeIdDeleted]) {
+                    [self.wardrobeIds removeObject:wardrobeIdDeleted];
+                } else {
+                    [self.wardrobeIds addObject:wardrobeIdDeleted];
+                }
+                
+                
+                if ([self.selectedCell containsObject:indexString]) {
+                    
+                    [self.selectedCell removeObject:indexString];
+                }
+                else {
+                    [self.selectedCell addObject:indexString];
+                }
+                [self.wardrobeCollectionView reloadData];
+            }
+           
         }
             break;
         case choose:

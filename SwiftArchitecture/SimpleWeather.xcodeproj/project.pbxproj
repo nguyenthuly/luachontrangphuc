@@ -26,6 +26,12 @@
 		043764221AA83CE400C2E187 /* WXController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641B1AA83CE400C2E187 /* WXController.m */; };
 		043764231AA83CE400C2E187 /* WXDailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641D1AA83CE400C2E187 /* WXDailyForecast.m */; };
 		043764241AA83CE400C2E187 /* WXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641F1AA83CE400C2E187 /* WXManager.m */; };
+		048232441AC073ED0064D656 /* image_blue_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 048232421AC073ED0064D656 /* image_blue_checked.png */; };
+		048232451AC073ED0064D656 /* image_blue_uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 048232431AC073ED0064D656 /* image_blue_uncheck.png */; };
+		048232481AC074010064D656 /* image_blue_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048232461AC074010064D656 /* image_blue_checked@2x.png */; };
+		048232491AC074010064D656 /* image_blue_uncheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048232471AC074010064D656 /* image_blue_uncheck@2x.png */; };
+		0482324B1AC078120064D656 /* Delete Sign Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 0482324A1AC078120064D656 /* Delete Sign Filled.png */; };
+		0482324D1AC078200064D656 /* Delete Sign Filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0482324C1AC078200064D656 /* Delete Sign Filled@2x.png */; };
 		04ADDCE31AA053ED00C49FD4 /* add_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADDBE41AA053EC00C49FD4 /* add_image.png */; };
 		04ADDCE41AA053ED00C49FD4 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADDBE51AA053EC00C49FD4 /* back.png */; };
 		04ADDCE51AA053ED00C49FD4 /* back_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADDBE61AA053EC00C49FD4 /* back_green.png */; };
@@ -479,6 +485,12 @@
 		0437641D1AA83CE400C2E187 /* WXDailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXDailyForecast.m; sourceTree = "<group>"; };
 		0437641E1AA83CE400C2E187 /* WXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXManager.h; sourceTree = "<group>"; };
 		0437641F1AA83CE400C2E187 /* WXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXManager.m; sourceTree = "<group>"; };
+		048232421AC073ED0064D656 /* image_blue_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_blue_checked.png; sourceTree = "<group>"; };
+		048232431AC073ED0064D656 /* image_blue_uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_blue_uncheck.png; sourceTree = "<group>"; };
+		048232461AC074010064D656 /* image_blue_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_blue_checked@2x.png"; sourceTree = "<group>"; };
+		048232471AC074010064D656 /* image_blue_uncheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_blue_uncheck@2x.png"; sourceTree = "<group>"; };
+		0482324A1AC078120064D656 /* Delete Sign Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete Sign Filled.png"; sourceTree = "<group>"; };
+		0482324C1AC078200064D656 /* Delete Sign Filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete Sign Filled@2x.png"; sourceTree = "<group>"; };
 		04ADDBE41AA053EC00C49FD4 /* add_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_image.png; sourceTree = "<group>"; };
 		04ADDBE51AA053EC00C49FD4 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		04ADDBE61AA053EC00C49FD4 /* back_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_green.png; sourceTree = "<group>"; };
@@ -1100,6 +1112,9 @@
 		04ADDBE31AA053EC00C49FD4 /* 1x */ = {
 			isa = PBXGroup;
 			children = (
+				0482324A1AC078120064D656 /* Delete Sign Filled.png */,
+				048232421AC073ED0064D656 /* image_blue_checked.png */,
+				048232431AC073ED0064D656 /* image_blue_uncheck.png */,
 				04ADDBE41AA053EC00C49FD4 /* add_image.png */,
 				04ADDBE51AA053EC00C49FD4 /* back.png */,
 				04ADDBE61AA053EC00C49FD4 /* back_green.png */,
@@ -1140,6 +1155,9 @@
 		04ADDC051AA053EC00C49FD4 /* 2x */ = {
 			isa = PBXGroup;
 			children = (
+				0482324C1AC078200064D656 /* Delete Sign Filled@2x.png */,
+				048232461AC074010064D656 /* image_blue_checked@2x.png */,
+				048232471AC074010064D656 /* image_blue_uncheck@2x.png */,
 				04ADDC061AA053EC00C49FD4 /* add_image@2x.png */,
 				04ADDC071AA053EC00C49FD4 /* back2x.png */,
 				04ADDC081AA053EC00C49FD4 /* back_green@2x.png */,
@@ -2111,12 +2129,14 @@
 				04ADDDD11AA053ED00C49FD4 /* rain_red@2x.png in Resources */,
 				04ADDDB01AA053ED00C49FD4 /* sunset_red.png in Resources */,
 				04ADDDA91AA053ED00C49FD4 /* partly_cloudy_rain_red.png in Resources */,
+				048232481AC074010064D656 /* image_blue_checked@2x.png in Resources */,
 				04ADDD3E1AA053ED00C49FD4 /* mittens_red.png in Resources */,
 				04ADDD0A1AA053ED00C49FD4 /* down4_green@2x.png in Resources */,
 				04ADDD031AA053ED00C49FD4 /* user_male.png in Resources */,
 				04ADDCF81AA053ED00C49FD4 /* remove_image.png in Resources */,
 				04ADDD371AA053ED00C49FD4 /* hanger_red.png in Resources */,
 				04ADDD6F1AA053ED00C49FD4 /* shoe_man_red@2x.png in Resources */,
+				0482324D1AC078200064D656 /* Delete Sign Filled@2x.png in Resources */,
 				04ADDD0C1AA053ED00C49FD4 /* down_green@2x.png in Resources */,
 				04ADDCF31AA053ED00C49FD4 /* left_green.png in Resources */,
 				04ADDDBC1AA053ED00C49FD4 /* partly_cloudy_rain_gray@2x.png in Resources */,
@@ -2185,6 +2205,7 @@
 				04ADDD831AA053ED00C49FD4 /* vegan_shoes@2x.png in Resources */,
 				04ADDDC61AA053ED00C49FD4 /* dry_red@2x.png in Resources */,
 				04ADDCFF1AA053ED00C49FD4 /* up4.png in Resources */,
+				048232491AC074010064D656 /* image_blue_uncheck@2x.png in Resources */,
 				04ADDD351AA053ED00C49FD4 /* flip_flops.png in Resources */,
 				04ADDD781AA053ED00C49FD4 /* t_shirt_off@2x.png in Resources */,
 				867A4FD31831C733003F9195 /* weather-rain.png in Resources */,
@@ -2207,6 +2228,7 @@
 				868735CE1831A1E700C0CCFA /* InfoPlist.strings in Resources */,
 				04ADDD9B1AA053ED00C49FD4 /* storm_gray.png in Resources */,
 				04ADDD3D1AA053ED00C49FD4 /* mittens.png in Resources */,
+				048232451AC073ED0064D656 /* image_blue_uncheck.png in Resources */,
 				04B952ED1AA007DC005EFF2D /* nav_ios7.png in Resources */,
 				04ADDD941AA053ED00C49FD4 /* partly_cloudy_day_gray.png in Resources */,
 				04ADDD2A1AA053ED00C49FD4 /* 2.jpg in Resources */,
@@ -2276,6 +2298,7 @@
 				04ADDD051AA053ED00C49FD4 /* back2x.png in Resources */,
 				04ADDD211AA053ED00C49FD4 /* up@2x.png in Resources */,
 				04ADDDC51AA053ED00C49FD4 /* clouds_red@2x.png in Resources */,
+				0482324B1AC078120064D656 /* Delete Sign Filled.png in Resources */,
 				04ADDD191AA053ED00C49FD4 /* remove_image@2x.png in Resources */,
 				04ADDD141AA053ED00C49FD4 /* left_green@2x.png in Resources */,
 				04ADDD2E1AA053ED00C49FD4 /* 6.jpg in Resources */,
@@ -2302,6 +2325,7 @@
 				04ADDD771AA053ED00C49FD4 /* socks_red@2x.png in Resources */,
 				04ADDD1D1AA053ED00C49FD4 /* settings_off@2x.png in Resources */,
 				867A4FDA1831C733003F9195 /* weather-snow@2x.png in Resources */,
+				048232441AC073ED0064D656 /* image_blue_checked.png in Resources */,
 				04B952E21AA007DC005EFF2D /* ContactSample.plist in Resources */,
 				04ADDD361AA053ED00C49FD4 /* hanger.png in Resources */,
 				04ADDD811AA053ED00C49FD4 /* vegan_clothing@2x.png in Resources */,

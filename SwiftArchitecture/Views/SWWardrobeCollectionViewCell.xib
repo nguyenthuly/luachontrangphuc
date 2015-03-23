@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,10 +16,14 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3oa-tw-6BP">
                         <rect key="frame" x="5" y="5" width="60" height="80"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_blue_checked.png" translatesAutoresizingMaskIntoConstraints="NO" id="b6k-V4-QTf">
+                        <rect key="frame" x="23" y="33" width="24" height="24"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <connections>
+                <outlet property="checkImageView" destination="b6k-V4-QTf" id="c2p-za-9dT"/>
                 <outlet property="clotheImageView" destination="3oa-tw-6BP" id="dEU-qO-rns"/>
             </connections>
             <point key="canvasLocation" x="217" y="276"/>
@@ -27,5 +31,6 @@
     </objects>
     <resources>
         <image name="3.jpg" width="200" height="252"/>
+        <image name="image_blue_checked.png" width="24" height="24"/>
     </resources>
 </document>
