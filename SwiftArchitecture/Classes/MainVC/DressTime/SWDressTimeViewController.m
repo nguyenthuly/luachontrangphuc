@@ -447,8 +447,6 @@
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              if ([responseObject isKindOfClass:[NSArray class]]) {
                  self.colorData = (NSMutableArray *)responseObject;
-                 NSLog(@"ColorData: %@",responseObject);
-                 NSLog(@"Color count: %ld",self.colorData.count);
              }
              NSString * colorChoose = [SWUtil chooseColor:color andArr:self.colorData];
              switch (type) {
@@ -498,8 +496,10 @@
              switch (type) {
                  case skirt:
                  {
-                    self.skirtImageLink = self.linkImage;
-                    [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]];
+                     if (categorySkirt != 0) {
+                         self.skirtImageLink = self.linkImage;
+                         [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]];
+                     }
                  }
                      break;
                      
@@ -524,6 +524,8 @@
 }
 
 - (IBAction)suggestButton:(id)sender {
+    
+    self.skirtImageLink = @"Ko";
     
     UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
                                                                      delegate:self
@@ -567,10 +569,6 @@
         self.chooseView.hidden = YES;
     }];
     
-    if (![self.skirtImageLink length] > 0) {
-        self.skirtImageLink = @"Khong";
-    }
-
     //insert to History
     userId = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
     
