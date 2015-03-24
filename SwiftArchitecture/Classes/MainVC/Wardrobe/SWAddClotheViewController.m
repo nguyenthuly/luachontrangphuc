@@ -9,6 +9,7 @@
 #import "SWAddClotheViewController.h"
 #import "SWUtil.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "SWWardrobeDetailViewController.h"
 
 @interface SWAddClotheViewController (){
     NSMutableArray *tableViewArr;
@@ -280,11 +281,38 @@
             AFHTTPRequestOperation *op = [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                 [formData appendPartWithFileData:imageData name:@"image" fileName:imageNameStr mimeType:@"image/jpeg"];
             } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                switch (self.typeCategory) {
+                    case addClother:
+                    {
+                        SWWardrobeDetailViewController *detailVC = [[SWWardrobeDetailViewController alloc] init];
+                        detailVC.categoryId = self.categoryId;
+                        [self.navigationController pushViewController:detailVC animated:YES];
+                    }
+                        
+                        break;
+                    case addClotherDetail:
+                    {
+                        NSArray *viewControllers = [self.navigationController viewControllers];
+                        for (UIViewController *controller in viewControllers) {
+                            if ([controller isKindOfClass:[SWWardrobeDetailViewController class]]) {
+                                
+                                SWWardrobeDetailViewController *detailVC = (SWWardrobeDetailViewController*)controller;
+                                detailVC.categoryId = self.categoryId;
+                                [self.navigationController popToViewController:controller animated:YES];
+                                break;
+                            }
+                        }
+                    }
+                        break;
+                    default:
+                        break;
+                }
+                
+                
                 [[SWUtil sharedUtil] hideLoadingView];
-                NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@ ***** %@", operation.responseString, error);
-                [SWUtil showConfirmAlert:@"Lỗi!" message:[error localizedDescription] delegate:nil];
+                //[SWUtil showConfirmAlert:@"Lỗi!" message:[error localizedDescription] delegate:nil];
                 [[SWUtil sharedUtil] hideLoadingView];
             }];
             [op start];

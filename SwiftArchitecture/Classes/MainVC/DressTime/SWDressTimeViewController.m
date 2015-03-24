@@ -527,7 +527,7 @@
     
     self.skirtImageLink = @"Ko";
     
-    UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:Title_ActionSheet
+    UIActionSheet *addPhotoActionSheet = [[UIActionSheet alloc] initWithTitle:@"Chọn trang phục theo sự kiện"
                                                                      delegate:self
                                                             cancelButtonTitle:Cancel_ActionSheet
                                                        destructiveButtonTitle:nil
