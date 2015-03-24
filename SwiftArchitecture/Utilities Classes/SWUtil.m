@@ -59,20 +59,12 @@
 
 - (void)showLoadingViewWithTitle:(NSString *)title {
     self.progressView.labelText = title;
-    if (self.loadingViewCount == 0) {
-        [[SWUtil appDelegate].window bringSubviewToFront:self.progressView];
-        [self.progressView show:NO];
-    }
-    self.loadingViewCount++;
+    [[SWUtil appDelegate].window bringSubviewToFront:self.progressView];
+    [self.progressView show:NO];
 }
 
 - (void)hideLoadingView {
-    if (self.loadingViewCount > 0) {
-        if (self.loadingViewCount == 1) {
-            [self.progressView hide:NO];
-        }
-        self.loadingViewCount--;
-    }
+    [self.progressView hide:NO];
 }
 
 + (UIViewController*)newUniversalViewControllerWithClassName:(NSString*)className {
