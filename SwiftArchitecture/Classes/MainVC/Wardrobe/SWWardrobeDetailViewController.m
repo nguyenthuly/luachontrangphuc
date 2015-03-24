@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIView *contentWardrobeView;
 @property (nonatomic, strong) NSMutableArray *data;
 @property (weak, nonatomic) IBOutlet UILabel *noClotheLabel;
-@property (nonatomic,strong) NSMutableArray *selectedCell;
 @property (nonatomic, strong) NSMutableArray *wardrobeIds;
 
 @end
@@ -67,7 +66,8 @@
     lpgr.minimumPressDuration = .5; //seconds
     lpgr.delegate = self;
     [self.wardrobeCollectionView addGestureRecognizer:lpgr];
-  
+    
+    self.wardrobeIds = [[NSMutableArray alloc] initWithCapacity:10];
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
@@ -77,45 +77,62 @@
         checkDeleted = YES;
         [self setRightButtonWithImage:@"Delete Sign Filled" highlightedImage:nil target:self action:@selector(deleteClothes:)];
         NSIndexPath *indexPath = [self.wardrobeCollectionView indexPathForItemAtPoint:[gestureRecognizer locationInView:self.wardrobeCollectionView]];
-        //SWWardrobeCollectionViewCell *cell = (SWWardrobeCollectionViewCell *)[self.wardrobeCollectionView cellForItemAtIndexPath:indexPath];
+        SWWardrobeCollectionViewCell *cell = (SWWardrobeCollectionViewCell *)[self.wardrobeCollectionView cellForItemAtIndexPath:indexPath];
         
-        NSString *wardrobeIdDeleted = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
-        NSString *indexString = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-        
-        if ([self.wardrobeIds containsObject:wardrobeIdDeleted]) {
-            [self.wardrobeIds removeObject:wardrobeIdDeleted];
+        if ([self.wardrobeIds containsObject:cell.wardrobeId]) {
+            [self.wardrobeIds removeObject:cell.wardrobeId];
         } else {
-            [self.wardrobeIds addObject:wardrobeIdDeleted];
-        }
-        
-        if ([self.selectedCell containsObject:indexString]) {
-            
-            [self.selectedCell removeObject:indexString];
-        }
-        else {
-            [self.selectedCell addObject:indexString];
+            [self.wardrobeIds addObject:cell.wardrobeId];
         }
         [self.wardrobeCollectionView reloadData];
     }
 }
 
 - (void)deleteClothes:(id)sender{
-    NSLog(@"%@",self.wardrobeIds);
     
-    NSString *wardrobeID;
+    [SWUtil showConfirmAlert:Title_Alert_Validate message:ALert_Message_Delete cancelButton:Cancel otherButton:Yes tag:0 delegate:self];
+}
+
+- (void)deleteClothes{
+    
     if ([self.wardrobeIds count] > 0) {
-        for (int i = 0; i < self.wardrobeIds.count; i ++) {
-            wardrobeID = [self.wardrobeIds objectAtIndex:i];
+        NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_DELETE_CLOTHES];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        NSString *wardobe = @"";
+        for (int i = 0; i < self.wardrobeIds.count; i++) {
+            NSString *value = [self.wardrobeIds objectAtIndex:i];
+            wardobe = [wardobe stringByAppendingString:value];
+            
+            if (i < self.wardrobeIds.count - 1) {
+                wardobe = [wardobe stringByAppendingString:@","];
+            }
         }
+        
+        NSDictionary *parameters = @{@"wardrobeid":wardobe};
+        
+        [[SWUtil sharedUtil] showLoadingView];
+        [manager POST:url
+           parameters:parameters
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [self.data removeAllObjects];
+                  [self.wardrobeIds removeAllObjects];
+                  checkDeleted = NO;
+                  [self setRightButtonWithImage:Add highlightedImage:nil target:self action:@selector(addButtonTapped:)];
+                  [self initData];
+                  NSLog(@"Delete success");
+                  
+              }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Error: %@",error);
+                  [[SWUtil sharedUtil] hideLoadingView];
+              }];
     }
-    
 }
 
 
 - (void)initData{
-    
-    self.selectedCell = [[NSMutableArray alloc] initWithCapacity:10];
-    self.wardrobeIds = [[NSMutableArray alloc] initWithCapacity:10];
     
     if (!self.data) {
         self.data = [[NSMutableArray alloc] initWithCapacity:10];
@@ -140,7 +157,7 @@
                  
                  NSArray *result = (NSArray *)responseObject;
 
-                 for (int i = 0; i< result.count; i++) {
+                 for (int i = 0; i < result.count; i++) {
                      NSDictionary *dict = [result objectAtIndex:i];
                      if (![self.data containsObject:dict]) {
                          [self.data addObject:dict];
@@ -212,9 +229,15 @@
     NSString *imageLink = [NSString stringWithFormat:@"%@%@",URL_IMAGE,[[self.data objectAtIndex:indexPath.row] objectForKey:@"image"]];
     cell.imageLink = [[self.data objectAtIndex:indexPath.row] objectForKey:@"image"];
     [cell.clotheImageView sd_setImageWithURL:[NSURL URLWithString:imageLink]];
+    cell.wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
     
     if(indexPath.row == self.data.count - 1 && !_endOfRespond){
         [self initData];
+    }
+    
+    if (![self.wardrobeIds count ] > 0) {
+        checkDeleted = NO;
+        [self setRightButtonWithImage:Add highlightedImage:nil target:self action:@selector(addButtonTapped:)];
     }
     
     if (checkDeleted) {
@@ -226,7 +249,8 @@
     //ON/OFF check box.
     UIImage *_imageUnCheck = [UIImage imageNamed:@"image_blue_uncheck"];
     UIImage *_imageChecked = [UIImage imageNamed:@"image_blue_checked"];
-    if ([self.selectedCell  containsObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]]) {
+    
+    if ([self.wardrobeIds  containsObject:cell.wardrobeId]) {
         cell.checkImageView.image = _imageChecked;
     }
     else {
@@ -257,22 +281,12 @@
                 
             } else {
                 
-                NSString *wardrobeIdDeleted = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
-                NSString *indexString = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+                SWWardrobeCollectionViewCell *cell = (SWWardrobeCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
                 
-                if ([self.wardrobeIds containsObject:wardrobeIdDeleted]) {
-                    [self.wardrobeIds removeObject:wardrobeIdDeleted];
+                if ([self.wardrobeIds containsObject:cell.wardrobeId]) {
+                    [self.wardrobeIds removeObject:cell.wardrobeId];
                 } else {
-                    [self.wardrobeIds addObject:wardrobeIdDeleted];
-                }
-                
-                
-                if ([self.selectedCell containsObject:indexString]) {
-                    
-                    [self.selectedCell removeObject:indexString];
-                }
-                else {
-                    [self.selectedCell addObject:indexString];
+                    [self.wardrobeIds addObject:cell.wardrobeId];
                 }
                 [self.wardrobeCollectionView reloadData];
             }
@@ -316,5 +330,16 @@
 {
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
+
+#pragma mark - UIAlertView
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            [self deleteClothes];
+        }
+    }
+}
+
 
 @end

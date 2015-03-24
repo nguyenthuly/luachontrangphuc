@@ -66,6 +66,7 @@ typedef enum {
 #define URL_SUGGEST_BY_CATEGORYID @"wardrobe/api_WardrobeCountByCategoryId"
 #define URL_SUGGEST_BY_CATEGORYID_COLORID @"wardrobe/api_WardrobeCountByCategoryIdAndColorId"
 #define URL_CHOOSE_COLOR_BY_CATEGORY @"wardrobe/api_WardrobeGetColorByCategoryId"
+#define URL_DELETE_CLOTHES @"wardrobe/api_deleteWardrobe"
 
 
 /*TITLE*/
@@ -121,6 +122,7 @@ typedef enum {
 #define Register_message_fail @"Đăng ký không thành công"
 #define Email_existed_message @"Email đã được đăng ký"
 #define Check_Datetime @"Thời gian không hợp lệ! Mời bạn vui lòng chọn lại"
+#define ALert_Message_Delete @"Bạn chắc chắn muốn xóa trang phục chứ?"
 
 #define Date_Format @"eee dd/MM/yyyy"
 #define Time_Format @"hh:mm a"

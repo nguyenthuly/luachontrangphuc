@@ -9,7 +9,7 @@
 #import "SWFeelViewController.h"
 #import "SWUtil.h"
 #import "StarRatingControl.h"
-#import "SWLogViewController.h"
+#import "SWListLogViewController.h"
 
 #define Message_Alert_Feel @"Cảm ơn đánh giá của bạn!"
 #define Message_Feel @"Mời bạn nhập cảm nhận về bộ trang phục!"
@@ -177,7 +177,7 @@
         if (buttonIndex == 0) {
             NSArray *viewControllers = [self.navigationController viewControllers];
             for (UIViewController *controller in viewControllers) {
-                if ([controller isKindOfClass:[SWLogViewController class]]) {
+                if ([controller isKindOfClass:[SWListLogViewController class]]) {
                     [self.navigationController popToViewController:controller animated:YES];
                     break;
                 }
