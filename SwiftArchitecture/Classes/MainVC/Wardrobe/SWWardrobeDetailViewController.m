@@ -27,6 +27,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:YES];
     [[SWUtil appDelegate] hideTabbar:YES];
     [self.data removeAllObjects];

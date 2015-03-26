@@ -16,6 +16,8 @@
     NSString *imageNameStr;
     NSString *colorId;
     NSString *materialId;
+    NSString *subcategoryid;
+    NSString *categoryStr;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
@@ -73,8 +75,23 @@
             [self setRightButtonWithImage:Check_Mark highlightedImage:nil target:self action:@selector(checkButtonTapped:)];
 
             if (self.typeCategory == addClotherDetail) {
-                self.categoryImageView.hidden = YES;
-                self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+                
+                if (self.categoryId == Quan_Chanvay) {
+                    self.categoryLabel.text = @"Quần";
+                    self.categoryImageView.hidden = NO;
+                    self.categoryButton.enabled = YES;
+
+                }else if (self.categoryId == Giayhai){
+                    self.categoryLabel.text = @"Giày cao gót";
+                    self.categoryImageView.hidden = NO;
+                    self.categoryButton.enabled = YES;
+                }
+                else{
+                    self.categoryButton.enabled = NO;
+                    self.categoryImageView.hidden = YES;
+                    self.categoryLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+                }
+               
             }
             [self checkSizeLabel];
 
@@ -100,11 +117,7 @@
         default:
             break;
     }
-    
-    if (self.typeCategory == addClother) {
-        self.categoryId = 1;
-    }
-    
+
 }
 
 - (void)initDataFromServer{
@@ -157,7 +170,23 @@
             tableViewArr = [[NSMutableArray alloc] initWithArray:Color_Arr];
             break;
         case category:
-            tableViewArr = [[NSMutableArray alloc] initWithArray:Clothes_Arr];
+        {
+            if (self.typeCategory == addClother) {
+                tableViewArr = [[NSMutableArray alloc] initWithArray:Clothes_New];
+            } else {
+                switch (self.categoryId) {
+                    case Quan_Chanvay:
+                        tableViewArr = [[NSMutableArray alloc] initWithArray:Jean_Arr];
+                        break;
+                    case Giayhai:
+                        tableViewArr = [[NSMutableArray alloc] initWithArray:Shoe_Arr];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+        }
             break;
         case size:
         {
@@ -198,6 +227,17 @@
 }
 
 - (void)showPopupWithImageView:(UIImageView *)imageView{
+    
+    CGRect frame = self.addClotheTableView.frame;
+    if (tableViewArr.count < 5) {
+        frame.size.height = tableViewArr.count * 44;
+        self.addClotheTableView.frame = frame;
+    } else{
+        frame.size.height = 220;
+        self.addClotheTableView.frame = frame;
+    }
+    
+    
     if (self.addClotheTableView.hidden) {
         
         self.addClotheTableView.hidden = NO;
@@ -264,18 +304,22 @@
         
         colorId = [SWUtil checkColorId:self.colorLabel.text];
         materialId = [SWUtil checkMaterialId:self.materialLabel.text];
+        self.categoryId = [SWUtil checkCategoryId:self.categoryLabel.text];
+        subcategoryid = [SWUtil checkSubcategoryid:self.categoryLabel.text];
+        categoryStr = [SWUtil checkCategory:self.categoryLabel.text];
+        
         if (imageData) {
             NSDictionary *parameters = @{@"userid": [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"],
                                          @"name":self.nameTextField.text,
-                                         @"category":self.categoryLabel.text,
+                                         @"category":categoryStr,
                                          @"color":self.colorLabel.text,
                                          @"size":self.sizeLabel.text,
                                          @"material":self.materialLabel.text,
                                          @"categoryid":[NSNumber numberWithInteger:self.categoryId],
                                          @"colorid":colorId,
-                                         @"materialid":materialId};
-            
-            
+                                         @"materialid":materialId,
+                                         @"subcategoryid":subcategoryid};
+                        
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
             
             AFHTTPRequestOperation *op = [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -309,10 +353,8 @@
                         break;
                 }
                 
-                
                 [[SWUtil sharedUtil] hideLoadingView];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                //[SWUtil showConfirmAlert:@"Lỗi!" message:[error localizedDescription] delegate:nil];
                 [[SWUtil sharedUtil] hideLoadingView];
             }];
             [op start];
@@ -356,7 +398,6 @@
 
 - (IBAction)categoryButton:(id)sender {
     
-    if (self.typeCategory == addClother) {
         UIButton *button = (UIButton*)sender;
         CGRect frame = self.addClotheTableView.frame;
         frame.origin.y = button.frame.origin.y + button.frame.size.height;
@@ -366,7 +407,6 @@
         [self initData];
         [self.addClotheTableView reloadData];
         [self showPopupWithImageView:self.categoryImageView];
-    }
 }
 
 - (IBAction)sizeButton:(id)sender {
@@ -423,7 +463,6 @@
         {
             self.categoryLabel.text = cell.textLabel.text;
             if (self.typeCategory == addClother) {
-                self.categoryId = indexPath.row + 1;
             }
         }
             break;

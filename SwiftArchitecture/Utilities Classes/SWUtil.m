@@ -238,6 +238,92 @@
     return materialId;
 }
 
+
++ (NSInteger)checkCategoryId:(NSString *)category{
+    NSInteger categoryid = 0;
+    
+    if ([category isEqualToString:@"Áo sơ mi"]) {
+        categoryid = Aosomi;
+    }
+    if ([category isEqualToString:@"Áo phông"]) {
+        categoryid = Aophong;
+    }
+    if ([category isEqualToString:@"Áo khoác"]) {
+        categoryid = Aokhoac;
+    }
+    if ([category isEqualToString:@"Áo len"]) {
+        categoryid = Aolen;
+    }
+    if ([category isEqualToString:@"Quần"]) {
+        categoryid = Quan_Chanvay;
+    }
+    if ([category isEqualToString:@"Chân váy"]) {
+        categoryid = Quan_Chanvay;
+    }
+    
+    if ([category isEqualToString:@"Váy"]) {
+        categoryid = Vay;
+    }
+    if ([category isEqualToString:@"Giày thể thao"]) {
+        categoryid = Giaythethao;
+    }
+    if ([category isEqualToString:@"Giày cao gót"]) {
+        categoryid = Giayhai;
+    }
+    if ([category isEqualToString:@"Giày bệt"]) {
+        categoryid = Giayhai;
+    }
+    if ([category isEqualToString:@"Giày bốt"]) {
+        categoryid = Giaybot;
+    }
+    
+    return categoryid;
+    
+}
+
++ (NSString *)checkSubcategoryid:(NSString *)subcategory{
+    NSString *subcategoryid;
+    if ([subcategory isEqualToString:@"Quần"]) {
+        subcategoryid = Quan;
+    }
+    else if ([subcategory isEqualToString:@"Chân váy"]) {
+        subcategoryid = Chanvay;
+    }
+    else if ([subcategory isEqualToString:@"Giày cao gót"]){
+        subcategoryid = Giaycaogot;
+    }
+    else if ([subcategory isEqualToString:@"Giày bệt"]){
+        subcategoryid = Giaybet;
+    }
+    else{
+        subcategoryid = Ko;
+    }
+    
+    return subcategoryid;
+}
+
++ (NSString *)checkCategory:(NSString *)category{
+    NSString *categoryStr;
+    if ([category isEqualToString:@"Quần"]) {
+        categoryStr = @"Quần/Chân váy";
+    }
+    else if ([category isEqualToString:@"Chân váy"]) {
+        categoryStr = @"Quần/Chân váy";
+    }
+    else if ([category isEqualToString:@"Giày cao gót"]){
+        categoryStr = @"Giày hài";
+    }
+    else if ([category isEqualToString:@"Giày bệt"]){
+        categoryStr = @"Giày hài";
+    }
+    else{
+        categoryStr = category;
+    }
+    
+    return categoryStr;
+}
+
+
 + (NSInteger)randomWithMin:(NSInteger)min andMax:(NSInteger)max{
     NSInteger random = (arc4random() % (max - min + 1)) + min;
     
