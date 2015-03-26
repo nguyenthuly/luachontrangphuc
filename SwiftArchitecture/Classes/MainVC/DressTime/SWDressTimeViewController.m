@@ -16,7 +16,8 @@
     NSInteger categorySkirt;
     NSInteger categoryJean;
     NSInteger categoryShoe;
-    
+    NSString *subcategoryJean;
+    NSString *subcategoryShoe;
     NSString *userId;
     NSInteger datetime;
     NSString *weatherImage;
@@ -264,122 +265,205 @@
     return random;
 }
 
+- (NSString *)checkSubCategory:(NSInteger)sub{
+    NSString *subCategory;
+    switch (sub) {
+        case subQuan:
+            subCategory = Quan;
+            break;
+        case subChanvay:
+            subCategory = Chanvay;
+            break;
+        case subGiaycaogot:
+            subCategory = Giaycaogot;
+            break;
+        case subGiaybet:
+            subCategory = Giaybet;
+            break;
+        default:
+            subCategory = Ko;
+            break;
+    }
+    return subCategory;
+}
 
 - (void)chooseWork {
     
     //Rat lanh
     if (temperature < 12) {
-        categoryJean = Quan;
+        categoryJean = Quan_Chanvay;
         categorySkirt = Aokhoac;
         categoryShoe = Giaybot;
+        subcategoryJean = Quan;
+        subcategoryShoe = Ko;
     
     //Lanh
     } else if (temperature < 15) {
-        categoryJean = Quan;
+        categoryJean = Quan_Chanvay;
         categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
         categoryShoe = [self randomWithMin:Giayhai andMax:Giaybot];
-    
+        subcategoryJean = Quan;
+        
+        if (categoryShoe == Giayhai) {
+            subcategoryShoe = [self checkSubCategory:[self randomWithMin:subGiaycaogot andMax:subGiaybet]];
+        } else{
+            subcategoryShoe = Ko;
+        }
+        
     //Se lanh
-    } else if (temperature < 18){
-        categoryJean = Quan;
+    } else if (temperature < 20){
+        categoryJean = Quan_Chanvay;
         categoryShoe = Giayhai;
         categorySkirt = Aolen;
+        
+        NSInteger subJean = [self randomWithMin:subQuan andMax:subChanvay];
+        subcategoryJean = [self checkSubCategory:subJean];
+        if (subJean == subChanvay) {
+            subcategoryShoe = Giaycaogot;
+        } else{
+            subcategoryShoe = [self checkSubCategory:[self randomWithMin:subGiaycaogot andMax:subGiaybet]];
+        }
     
     //Khong lanh
     } else{
-        categoryJean = [self randomWithMin:Quan andMax:Vay];
+        categoryJean = [self randomWithMin:Quan_Chanvay andMax:Vay];
         categoryShoe = Giayhai;
+        
         if (categoryJean == Vay) {
             categorySkirt = 0;
             self.skirtImageView.image = [UIImage imageNamed:@"Ko"];
             self.skirtButton.enabled = NO;
+            subcategoryJean = Ko;
+            subcategoryShoe = Giaycaogot;
             
         }else {
             categorySkirt = Aosomi;
             self.skirtButton.enabled = YES;
+            NSInteger subJean = [self randomWithMin:subQuan andMax:subChanvay];
+            subcategoryJean = [self checkSubCategory:subJean];
+            
+            if (subJean == subChanvay) {
+                subcategoryShoe = Giaycaogot;
+            } else{
+                subcategoryShoe = [self checkSubCategory:[self randomWithMin:subGiaycaogot andMax:subGiaybet]];
+            }
         }
     }
     
-    [self chooseClothesWithCategoryId:categoryJean];
+    [self chooseClothesWithCategoryId:categoryJean andSubcategoryJean:subcategoryJean];
 }
 
 - (void)chooseGoout{
     
     //Rat lanh
     if (temperature < 12) {
-        categoryJean = Quan;
+        categoryJean = Quan_Chanvay;
         categorySkirt = Aokhoac;
         categoryShoe = Giaybot;
+        subcategoryJean = Quan;
+        subcategoryShoe = Ko;
         
         //Lanh
     } else if (temperature < 15) {
-        categoryJean = Quan;
+        categoryJean = Quan_Chanvay;
         categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
         categoryShoe = [self randomWithMin:Giaythethao andMax:Giaybot];
+        subcategoryJean = Quan;
+        
+        if (categoryShoe == Giayhai) {
+            subcategoryShoe = Giaybet;
+        } else{
+            subcategoryShoe = Ko;
+        }
+        
         
         //Se lanh
-    } else if (temperature < 18){
-        categoryJean = Quan;
+    } else if (temperature < 20){
+        categoryJean = Quan_Chanvay;
         categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
         categorySkirt = Aolen;
+        subcategoryJean = Quan;
+        
+        if (categoryShoe == Giayhai) {
+            subcategoryShoe = Giaybet;
+        } else{
+            subcategoryShoe = Ko;
+        }
         
         //Khong lanh
     } else{
-        categoryJean = [self randomWithMin:Quan andMax:Vay];
+        categoryJean = Quan_Chanvay;
+        categorySkirt = Aophong;
         categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
-        if (categoryJean == Vay) {
-            categorySkirt = 0;
-            self.skirtImageView.image = [UIImage imageNamed:@"Ko"];
-            self.skirtButton.enabled = NO;
-            
-        }else {
-            categorySkirt = [self randomWithMin:Aosomi andMax:Aophong];;
-            self.skirtButton.enabled = YES;
+        NSInteger subJean = [self randomWithMin:subQuan andMax:subChanvay];
+        subcategoryJean = [self checkSubCategory:subJean];
+        
+        if (categoryShoe == Giayhai) {
+            if (subJean == subChanvay) {
+                subcategoryShoe = Giaycaogot;
+            } else{
+                subcategoryShoe = Giaybet;
+            }
+        } else{
+            subcategoryShoe = Ko;
         }
+           
     }
     
-    [self chooseClothesWithCategoryId:categoryJean];
+    [self chooseClothesWithCategoryId:categoryJean andSubcategoryJean:subcategoryJean];
 }
 
 - (void)chooseParty{
     
     //Rat lanh
     if (temperature < 12) {
-        categoryJean = Quan;
+        categoryJean = Quan_Chanvay;
         categorySkirt = Aokhoac;
         categoryShoe = Giaybot;
+        subcategoryJean = Quan;
+        subcategoryShoe = Ko;
         
         //Lanh
     } else if (temperature < 15) {
-        categoryJean = Quan;
+        categoryJean = Quan_Chanvay;
         categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
         categoryShoe = [self randomWithMin:Giayhai andMax:Giaybot];
         
+        if (categorySkirt == Aokhoac) {
+            subcategoryJean = Quan;
+        } else{
+            subcategoryJean = Chanvay;
+        }
+        
+        if (categoryShoe == Giayhai) {
+            subcategoryShoe = Giaycaogot;
+        } else{
+            subcategoryShoe = Ko;
+        }
+        
         //Se lanh
-    } else if (temperature < 18){
-        categoryJean = Quan;
+    } else if (temperature < 20){
+        categoryJean = Quan_Chanvay;
         categoryShoe = Giayhai;
         categorySkirt = Aolen;
+        subcategoryJean = Chanvay;
+        subcategoryShoe = Giaycaogot;
         
         //Khong lanh
     } else{
-        categoryJean = [self randomWithMin:Quan andMax:Vay];
+        categoryJean = Vay;
         categoryShoe = Giayhai;
-        if (categoryJean == Vay) {
-            categorySkirt = 0;
-            self.skirtImageView.image = [UIImage imageNamed:@"Ko"];
-            self.skirtButton.enabled = NO;
-            
-        }else {
-            categorySkirt = Aosomi;
-            self.skirtButton.enabled = YES;
-        }
+        categorySkirt = 0;
+        self.skirtImageView.image = [UIImage imageNamed:@"Ko"];
+        self.skirtButton.enabled = NO;
+        subcategoryJean = Ko;
+        subcategoryShoe = Giaycaogot;
     }
     
-    [self chooseClothesWithCategoryId:categoryJean];
+    [self chooseClothesWithCategoryId:categoryJean andSubcategoryJean:subcategoryJean];
 }
 
-- (void)chooseClothesWithCategoryId:(NSInteger)categoryId{
+- (void)chooseClothesWithCategoryId:(NSInteger)categoryId andSubcategoryJean:(NSString *)subCategoryJean{
     
     NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_SUGGEST_BY_CATEGORYID];
     
@@ -388,7 +472,8 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
-                                 @"categoryid":[NSNumber numberWithInteger:categoryId]
+                                 @"categoryid":[NSNumber numberWithInteger:categoryId],
+                                 @"subcategoryid":subCategoryJean
                                  };
     [manager GET:url
       parameters:parameters
@@ -410,12 +495,12 @@
                     case skirt:
                     {
                         if (categorySkirt != 0) {
-                            [self chooseColor:categorySkirt withCategory:skirt andColor:self.jeanColor];
+                            [self chooseColor:categorySkirt withCategory:skirt andColor:self.jeanColor andSubcategory:Ko];
                         }
                     }
                         break;
                     case shoe:
-                        [self chooseColor:categoryShoe withCategory:shoe andColor:self.jeanColor];
+                        [self chooseColor:categoryShoe withCategory:shoe andColor:self.jeanColor andSubcategory:subcategoryShoe];
                         break;
                     default:
                         break;
@@ -431,7 +516,7 @@
 }
 
 
-- (void)chooseColor:(NSInteger)categoryId withCategory:(TypeChooseClothe)type andColor:(NSString *)color{
+- (void)chooseColor:(NSInteger)categoryId withCategory:(TypeChooseClothe)type andColor:(NSString *)color andSubcategory:(NSString *)subcategory{
     
     NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_CHOOSE_COLOR_BY_CATEGORY];
     
@@ -441,20 +526,22 @@
     
     NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
                                  @"categoryid":[NSNumber numberWithInteger:categoryId],
+                                 @"subcategoryid":subcategory
                                  };
     [manager GET:url
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              if ([responseObject isKindOfClass:[NSArray class]]) {
                  self.colorData = (NSMutableArray *)responseObject;
+                 NSLog(@"Color: %@",responseObject);
              }
              NSString * colorChoose = [SWUtil chooseColor:color andArr:self.colorData];
              switch (type) {
                  case skirt:
-                     [self chooseClothesWithCategoryId:categorySkirt colorId:colorChoose withType:skirt];
+                     [self chooseClothesWithCategoryId:categorySkirt colorId:colorChoose withType:skirt andSubcategory:Ko];
                      break;
                  case shoe:
-                     [self chooseClothesWithCategoryId:categoryShoe colorId:colorChoose withType:shoe];
+                     [self chooseClothesWithCategoryId:categoryShoe colorId:colorChoose withType:shoe andSubcategory:subcategoryShoe];
                      break;
                  default:
                      break;
@@ -469,7 +556,7 @@
 }
 
 
-- (void)chooseClothesWithCategoryId:(NSInteger)categoryId colorId:(NSString *)colorid withType:(TypeChooseClothe)type{
+- (void)chooseClothesWithCategoryId:(NSInteger)categoryId colorId:(NSString *)colorid withType:(TypeChooseClothe)type andSubcategory:(NSString *)subcategory{
     
     NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_SUGGEST_BY_CATEGORYID_COLORID];
     
@@ -479,7 +566,8 @@
     
     NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
                                  @"categoryid":[NSNumber numberWithInteger:categoryId],
-                                 @"colorid":colorid
+                                 @"colorid":colorid,
+                                 @"subcategoryid":subcategory
                                  };
     [manager GET:url
       parameters:parameters

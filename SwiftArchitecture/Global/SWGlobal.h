@@ -166,6 +166,10 @@ typedef enum {
 #define Size_Jean_Arr @[@"26",@"27",@"28",@"29",@"30",@"31",@"32"]
 #define Material_Clothes_Arr @[@"Vải",@"Bò",@"Da",@"Cotton",@"Len"]
 #define Material_Shoes_Arr @[@"Vải",@"Da"]
+#define Clothes_New @[@"Áo sơ mi",@"Áo phông",@"Áo khoác",@"Áo len",@"Quần",@"Chân váy",@"Váy",@"Giày thể thao",@"Giày bệt",@"Giày cao gót",@"Giày bốt"]
+
+#define Jean_Arr @[@"Quần",@"Chân váy"]
+#define Shoe_Arr @[@"Giày cao gót", @"Giày bệt"]
 
 
 /*CATEGORY*/
@@ -174,15 +178,26 @@ typedef enum {
 #define Aophong 2
 #define Aokhoac 3
 #define Aolen 4
-#define Quan 5
+#define Quan_Chanvay 5
 #define Vay 6
 #define Giaythethao 7
 #define Giayhai 8
 #define Giaybot 9
 
+//SUBCATEGORY
 
-/*COLOR*/
+#define Quan @"quan"
+#define Chanvay @"chanvay"
+#define Giaycaogot @"giaycaogot"
+#define Giaybet @"giaybet"
+#define Ko @"Ko"
 
+#define subQuan 1
+#define subChanvay 2
+#define subGiaycaogot 3
+#define subGiaybet 4
+
+//User Infor
 #define First_Name 0
 #define Last_Name 1
 #define Gender 2
