@@ -41,8 +41,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initUI];
-    //[self initData];
 }
+
 - (void)initUI{
     self.title = Log_Title;
     [self setBackButtonWithImage:Back_Button highlightedImage:nil target:self action:@selector(backButtonTapped:)];

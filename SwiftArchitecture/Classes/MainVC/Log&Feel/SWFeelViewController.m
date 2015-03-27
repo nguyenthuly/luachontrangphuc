@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *skirtImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *jeanImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *shoeImageView;
+@property (weak, nonatomic) IBOutlet UILabel *skirtLabel;
 
 - (IBAction)sendButtonTapped:(id)sender;
 
@@ -68,10 +69,18 @@
 
 - (void)initData{
     
-    [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:self.skirtImage]];
     [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:self.jeanImage]];
     [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:self.shoeImage]];
     self.feelTextField.text = [self.logData objectForKey:@"feel"];
+    
+    if ([self.skirtImage containsString:Ko]) {
+        skirtRating.hidden = YES;
+        self.skirtLabel.hidden = YES;
+    }else{
+        skirtRating.hidden = NO;
+        self.skirtLabel.hidden = NO;
+        [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:self.skirtImage]];
+    }
 }
 
 - (void)backButtonTapped:(id)sender{
