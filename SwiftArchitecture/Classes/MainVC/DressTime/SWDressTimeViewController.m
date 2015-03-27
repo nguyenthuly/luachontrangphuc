@@ -102,7 +102,6 @@
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(NSArray *newForecast) {
          [self initScroll];
-         [[SWUtil sharedUtil] hideLoadingView];
      }];
     
     [[WXManager sharedManager] findCurrentLocation];
@@ -155,14 +154,14 @@
 }
 
 - (void)initScroll {
-    
+    [[SWUtil sharedUtil] showLoadingView];
     for (UIView *subview in self.weatherScrollView.subviews) {
         [subview removeFromSuperview];
     }
     
     int xPos = 0;
     
-    for (int i = 0; i < [[WXManager sharedManager].hourlyForecast count]; i++) {
+    for (int i = 2; i < [[WXManager sharedManager].hourlyForecast count]; i++) {
         WXCondition *weather = [WXManager sharedManager].hourlyForecast[i];
         
         SWWeatherView *weatherView = [[SWWeatherView alloc] initWithFrame:CGRectZero];
@@ -194,6 +193,7 @@
     CGSize contentSize = [self.weatherScrollView contentSize];
     contentSize.width = xPos;
     [self.weatherScrollView setContentSize:contentSize];
+    [[SWUtil sharedUtil] hideLoadingView];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {

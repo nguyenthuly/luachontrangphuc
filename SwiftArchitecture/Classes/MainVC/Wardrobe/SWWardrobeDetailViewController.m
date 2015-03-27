@@ -145,6 +145,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"image/jpeg", nil];
     
     NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
                                  @"categoryid":[NSNumber numberWithInteger:self.categoryId],
@@ -182,15 +183,16 @@
                  
              } else {
                  self.noClotheLabel.hidden = YES;
-                 [self.wardrobeCollectionView reloadData];
+                 
                  self.title = [[self.data objectAtIndex:0] objectForKey:@"category"];
                  NSLog(@"WARDROBE JSON: %@", responseObject);
              }
+             [self.wardrobeCollectionView reloadData];
              [[SWUtil sharedUtil] hideLoadingView];
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@",error);
-             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
     
@@ -215,7 +217,7 @@
 #pragma mark - CollectionView
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
+    self.noClotheLabel.hidden = YES;
     return 1;
 }
 
@@ -230,7 +232,21 @@
     
     NSString *imageLink = [NSString stringWithFormat:@"%@%@",URL_IMAGE,[[self.data objectAtIndex:indexPath.row] objectForKey:@"image"]];
     cell.imageLink = [[self.data objectAtIndex:indexPath.row] objectForKey:@"image"];
-    [cell.clotheImageView sd_setImageWithURL:[NSURL URLWithString:imageLink]];
+    cell.clotheImageView.image = nil;
+    cell.clotheImageView.contentMode = UIViewContentModeCenter;
+     NSURL *url = [[NSBundle mainBundle] URLForResource:@"loading" withExtension:@"gif"];
+    [cell.clotheImageView sd_setImageWithURL:[NSURL URLWithString:imageLink]
+                            placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                          
+                          if (image) {
+                              cell.clotheImageView.contentMode = UIViewContentModeScaleAspectFill;
+                          
+                          } else {
+                              
+                          }
+                      }];
+    
     cell.wardrobeId = [[self.data objectAtIndex:indexPath.row] objectForKey:@"wardrobeid"];
     
     if(indexPath.row == self.data.count - 1 && !_endOfRespond){

@@ -143,6 +143,7 @@
     // define the block to call when we get the asset based on the url (below)
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
     {
+        NSString *imageNameStr;
         ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
         NSLog(@"[imageRep filename] : %@", [imageRep filename]);
         
@@ -150,18 +151,24 @@
         NSString *url = [NSString stringWithFormat:@"%@%@", URL_BASE, URL_UPLOAD_AVARTAR];
         
         if (imageData) {
+            if (!imageRep) {
+                imageNameStr = @"IMG.JPG";
+            } else{
+                imageNameStr = [imageRep filename];
+            }
+            
             NSDictionary *parameters = @{@"userid": [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]};
             
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
             
             AFHTTPRequestOperation *op = [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                [formData appendPartWithFileData:imageData name:@"avatar" fileName:[imageRep filename] mimeType:@"image/jpeg"];
+                [formData appendPartWithFileData:imageData name:@"avatar" fileName:imageNameStr mimeType:@"image/jpeg"];
             } success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 [[SWUtil sharedUtil] hideLoadingView];
                 
-                NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
+                NSLog(@"Success: %@", operation.responseString);
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@ ***** %@", operation.responseString, error);
+                NSLog(@"Error: %@", operation.responseString);
                 [SWUtil showConfirmAlert:@"Lỗi!" message:[error localizedDescription] delegate:nil];
                 [[SWUtil sharedUtil] hideLoadingView];
             }];

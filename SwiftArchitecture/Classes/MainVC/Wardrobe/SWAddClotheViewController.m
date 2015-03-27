@@ -128,6 +128,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"image/jpeg", nil];
     
     NSDictionary *parameters = @{@"userid":[NSNumber numberWithInteger:[[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] integerValue]],
                                  @"wardrobeid":[[NSUserDefaults standardUserDefaults] objectForKey:@"wardrobeid"]
@@ -355,6 +356,7 @@
                 
                 [[SWUtil sharedUtil] hideLoadingView];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
                 [[SWUtil sharedUtil] hideLoadingView];
             }];
             [op start];
@@ -462,8 +464,6 @@
         case category:
         {
             self.categoryLabel.text = cell.textLabel.text;
-            if (self.typeCategory == addClother) {
-            }
         }
             break;
         case size:
@@ -529,8 +529,13 @@
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
     {
         ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
+        if (!imageRep) {
+            imageNameStr = @"IMG.JPG";
+        } else{
+            imageNameStr = [imageRep filename];
+        }
         NSLog(@"[imageRep filename] : %@", [imageRep filename]);
-        imageNameStr = [imageRep filename];
+
         };
     
     // get the asset library and fetch the asset based on the ref url (pass in block above)

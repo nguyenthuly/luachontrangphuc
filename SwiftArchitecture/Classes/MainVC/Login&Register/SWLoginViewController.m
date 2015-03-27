@@ -39,7 +39,7 @@
 
 - (void)initUI{
     self.title = Login_Title;
-self.emailTextField.text = @"mrskem.iu@gmail.com";
+    self.emailTextField.text = @"mrskem.iu@gmail.com";
     self.passWordTextField.text = @"13042011";
     self.loginView.layer.borderWidth = 1.0;
     self.loginView.layer.borderColor = [[UIColor colorWithHex:Gray_Color alpha:1.0] CGColor];
@@ -75,6 +75,7 @@ self.emailTextField.text = @"mrskem.iu@gmail.com";
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"image/jpeg", nil];
         
         NSDictionary *parameters = @{@"email": self.emailTextField.text,
                                      @"password": self.passWordTextField.text};
@@ -86,14 +87,14 @@ self.emailTextField.text = @"mrskem.iu@gmail.com";
                  [[SWUtil appDelegate] initTabbar];
                  [SWUtil saveUserInfor:responseObject];                 
                  NSLog(@"LOGIN JSON: %@", responseObject);
-                 [[SWUtil sharedUtil] hideLoadingView];
+//                 [[SWUtil sharedUtil] hideLoadingView];
             
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
                 NSLog(@"Error: %@", error);
                 [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Email hoặc tài khoản chưa đúng" delegate:nil];
-                self.emailTextField.text = @"";
-                self.passWordTextField.text = @"";
+//                self.emailTextField.text = @"";
+//                self.passWordTextField.text = @"";
                 [[SWUtil sharedUtil] hideLoadingView];
         }];
     } else {
@@ -101,9 +102,7 @@ self.emailTextField.text = @"mrskem.iu@gmail.com";
         [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Yêu cầu kết nối mạng để đăng nhập" delegate:nil];
         [[SWUtil sharedUtil] hideLoadingView];
     }
-    
-    //[[SWUtil appDelegate] initTabbar];
-    
+        
 }
 
 
