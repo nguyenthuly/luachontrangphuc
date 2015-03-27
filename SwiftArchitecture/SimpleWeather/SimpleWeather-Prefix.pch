@@ -37,5 +37,5 @@
 
 #import "AFHTTPRequestOperationManager.h"
 #import "UIImageView+WebCache.h"
-
+#import "UIImage+animatedGIF.h"
 #endif

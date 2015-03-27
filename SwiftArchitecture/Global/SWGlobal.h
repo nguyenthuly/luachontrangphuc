@@ -50,8 +50,12 @@ typedef enum {
 
 /*URL*/
 
-#define URL_BASE @"http://localhost/LuaChonTrangPhuc/index.php/api/"
-#define URL_IMAGE @"http://localhost/LuaChonTrangPhuc/"
+//#define URL_BASE @"http://localhost/LuaChonTrangPhuc/index.php/api/"
+//#define URL_IMAGE @"http://localhost/LuaChonTrangPhuc/"
+
+#define URL_BASE @"http://nguyenthuly.16mb.com/LuaChonTrangPhuc/index.php/api/"
+#define URL_IMAGE @"http://nguyenthuly.16mb.com/LuaChonTrangPhuc/"
+
 #define URL_LOGIN @"users/api_login"
 #define URL_REGISTER @"users/api_register"
 #define URL_UPDATE_USER @"users/api_updateUser"

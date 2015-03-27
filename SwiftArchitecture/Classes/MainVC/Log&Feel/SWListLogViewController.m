@@ -50,7 +50,9 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"image/jpeg", nil];
+
+        
     NSDictionary *parameters = @{@"userid": [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"],
                                   @"offset":[NSNumber numberWithInteger:self.listLogArr.count]};
     [manager GET:url
@@ -78,7 +80,9 @@
              
              if (code == 0 && self.listLogArr.count == 0) {
                  _endOfRespond = YES;
+                 //self.listLogTableView.hidden = YES;
              } else {
+                 //self.listLogTableView.hidden = NO;
                 [self.listLogTableView reloadData];
              }
              
@@ -87,7 +91,7 @@
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
              NSLog(@"Error: %@", error);
-             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Lỗi" delegate:nil];
+             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Lỗi" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
 

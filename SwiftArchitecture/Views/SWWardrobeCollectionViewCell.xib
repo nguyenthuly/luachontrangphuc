@@ -13,7 +13,7 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="70" height="90"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3oa-tw-6BP">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oa-tw-6BP">
                         <rect key="frame" x="5" y="5" width="60" height="80"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_blue_checked.png" translatesAutoresizingMaskIntoConstraints="NO" id="b6k-V4-QTf">
@@ -30,7 +30,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="3.jpg" width="200" height="252"/>
         <image name="image_blue_checked.png" width="24" height="24"/>
     </resources>
 </document>

@@ -26,6 +26,8 @@
 		043764221AA83CE400C2E187 /* WXController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641B1AA83CE400C2E187 /* WXController.m */; };
 		043764231AA83CE400C2E187 /* WXDailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641D1AA83CE400C2E187 /* WXDailyForecast.m */; };
 		043764241AA83CE400C2E187 /* WXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437641F1AA83CE400C2E187 /* WXManager.m */; };
+		045621F21AC51C25006862F0 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 045621F11AC51C25006862F0 /* UIImage+animatedGIF.m */; };
+		045621F41AC51D4B006862F0 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 045621F31AC51D4B006862F0 /* loading.gif */; };
 		048232441AC073ED0064D656 /* image_blue_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 048232421AC073ED0064D656 /* image_blue_checked.png */; };
 		048232451AC073ED0064D656 /* image_blue_uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 048232431AC073ED0064D656 /* image_blue_uncheck.png */; };
 		048232481AC074010064D656 /* image_blue_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048232461AC074010064D656 /* image_blue_checked@2x.png */; };
@@ -485,6 +487,9 @@
 		0437641D1AA83CE400C2E187 /* WXDailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXDailyForecast.m; sourceTree = "<group>"; };
 		0437641E1AA83CE400C2E187 /* WXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXManager.h; sourceTree = "<group>"; };
 		0437641F1AA83CE400C2E187 /* WXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXManager.m; sourceTree = "<group>"; };
+		045621F01AC51C25006862F0 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		045621F11AC51C25006862F0 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		045621F31AC51D4B006862F0 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		048232421AC073ED0064D656 /* image_blue_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_blue_checked.png; sourceTree = "<group>"; };
 		048232431AC073ED0064D656 /* image_blue_uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_blue_uncheck.png; sourceTree = "<group>"; };
 		048232461AC074010064D656 /* image_blue_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_blue_checked@2x.png"; sourceTree = "<group>"; };
@@ -1087,9 +1092,19 @@
 			path = Weather;
 			sourceTree = "<group>";
 		};
+		045621EF1AC51C25006862F0 /* ImageAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				045621F01AC51C25006862F0 /* UIImage+animatedGIF.h */,
+				045621F11AC51C25006862F0 /* UIImage+animatedGIF.m */,
+			);
+			path = ImageAnimation;
+			sourceTree = "<group>";
+		};
 		04ADDBE11AA053EC00C49FD4 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				045621F31AC51D4B006862F0 /* loading.gif */,
 				04ADDBE21AA053EC00C49FD4 /* Images */,
 			);
 			path = Resource;
@@ -1731,6 +1746,7 @@
 		04B951491AA007DC005EFF2D /* CustomControls */ = {
 			isa = PBXGroup;
 			children = (
+				045621EF1AC51C25006862F0 /* ImageAnimation */,
 				04D682FD1AB47DB6006FD27A /* MBHudView */,
 				04D683001AB47DB6006FD27A /* SDWebImage */,
 				04B9514A1AA007DC005EFF2D /* AwesomeButton */,
@@ -2416,6 +2432,7 @@
 				04ADDCED1AA053ED00C49FD4 /* edit_green.png in Resources */,
 				04ADDDB21AA053ED00C49FD4 /* dry_gray@2x.png in Resources */,
 				04ADDD4B1AA053ED00C49FD4 /* socks.png in Resources */,
+				045621F41AC51D4B006862F0 /* loading.gif in Resources */,
 				04ADDDD61AA053ED00C49FD4 /* sunrise_red@2x.png in Resources */,
 				04ADDD991AA053ED00C49FD4 /* snow_gray.png in Resources */,
 			);
@@ -2560,6 +2577,7 @@
 				041AE9D01AB18F390086B0B2 /* AFSecurityPolicy.m in Sources */,
 				04D683301AB47DB6006FD27A /* UIImageView+HighlightedWebCache.m in Sources */,
 				04D6832F1AB47DB6006FD27A /* UIImage+WebP.m in Sources */,
+				045621F21AC51C25006862F0 /* UIImage+animatedGIF.m in Sources */,
 				04B952B81AA007DC005EFF2D /* NSObject+Extension.m in Sources */,
 				04B952901AA007DC005EFF2D /* GCDispatchQueue.m in Sources */,
 				04B952B61AA007DC005EFF2D /* NSMutableArray+Queue.m in Sources */,
