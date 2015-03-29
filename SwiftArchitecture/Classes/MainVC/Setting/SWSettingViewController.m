@@ -169,7 +169,7 @@
                 NSLog(@"Success: %@", operation.responseString);
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", operation.responseString);
-                [SWUtil showConfirmAlert:@"Lỗi!" message:[error localizedDescription] delegate:nil];
+                //[SWUtil showConfirmAlert:@"Lỗi!" message:[error localizedDescription] delegate:nil];
                 [[SWUtil sharedUtil] hideLoadingView];
             }];
             [op start];

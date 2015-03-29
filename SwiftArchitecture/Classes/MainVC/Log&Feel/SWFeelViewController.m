@@ -115,7 +115,7 @@
               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   
                   NSLog(@"Error: %@", error);
-                  [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Lỗi" delegate:nil];
+                  //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Lỗi" delegate:nil];
                   [[SWUtil sharedUtil] hideLoadingView];
               }];
 

@@ -81,7 +81,7 @@
      subscribeNext:^(WXCondition *newCondition) {
          float temp = newCondition.temperature.floatValue-273.15;
          if (temp >= 0) {
-             self.temperatureLabel.text = [NSString stringWithFormat:@"%.0f°C",newCondition.temperature.floatValue-273.15];
+             self.temperatureLabel.text = [NSString stringWithFormat:@"%.0f°C",newCondition.temperature.floatValue - 273.15];
          } else {
              self.temperatureLabel.text = @"";
          }
@@ -90,6 +90,7 @@
          self.cityLabel.text = [newCondition.locationName capitalizedString];
          NSString *imageStringCurrent = [NSString stringWithFormat:@"%@",[newCondition imageName]];
          self.weatherImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",imageStringCurrent, Gray_Weather]];
+         
          //if didnot select
          city = self.cityLabel.text;
          weatherImage = imageStringCurrent;
@@ -102,6 +103,7 @@
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(NSArray *newForecast) {
          [self initScroll];
+         [[SWUtil sharedUtil] hideLoadingView];
      }];
     
     [[WXManager sharedManager] findCurrentLocation];
@@ -193,7 +195,6 @@
     CGSize contentSize = [self.weatherScrollView contentSize];
     contentSize.width = xPos;
     [self.weatherScrollView setContentSize:contentSize];
-    [[SWUtil sharedUtil] hideLoadingView];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
@@ -399,11 +400,7 @@
         subcategoryJean = [self checkSubCategory:subJean];
         
         if (categoryShoe == Giayhai) {
-            if (subJean == subChanvay) {
-                subcategoryShoe = Giaycaogot;
-            } else{
-                subcategoryShoe = Giaybet;
-            }
+            subcategoryShoe = Giaybet;
         } else{
             subcategoryShoe = Ko;
         }
@@ -459,7 +456,6 @@
         subcategoryJean = Ko;
         subcategoryShoe = Giaycaogot;
     }
-    
     [self chooseClothesWithCategoryId:categoryJean andSubcategoryJean:subcategoryJean];
 }
 
@@ -486,7 +482,7 @@
              NSInteger randNum = [self randomWithMin:0 andMax:self.data.count - 1];
              self.linkImageJean = [[self.data objectAtIndex:randNum] objectForKey:@"image"];
              self.jeanImageLink = self.linkImageJean;
-             [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.jeanImageLink]]];
+             
              self.jeanColor = [[self.data objectAtIndex:randNum] objectForKey:@"colorid"];
              
              for (int i = 1; i < 3; i++) {
@@ -510,6 +506,7 @@
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
              [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             NSLog(@"Error: %@",error);
              [[SWUtil sharedUtil] hideLoadingView];
          }];
     
@@ -548,8 +545,8 @@
              }
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             
-             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             NSLog(@"Error: %@",error);
+             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
     
@@ -580,13 +577,32 @@
              NSInteger randNum = [self randomWithMin:0 andMax:self.resultData.count - 1];
              
              self.linkImage = [[self.resultData objectAtIndex:randNum] objectForKey:@"image"];
+             NSURL *url = [[NSBundle mainBundle] URLForResource:@"loading" withExtension:@"gif"];
+             
+             [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.jeanImageLink]]
+                                   placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                              
+                                              if (image) {
+                                              } else {
+                                                  
+                                              }
+                                          }];
              
              switch (type) {
                  case skirt:
                  {
                      if (categorySkirt != 0) {
                          self.skirtImageLink = self.linkImage;
-                         [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]];
+                         [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]
+                                                 placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                            
+                                                            if (image) {
+                                                            } else {
+                                                                
+                                                            }
+                                                        }];
                      }
                  }
                      break;
@@ -594,7 +610,15 @@
                  case shoe:
                  {
                      self.shoeImageLink = self.linkImage;
-                     [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.shoeImageLink]]];
+                     [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.shoeImageLink]]
+                                            placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                       
+                                                       if (image) {
+                                                       } else {
+                                                           
+                                                       }
+                                                   }];
                      
                  }
                      break;
@@ -602,10 +626,12 @@
                      break;
              }
              
+             [[SWUtil sharedUtil] hideLoadingView];
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
-             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             NSLog(@"Error: %@",error);
              [[SWUtil sharedUtil] hideLoadingView];
          }];
     
@@ -625,6 +651,8 @@
 }
 
 - (void)showView{
+    
+    [[SWUtil sharedUtil] showLoadingView];
     
     if (self.chooseView.hidden) {
         
@@ -704,12 +732,14 @@
         {
             [self chooseGoout];
             [self showView];
+
         }
             break;
         case 2:
         {
             [self chooseParty];
             [self showView];
+
         }
             break;
         case 3:

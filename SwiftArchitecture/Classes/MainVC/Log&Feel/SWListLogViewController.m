@@ -23,6 +23,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[SWUtil appDelegate] hideTabbar:NO];
+    [self.listLogArr removeAllObjects];
     [self initData];
 
 }
@@ -31,7 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initUI];
-    //[self initData];
 }
 
 - (void)initUI{
@@ -60,6 +60,7 @@
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"List Log JSON: %@", responseObject);
              if ([responseObject isKindOfClass:[NSArray class]]) {
+                 
                  NSArray *result = (NSArray *)responseObject;
                  for (int i = 0; i < result.count; i++) {
                      NSDictionary *dict = [result objectAtIndex:i];
@@ -80,9 +81,7 @@
              
              if (code == 0 && self.listLogArr.count == 0) {
                  _endOfRespond = YES;
-                 //self.listLogTableView.hidden = YES;
              } else {
-                 //self.listLogTableView.hidden = NO;
                 [self.listLogTableView reloadData];
              }
              
@@ -91,7 +90,6 @@
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
              NSLog(@"Error: %@", error);
-             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Lỗi" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
 
