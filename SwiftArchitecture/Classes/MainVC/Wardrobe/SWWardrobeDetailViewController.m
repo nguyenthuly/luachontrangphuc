@@ -234,7 +234,8 @@
     cell.imageLink = [[self.data objectAtIndex:indexPath.row] objectForKey:@"image"];
     cell.clotheImageView.image = nil;
     cell.clotheImageView.contentMode = UIViewContentModeCenter;
-     NSURL *url = [[NSBundle mainBundle] URLForResource:@"loading" withExtension:@"gif"];
+    
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"loading" withExtension:@"gif"];
     [cell.clotheImageView sd_setImageWithURL:[NSURL URLWithString:imageLink]
                             placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

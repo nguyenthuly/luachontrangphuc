@@ -77,6 +77,9 @@
         {
             self.title = Register_Title;
             [self.registerButton setTitle:Register_Button forState:UIControlStateNormal];
+            self.registerButton.enabled = YES;
+            self.registerTableView.userInteractionEnabled = YES;
+
         }
             break;
         case edit_infor:
@@ -84,7 +87,8 @@
             self.title = InforUser_Title;
             [self setRightButtonWithImage:Edit highlightedImage:nil target:self action:@selector(editButtonTapped:)];
             self.registerTableView.userInteractionEnabled = NO;
-            
+            self.registerButton.enabled = NO;
+
             CGRect frame = self.registerTableView.frame;
             frame.size.height = frame.size.height - 132;
             self.registerTableView.frame = frame;
@@ -111,6 +115,7 @@
 
 - (void)editButtonTapped:(id)sender{
     self.registerTableView.userInteractionEnabled = YES;
+    self.registerButton.enabled = YES;
 }
 
 - (IBAction)hiddenDatePickerButtonTapped:(id)sender {
