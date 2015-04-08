@@ -63,6 +63,7 @@
     NSURL *url = [NSURL URLWithString:urlString];
     
     return [[self fetchJSONFromURL:url] map:^(NSDictionary *json) {
+        
         return [MTLJSONAdapter modelOfClass:[WXCondition class] fromJSONDictionary:json error:nil];
     }];
 }
