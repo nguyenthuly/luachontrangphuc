@@ -94,13 +94,13 @@
     [header addSubview:hiloLabel];
     
     // top
-    UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 30)];
-    cityLabel.backgroundColor = [UIColor clearColor];
-    cityLabel.textColor = [UIColor whiteColor];
-    cityLabel.text = @"Loading...";
-    cityLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
-    cityLabel.textAlignment = NSTextAlignmentCenter;
-    [header addSubview:cityLabel];
+//    UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 30)];
+//    cityLabel.backgroundColor = [UIColor clearColor];
+//    cityLabel.textColor = [UIColor whiteColor];
+//    cityLabel.text = @"Loading...";
+//    cityLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+//    cityLabel.textAlignment = NSTextAlignmentCenter;
+//    [header addSubview:cityLabel];
     
     UILabel *conditionsLabel = [[UILabel alloc] initWithFrame:conditionsFrame];
     conditionsLabel.backgroundColor = [UIColor clearColor];
@@ -119,7 +119,7 @@
      subscribeNext:^(WXCondition *newCondition) {
          temperatureLabel.text = [NSString stringWithFormat:@"%.0f°",newCondition.temperature.floatValue];
          conditionsLabel.text = [newCondition.condition capitalizedString];
-         cityLabel.text = [newCondition.locationName capitalizedString];
+         //cityLabel.text = [newCondition.locationName capitalizedString];
          
          iconView.image = [UIImage imageNamed:[newCondition imageName]];
      }];

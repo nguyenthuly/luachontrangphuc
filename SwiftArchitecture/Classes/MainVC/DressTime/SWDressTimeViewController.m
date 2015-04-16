@@ -103,7 +103,6 @@
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(NSArray *newForecast) {
          [self initScroll];
-         [[SWUtil sharedUtil] hideLoadingView];
      }];
     
     [[WXManager sharedManager] findCurrentLocation];
@@ -190,6 +189,10 @@
         xPos += frame.size.width;
         [weatherView setFrame:frame];
         [self.weatherScrollView addSubview:weatherView];
+        
+        if (i == [[WXManager sharedManager].hourlyForecast count]-1) {
+            [[SWUtil sharedUtil] hideLoadingView];
+        }
     }
     
     CGSize contentSize = [self.weatherScrollView contentSize];
