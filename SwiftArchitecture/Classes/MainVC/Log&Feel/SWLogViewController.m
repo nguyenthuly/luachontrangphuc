@@ -73,7 +73,6 @@
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
              NSLog(@"Error: %@", error);
-             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Lỗi" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
 }
@@ -90,9 +89,43 @@
     self.cityLabel.text = [self.logDict objectForKey:@"city"];
     self.temperatureLabel.text = [NSString stringWithFormat:@"%@°C",[self.logDict objectForKey:@"temperature"]];
     self.weatherImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",[self.logDict objectForKey:@"weatherImage"],Gray_Weather]];
-    [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:skirtImageLink]];
-    [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:jeanImageLink]];
-    [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:shoeImageLink]];
+
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"loading" withExtension:@"gif"];
+    
+    self.jeanImageView.contentMode = UIViewContentModeCenter;
+    [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:jeanImageLink]
+                          placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     
+                                     if (image) {
+                                         self.jeanImageView.contentMode = UIViewContentModeScaleToFill;
+                                     } else {
+                                         
+                                     }
+                                 }];
+    
+    self.shoeImageView.contentMode = UIViewContentModeCenter;
+    [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:shoeImageLink]
+                          placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     
+                                     if (image) {
+                                         self.shoeImageView.contentMode = UIViewContentModeScaleToFill;
+                                     } else {
+                                         
+                                     }
+                                 }];
+    
+    self.skirtImageView.contentMode = UIViewContentModeCenter;
+    [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:skirtImageLink]
+                           placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                      self.skirtImageView.contentMode = UIViewContentModeScaleToFill;
+                                      if (image) {
+                                      } else {
+                                          
+                                      }
+                                  }];
 
 }
 

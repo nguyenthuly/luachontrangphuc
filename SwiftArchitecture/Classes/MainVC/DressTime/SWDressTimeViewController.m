@@ -87,7 +87,7 @@
          }
          
          self.descriptionLabel.text = [newCondition.conditionDescription capitalizedString];
-         self.cityLabel.text = [newCondition.locationName capitalizedString];
+         //self.cityLabel.text = [newCondition.locationName capitalizedString];
          NSString *imageStringCurrent = [NSString stringWithFormat:@"%@",[newCondition imageName]];
          self.weatherImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",imageStringCurrent, Gray_Weather]];
          
@@ -549,7 +549,6 @@
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@",error);
-             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
     
@@ -581,12 +580,13 @@
              
              self.linkImage = [[self.resultData objectAtIndex:randNum] objectForKey:@"image"];
              NSURL *url = [[NSBundle mainBundle] URLForResource:@"loading" withExtension:@"gif"];
-             
+             self.jeanImageView.contentMode = UIViewContentModeCenter;
              [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.jeanImageLink]]
                                    placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
                                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                               
                                               if (image) {
+                                                  self.jeanImageView.contentMode = UIViewContentModeScaleToFill;
                                               } else {
                                                   
                                               }
@@ -597,10 +597,11 @@
                  {
                      if (categorySkirt != 0) {
                          self.skirtImageLink = self.linkImage;
+                         self.skirtImageView.contentMode = UIViewContentModeCenter;
                          [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]
                                                  placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
                                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                            
+                                                            self.skirtImageView.contentMode = UIViewContentModeScaleToFill;
                                                             if (image) {
                                                             } else {
                                                                 
@@ -613,11 +614,13 @@
                  case shoe:
                  {
                      self.shoeImageLink = self.linkImage;
+                     self.shoeImageView.contentMode = UIViewContentModeCenter;
                      [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.shoeImageLink]]
                                             placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
                                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                                        
                                                        if (image) {
+                                                           self.shoeImageView.contentMode = UIViewContentModeScaleToFill;
                                                        } else {
                                                            
                                                        }
@@ -632,9 +635,7 @@
              [[SWUtil sharedUtil] hideLoadingView];
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             
-             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
-             NSLog(@"Error: %@",error);
+                          NSLog(@"Error: %@",error);
              [[SWUtil sharedUtil] hideLoadingView];
          }];
     

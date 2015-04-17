@@ -192,7 +192,6 @@
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@",error);
-             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
              [[SWUtil sharedUtil] hideLoadingView];
          }];
     

@@ -68,9 +68,33 @@
 }
 
 - (void)initData{
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"loading" withExtension:@"gif"];
     
-    [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:self.jeanImage]];
-    [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:self.shoeImage]];
+    self.jeanImageView.contentMode = UIViewContentModeCenter;
+    [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:self.jeanImage]
+                          placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     
+                                     if (image) {
+                                         self.jeanImageView.contentMode = UIViewContentModeScaleToFill;
+                                     } else {
+                                         
+                                     }
+                                 }];
+    
+    self.shoeImageView.contentMode = UIViewContentModeCenter;
+    [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:self.shoeImage]
+                          placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     
+                                     if (image) {
+                                         self.shoeImageView.contentMode = UIViewContentModeScaleToFill;
+                                     } else {
+                                         
+                                     }
+                                 }];
+
+    
     self.feelTextField.text = [self.logData objectForKey:@"feel"];
     
     if ([self.skirtImage containsString:Ko]) {
@@ -79,7 +103,17 @@
     }else{
         skirtRating.hidden = NO;
         self.skirtLabel.hidden = NO;
-        [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:self.skirtImage]];
+        
+        self.skirtImageView.contentMode = UIViewContentModeCenter;
+        [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:self.skirtImage]
+                               placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                          self.skirtImageView.contentMode = UIViewContentModeScaleToFill;
+                                          if (image) {
+                                          } else {
+                                              
+                                          }
+                                      }];
     }
 }
 
@@ -115,7 +149,6 @@
               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   
                   NSLog(@"Error: %@", error);
-                  //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Lỗi" delegate:nil];
                   [[SWUtil sharedUtil] hideLoadingView];
               }];
 
