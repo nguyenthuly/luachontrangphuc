@@ -116,17 +116,19 @@
                                      }
                                  }];
     
-    self.skirtImageView.contentMode = UIViewContentModeCenter;
-    [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:skirtImageLink]
-                           placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                      self.skirtImageView.contentMode = UIViewContentModeScaleToFill;
-                                      if (image) {
-                                      } else {
-                                          
-                                      }
-                                  }];
-
+    if (![skirtImageLink containsString:Ko]) {
+        self.skirtImageView.contentMode = UIViewContentModeCenter;
+        [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:skirtImageLink]
+                               placeholderImage:[UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:url]]
+                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                          self.skirtImageView.contentMode = UIViewContentModeScaleToFill;
+                                          if (image) {
+                                          } else {
+                                              
+                                          }
+                                      }];
+    }
+  
 }
 
 - (void)backButtonTapped:(id)sender{
