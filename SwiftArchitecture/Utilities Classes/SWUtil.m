@@ -351,19 +351,19 @@
     NSMutableArray *listColor;
     NSMutableArray *commonMutableArr = [[NSMutableArray alloc]  initWithCapacity:10];
     
-        //Do
-        if ([colorId isEqualToString:do_Color]) {
+            //Do
+            if ([colorId isEqualToString:do_Color]) {
             listColor = [[NSMutableArray alloc] initWithArray:@[vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
             commonMutableArr = [self chooseArr1:colorArr andArr2:listColor];
-        }
+            }
             
-        //Hong
-        if ([colorId isEqualToString:hong_Color]) {
-            listColor = [[NSMutableArray alloc] initWithArray:@[vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
-            commonMutableArr = [self chooseArr1:colorArr andArr2:listColor];
-        }
+            //Hong
+            if ([colorId isEqualToString:hong_Color]) {
+                listColor = [[NSMutableArray alloc] initWithArray:@[vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
+                commonMutableArr = [self chooseArr1:colorArr andArr2:listColor];
+            }
             
-        //Vang
+            //Vang
             if ([colorId isEqualToString:vang_Color]) {
                 listColor = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color,nau_Color]];
                 commonMutableArr = [self chooseArr1:colorArr andArr2:listColor];

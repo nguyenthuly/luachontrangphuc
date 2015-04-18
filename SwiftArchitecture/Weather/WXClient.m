@@ -59,8 +59,8 @@
 }
 
 - (RACSignal *)fetchCurrentConditionsForLocation:(CLLocationCoordinate2D)coordinate {
-    NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&lang=vi",coordinate.latitude, coordinate.longitude];
-    //NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=21.034685&lon=105.78031&lang=vi"];
+    //NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&lang=vi",coordinate.latitude, coordinate.longitude];
+    NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=21.034685&lon=105.78031&lang=vi"];
     NSURL *url = [NSURL URLWithString:urlString];
     
     return [[self fetchJSONFromURL:url] map:^(NSDictionary *json) {
@@ -70,8 +70,8 @@
 }
 
 - (RACSignal *)fetchDailyForecastForLocation:(CLLocationCoordinate2D)coordinate {
-   NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?lat=%f&lon=%f&cnt=7&lang=vi",coordinate.latitude, coordinate.longitude];
-    //NSString *urlString = @"";//[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?lat=21.013109&lon=105.812994&cnt=7&lang=vi"];
+   //NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?lat=%f&lon=%f&cnt=7&lang=vi",coordinate.latitude, coordinate.longitude];
+    NSString *urlString = @"";//[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?lat=21.013109&lon=105.812994&cnt=7&lang=vi"];
     NSURL *url = [NSURL URLWithString:urlString];
     
     // Use the generic fetch method and map results to convert into an array of Mantle objects
@@ -88,8 +88,8 @@
 
 - (RACSignal *)fetchHourlyForecastForLocation:(CLLocationCoordinate2D)coordinate {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast?lat=%f&lon=%f&cnt=12&lang=vi",coordinate.latitude, coordinate.longitude];
-    //NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast?lat=21.034685&lon=105.78031&cnt=12&lang=vi"];
+    //NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast?lat=%f&lon=%f&cnt=12&lang=vi",coordinate.latitude, coordinate.longitude];
+    NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast?lat=21.034685&lon=105.78031&cnt=12&lang=vi"];
     NSURL *url = [NSURL URLWithString:urlString];
     
     return [[self fetchJSONFromURL:url] map:^(NSDictionary *json) {

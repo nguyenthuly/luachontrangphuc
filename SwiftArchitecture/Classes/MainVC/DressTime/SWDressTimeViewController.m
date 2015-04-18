@@ -11,6 +11,8 @@
 #import "SWWardrobeDetailViewController.h"
 #import "WXManager.h"
 
+#define TEMP 276.15
+
 @interface SWDressTimeViewController () <UIScrollViewDelegate>{
     SWWeatherView *weatherGrid;
     NSInteger categorySkirt;
@@ -79,9 +81,9 @@
     [[RACObserve([WXManager sharedManager], currentCondition)
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(WXCondition *newCondition) {
-         float temp = newCondition.temperature.floatValue-273.15;
+         float temp = newCondition.temperature.floatValue-TEMP;
          if (temp >= 0) {
-             self.temperatureLabel.text = [NSString stringWithFormat:@"%.0f°C",newCondition.temperature.floatValue - 273.15];
+             self.temperatureLabel.text = [NSString stringWithFormat:@"%.0f°C",newCondition.temperature.floatValue - TEMP];
          } else {
              self.temperatureLabel.text = @"";
          }
@@ -169,9 +171,9 @@
         weatherView.delegate = self;
         
         NSString *temperatureString = @"";
-        float temp = weather.temperature.floatValue - 273.15;
+        float temp = weather.temperature.floatValue - TEMP;
         if (temp >= 0) {
-            temperatureString = [NSString stringWithFormat:@"%.0f°",weather.temperature.floatValue - 273.15];
+            temperatureString = [NSString stringWithFormat:@"%.0f°",weather.temperature.floatValue - TEMP];
         }
         
         NSString *time = [self.hourlyFormatter stringFromDate:weather.date];
