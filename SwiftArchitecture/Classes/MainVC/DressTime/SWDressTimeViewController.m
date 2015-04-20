@@ -296,7 +296,7 @@
 - (void)chooseWork {
     
     //Rat lanh
-    if (temperature < 12) {
+    if (temperature < 10) {
         categoryJean = Quan_Chanvay;
         categorySkirt = Aokhoac;
         categoryShoe = Giaybot;
@@ -304,7 +304,7 @@
         subcategoryShoe = Ko;
     
     //Lanh
-    } else if (temperature < 15) {
+    } else if (temperature < 16) {
         categoryJean = Quan_Chanvay;
         categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
         categoryShoe = [self randomWithMin:Giayhai andMax:Giaybot];
@@ -317,7 +317,7 @@
         }
         
     //Se lanh
-    } else if (temperature < 20){
+    } else if (temperature < 22){
         categoryJean = Quan_Chanvay;
         categoryShoe = Giayhai;
         categorySkirt = Aolen;
@@ -362,7 +362,7 @@
 - (void)chooseGoout{
     
     //Rat lanh
-    if (temperature < 12) {
+    if (temperature < 10) {
         categoryJean = Quan_Chanvay;
         categorySkirt = Aokhoac;
         categoryShoe = Giaybot;
@@ -370,7 +370,7 @@
         subcategoryShoe = Ko;
         
         //Lanh
-    } else if (temperature < 15) {
+    } else if (temperature < 16) {
         categoryJean = Quan_Chanvay;
         categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
         categoryShoe = [self randomWithMin:Giaythethao andMax:Giaybot];
@@ -384,7 +384,7 @@
         
         
         //Se lanh
-    } else if (temperature < 20){
+    } else if (temperature < 22){
         categoryJean = Quan_Chanvay;
         categoryShoe = [self randomWithMin:Giaythethao andMax:Giayhai];
         categorySkirt = Aolen;
@@ -418,7 +418,7 @@
 - (void)chooseParty{
     
     //Rat lanh
-    if (temperature < 12) {
+    if (temperature < 10) {
         categoryJean = Quan_Chanvay;
         categorySkirt = Aokhoac;
         categoryShoe = Giaybot;
@@ -426,7 +426,7 @@
         subcategoryShoe = Ko;
         
         //Lanh
-    } else if (temperature < 15) {
+    } else if (temperature < 16) {
         categoryJean = Quan_Chanvay;
         categorySkirt = [self randomWithMin:Aokhoac andMax:Aolen];
         categoryShoe = [self randomWithMin:Giayhai andMax:Giaybot];
@@ -444,7 +444,7 @@
         }
         
         //Se lanh
-    } else if (temperature < 20){
+    } else if (temperature < 22){
         categoryJean = Quan_Chanvay;
         categoryShoe = Giayhai;
         categorySkirt = Aolen;
