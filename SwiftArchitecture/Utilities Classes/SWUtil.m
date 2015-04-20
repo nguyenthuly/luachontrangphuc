@@ -353,13 +353,13 @@
     
             //Do
             if ([colorId isEqualToString:do_Color]) {
-            listColor = [[NSMutableArray alloc] initWithArray:@[vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
+            listColor = [[NSMutableArray alloc] initWithArray:@[hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
             commonMutableArr = [self chooseArr1:colorArr andArr2:listColor];
             }
             
             //Hong
             if ([colorId isEqualToString:hong_Color]) {
-                listColor = [[NSMutableArray alloc] initWithArray:@[vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
+                listColor = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
                 commonMutableArr = [self chooseArr1:colorArr andArr2:listColor];
             }
             
@@ -390,7 +390,7 @@
             }
             
             //Xam
-            if ([colorId isEqualToString:do_Color]) {
+            if ([colorId isEqualToString:xam_Color]) {
                 listColor = [[NSMutableArray alloc] initWithArray:@[do_Color,hong_Color,vang_Color,xanh_Color,trang_Color,den_Color,ghi_Color,xam_Color]];
                 commonMutableArr = [self chooseArr1:colorArr andArr2:listColor];
             }
