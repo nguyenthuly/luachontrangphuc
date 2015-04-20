@@ -11,7 +11,7 @@
 #import "SWWardrobeDetailViewController.h"
 #import "WXManager.h"
 
-#define TEMP 276.15
+#define TEMP 273.15
 
 @interface SWDressTimeViewController () <UIScrollViewDelegate>{
     SWWeatherView *weatherGrid;
