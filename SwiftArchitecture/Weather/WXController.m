@@ -119,7 +119,6 @@
      subscribeNext:^(WXCondition *newCondition) {
          temperatureLabel.text = [NSString stringWithFormat:@"%.0f°",newCondition.temperature.floatValue];
          conditionsLabel.text = [newCondition.condition capitalizedString];
-         //cityLabel.text = [newCondition.locationName capitalizedString];
          
          iconView.image = [UIImage imageNamed:[newCondition imageName]];
      }];

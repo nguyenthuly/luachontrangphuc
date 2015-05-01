@@ -89,7 +89,6 @@
          }
          
          self.descriptionLabel.text = [newCondition.conditionDescription capitalizedString];
-         //self.cityLabel.text = [newCondition.locationName capitalizedString];
          NSString *imageStringCurrent = [NSString stringWithFormat:@"%@",[newCondition imageName]];
          self.weatherImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",imageStringCurrent, Gray_Weather]];
          
