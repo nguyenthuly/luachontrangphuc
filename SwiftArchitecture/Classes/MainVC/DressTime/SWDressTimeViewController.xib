@@ -110,7 +110,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="AcceptButton:" destination="-1" eventType="touchUpInside" id="Fu6-Yf-0ef"/>
+                                <action selector="AcceptButton:" destination="-1" eventType="touchUpInside" id="hhN-6t-B2P"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ju3-1y-PN0">

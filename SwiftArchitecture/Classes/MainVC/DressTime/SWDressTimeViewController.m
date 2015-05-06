@@ -78,6 +78,28 @@
     
     [self currentDateTime];
     
+    [self getDataForWeather];
+    
+    switch (self.typeChooseClothe) {
+        case skirt:
+            [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]];
+            break;
+        case jean:
+            [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.jeanImageLink]]];
+            break;
+        case shoe:
+            [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.shoeImageLink]]];
+            break;
+        default:
+            break;
+    }
+    
+}
+
+- (void)getDataForWeather {
+    [[SWUtil sharedUtil] showLoadingView];
+    [[WXManager sharedManager] findCurrentLocation];
+    
     [[RACObserve([WXManager sharedManager], currentCondition)
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(WXCondition *newCondition) {
@@ -103,24 +125,9 @@
     [[RACObserve([WXManager sharedManager], hourlyForecast)
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(NSArray *newForecast) {
-         [self initScroll];
+         [[SWUtil sharedUtil] showLoadingView];
+        [self initScroll];
      }];
-    
-    [[WXManager sharedManager] findCurrentLocation];
-    
-    switch (self.typeChooseClothe) {
-        case skirt:
-            [self.skirtImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.skirtImageLink]]];
-            break;
-        case jean:
-            [self.jeanImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.jeanImageLink]]];
-            break;
-        case shoe:
-            [self.shoeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_IMAGE,self.shoeImageLink]]];
-            break;
-        default:
-            break;
-    }
     
 }
 
@@ -129,7 +136,7 @@
     // Do any additional setup after loading the view from its nib.
     [self initUI];
     [[SWUtil sharedUtil] showLoadingView];
-    
+
 }
 
 - (void)initUI{
@@ -156,10 +163,14 @@
 }
 
 - (void)initScroll {
-    [[SWUtil sharedUtil] showLoadingView];
+    
     for (UIView *subview in self.weatherScrollView.subviews) {
         [subview removeFromSuperview];
     }
+    
+
+    [[SWUtil sharedUtil] showLoadingView];
+    
     
     int xPos = 0;
     
@@ -509,7 +520,7 @@
 
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
-             [SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
+             //[SWUtil showConfirmAlert:Title_Alert_Validate message:@"Fail" delegate:nil];
              NSLog(@"Error: %@",error);
              [[SWUtil sharedUtil] hideLoadingView];
          }];
@@ -681,6 +692,8 @@
 }
 
 - (IBAction)AcceptButton:(id)sender {
+    
+    
     
     [UIView animateWithDuration:.3 animations:^{
         
